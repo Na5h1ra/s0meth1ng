@@ -1,18 +1,20 @@
-ffmpegÎÄµµ£ºhttps://ffmpeg.org/ffmpeg.html
-iPod ClassicµÄRockboxÎÄµµ£ºhttps://download.rockbox.org/release/3.15/rockbox-ipod6g-3.15.pdf
-iPod Classic½éÉÜ£ºhttps://en.wikipedia.org/wiki/IPod_classic
+ffmpegæ–‡æ¡£ï¼šhttps://ffmpeg.org/ffmpeg.html
+iPod Classicçš„Rockboxæ–‡æ¡£ï¼šhttps://download.rockbox.org/release/3.15/rockbox-ipod6g-3.15.pdf
+iPod Classicä»‹ç»ï¼šhttps://en.wikipedia.org/wiki/IPod_classic
 
 
-iPod ClassicµÄRockboxÀïµÄMpeg Player plugin½éÉÜ£º "The Mpeg Player is a video player plugin capable of playing back MPEG-1 and MPEG-2"
+iPod Classicçš„Rockboxé‡Œçš„Mpeg Player pluginä»‹ç»ï¼šhttps://www.rockbox.org/wiki/PluginMpegplayer
+
+"The Mpeg Player is a video player plugin capable of playing back MPEG-1 and MPEG-2"
 video streams with MPEG audio multiplexed into .mpg files.
 
-iPod Classic 6th gen£º "The iPod Classic has a 2.5" backlit display at a resolution of 320¡Á240."
+iPod Classic 6th genï¼š "The iPod Classic has a 2.5" backlit display at a resolution of 320Ã—240."
 
 
 
 
-µ¥¸öflvÎÄ¼ş×ªÂëÎªRockboxÖ§³ÖµÄmpegÊÓÆµ¸ñÊ½£¬´úÂëÎª£º
-ffmpeg -i input.flv -s 320x180 -vcodec mpeg2video -b:a 192k -ac 2 -ar 44100 -acodec mp3 output.mpg 
- 
-ÅúÁ¿×ª»»ÎÄ¼ş¼ĞÏÂµÄflvÎªmpegÊÓÆµ£¬´úÂëÎª
+å•ä¸ªflvæ–‡ä»¶è½¬ç ä¸ºRockboxæ”¯æŒçš„mpegè§†é¢‘ï¼Œä»£ç ä¸ºï¼š
+ffmpeg -i input.flv -s 320x180 -vcodec mpeg2video -b:v 320k -b:a 192k -ac 2 -ar 44100 -acodec mp3 output.mpg 
+
+æ‰¹é‡è½¬æ¢æ–‡ä»¶å¤¹ä¸‹çš„flvä¸ºmpegè§†é¢‘ï¼Œä»£ç ä¸º
 for %%i in (.\*.flv) do ffmpeg -i "%%i" -s 320x180 -vcodec mpeg2video -b:v 320k -b:a 192k -ac 2 -ar 44100 -acodec mp3 "%%~dpni.mpg"
