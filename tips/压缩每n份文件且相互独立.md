@@ -1,34 +1,35 @@
-µÚ1²½£º
-DIR /B >> listfile.txt
-Êä³öÄ¿Â¼ÏÂËùÓĞÎÄ¼ş
+ç¬¬1æ­¥ï¼š
+å³é”®æ‰“å¼€Powershellï¼Œè¾“å…¥å‘½ä»¤ï¼š
+cmd /r dir /b >listfile.txt
+è¾“å‡ºç›®å½•ä¸‹æ‰€æœ‰æ–‡ä»¶
 
 
-µÚ2²½£º
-TXTKiller»òÕß±ğµÄÎÄ±¾Èí¼ş,·Ö¸îlistfile.txtÎªlistfile_1.txt,listfile_2.txtÖ±µ½listfile_%i.txt
+ç¬¬2æ­¥ï¼š
+TXTKilleræˆ–è€…åˆ«çš„æ–‡æœ¬è½¯ä»¶,åˆ†å‰²listfile.txtä¸ºlistfile_1.txt,listfile_2.txtç›´åˆ°listfile_%i.txt
 
 
-µÚ3²½£º
-²éÕÒ7zipÏà¹ØÃüÁî
-ÀıÈç£ºhttps://documentation.help/7-Zip/start.htm
+ç¬¬3æ­¥ï¼š
+æŸ¥æ‰¾7zipç›¸å…³å‘½ä»¤
+ä¾‹å¦‚ï¼šhttps://documentation.help/7-Zip/start.htm
 
-"7z a -tzip archive.zip @listfile.txt -mx9 -mmt=8 -m0=LZMA:d=25 -ppassword
-ÒâÎª£º½«listfile.txtÖĞÖ¸¶¨µÄÎÄ¼şÌí¼Ó½øarchive.zipÖĞ£¨×Ô¶¯´´½¨zipÎÄ¼ş£©£¬Éè¶¨×î¸ßÑ¹ËõÄ£Ê½£¬CPUÏß³ÌÊıÎª8£¬µÚÒ»Ëã·¨ÎªLZMAËã·¨£¬×Öµä´óĞ¡Îª32MB£¬Éè¶¨ÃÜÂëÎªpassword"
+7z a -tzip archive.zip @listfile.txt -mx9 -mmt=8 -m0=LZMA:d=25 -ppassword
+æ„ä¸ºï¼šå°†listfile.txtä¸­æŒ‡å®šçš„æ–‡ä»¶æ·»åŠ è¿›archive.zipä¸­ï¼ˆè‡ªåŠ¨åˆ›å»ºzipæ–‡ä»¶ï¼‰ï¼Œè®¾å®šæœ€é«˜å‹ç¼©æ¨¡å¼ï¼ŒCPUçº¿ç¨‹æ•°ä¸º8ï¼Œç¬¬ä¸€ç®—æ³•ä¸ºLZMAç®—æ³•ï¼Œå­—å…¸å¤§å°ä¸º32MBï¼Œè®¾å®šå¯†ç ä¸ºpassword
 
-À´Ô´£ºhttps://www.zhihu.com/question/379054502/answer/1077926871
+æ¥æºï¼šhttps://www.zhihu.com/question/379054502/answer/1077926871
 
 
-µÚ4²½£º
-²éÕÒforÑ­»·Ïà¹ØÃüÁî
-ÀıÈç£ºhttps://learn.microsoft.com/en-us/windows-server/administration/windows-commands/for
-ÒÔ¼°£ºhttps://ss64.com/nt/for.html
+ç¬¬4æ­¥ï¼š
+æŸ¥æ‰¾forå¾ªç¯ç›¸å…³å‘½ä»¤
+ä¾‹å¦‚ï¼šhttps://learn.microsoft.com/en-us/windows-server/administration/windows-commands/for
+ä»¥åŠï¼šhttps://ss64.com/nt/for.html
 
 for /L %[variable] in ([start],[step],[stop]) do [command]
 
 
-µÚ5²½£º
-Ğ´³öÏà¹ØÃüÁî
-ÒÔÑ¹Ëõ5000·İÎÄ¼ş£¬×î¸ßÑ¹ËõÄ£Ê½ÎªÀı£¬Õâ5000·İÎÄ¼şµÄÎÄ¼şÃûĞ´Èëlistfile.txt²¢°´Ã¿100ĞĞ·Ö¸î³É50·İlistfile_%i.txt£¨%iÎªĞòºÅ£©ÎÄ¼ş¡£
+ç¬¬5æ­¥ï¼š
+å†™å‡ºç›¸å…³å‘½ä»¤
+ä»¥å‹ç¼©5000ä»½æ–‡ä»¶ï¼Œæœ€é«˜å‹ç¼©æ¨¡å¼ä¸ºä¾‹ï¼Œè¿™5000ä»½æ–‡ä»¶çš„æ–‡ä»¶åå†™å…¥listfile.txtå¹¶æŒ‰æ¯100è¡Œåˆ†å‰²æˆ50ä»½listfile_%i.txtï¼ˆ%iä¸ºåºå·ï¼‰æ–‡ä»¶ã€‚
 
-¡±for /L %i in (1,1,50) do 7z a -tzip archive_%i.zip @listfile_%i.txt -mx9 -mmt=8 -m0=LZMA:d=27 -psecret¡°
+for /L %i in (1,1,50) do 7z a -tzip archive_%i.zip @listfile_%i.txt -mx9 -mmt=8 -m0=LZMA:d=27 -psecret
 
-À´Ô´£ºhttps://www.zhihu.com/question/379054502/answer/1077926871
+æ¥æºï¼šhttps://www.zhihu.com/question/379054502/answer/1077926871
