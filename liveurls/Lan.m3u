@@ -193,16 +193,15 @@ http://192.168.10.99:35455/bilibili/25109765
 http://192.168.10.99:35455/bilibili/24933342
 
 
-#EXTINF:-1 tvg-logo="http://downhdlogo.yy.com/hdlogo/640640/640/640/91/1634911740/u1634911740k7wFsbW.jpg" group-title="YY", 好久不见-武林外传
-http://192.168.10.99:35455/yy/1355914397
-#EXTINF:-1 tvg-logo="http://downhdlogo.yy.com/hdlogo/640640/640/640/78/2664783515/u26647835159vB5axM.jpg" group-title="YY", 苏小小-武林外传
-http://192.168.10.99:35455/yy/1354752120
-#EXTINF:-1 tvg-logo="http://downhdlogo.yy.com/hdlogo/640640/640/640/97/2509978304/u2509978304IyBTrdR.jpg" group-title="YY", 昕朵儿-武林外传
+
+#EXTINF:-1 tvg-logo="https://s1.yy.com/guild/header/10001.jpg" group-title="YY", 武林外传
+http://192.168.10.99:35455/yy/1355652820
+#EXTINF:-1 tvg-logo="https://s1.yy.com/guild/header/10001.jpg" group-title="YY", 武林外传 720p
+http://192.168.10.99:35455/yy/21092633
+#EXTINF:-1 tvg-logo="https://s1.yy.com/guild/header/10001.jpg" group-title="YY", 武林外传720p
 http://192.168.10.99:35455/yy/1353852605
-#EXTINF:-1 tvg-logo="http://downhdlogo.yy.com/hdlogo/640640/640/640/48/2836489679/u2836489679FURj3Qt.jpg" group-title="YY", 昕朵儿影视-武林外传
-http://192.168.10.99:35455/yy/1355269576
-#EXTINF:-1 tvg-logo="http://downhdlogo.yy.com/hdlogo/6060/60/60/68/2379685847/u2379685847zDFq2o1.jpg" group-title="YY", 杨紫小可爱-武林外传
-http://192.168.10.99:35455/yy/1353085648
+#EXTINF:-1 tvg-logo="https://s1.yy.com/guild/header/10001.jpg" group-title="YY", 士兵突击720P
+http://192.168.10.99:35455/yy/1382828766
 #EXTINF:-1 tvg-logo="https://s1.yy.com/guild/header/10001.jpg" group-title="YY", 天道-电视剧
 http://192.168.10.99:35455/yy/1382735574
 #EXTINF:-1 tvg-logo="https://s1.yy.com/guild/header/10001.jpg" group-title="YY", 黑冰
