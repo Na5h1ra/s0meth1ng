@@ -243,6 +243,10 @@ http://192.168.10.99:35455/douyin/555122476023
 http://192.168.10.99:35455/douyin/36589305092
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 大头katniss
 http://192.168.10.99:35455/douyin/527696336035
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 莹莹睡醒了
+http://192.168.10.99:35455/douyin/814975434046
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 柯宝碎碎念
+http://192.168.10.99:35455/douyin/363456771847
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 愿你心之所向皆有回响
 http://192.168.10.99:35455/douyin/38619450364
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 薯条好吃
@@ -279,5 +283,17 @@ http://192.168.10.99:35455/douyin/427155286962
 http://192.168.10.99:35455/douyin/363110179225
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 珺主_zZ
 http://192.168.10.99:35455/douyin/288210046701
-#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 猫无语
+
+
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音NN", 猫无语
 http://192.168.10.99:35455/douyin/290284870381
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音NN", 桃芝妖妖
+http://192.168.10.99:35455/douyin/214367937247
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音NN", 阿芙洛狄Aphrodi
+http://192.168.10.99:35455/douyin/91071331545
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音NN", 周寻
+http://192.168.10.99:35455/douyin/599659464222
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音NN", 小人鱼多莉亚
+http://192.168.10.99:35455/douyin/490149237506
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音NN", 控控子酱
+http://192.168.10.99:35455/douyin/369500103166
