@@ -19,7 +19,7 @@ services:
     container_name: allinone
     privileged: true
     ports:
-      - 35455:5000
+      - 35455:35455
 ```
 
 ## pixman/pixman:latest
@@ -57,7 +57,7 @@ services:
     user: root
     network_mode: bridge
     ports:
-      - 35457:5000
+      - 35457:8080
 ```
 
 ## tindy2013/subconverter:latest
