@@ -1,12 +1,12 @@
 # Docker
 
 > 自用docker-compose.yml
->> 用于群晖和N1盒子
+>> 用于群晖和N1盒子,群晖注意权限问题，需要sudo -i进入root用户输入docker命令或者添加带有root用户的docker-compose命令
 
 
 ## youshandefeiyang/allinone:latest
-> [使用说明](https://github.com/youshandefeiyang/LiveRedirect/blob/main/Golang/README.md)
->
+> [使用说明](https://github.com/youshandefeiyang/LiveRedirect/blob/main/Golang/README.md),群晖里无法使用
+> 
 ```
 docker run -d --name=allinone -p 35455:35455 --privileged=true --restart=always youshandefeiyang/allinone:latest
 ```
@@ -35,6 +35,8 @@ services:
     image: pixman/pixman:latest
     restart: always
     container_name: pixman
+    user: root
+    network_mode: bridge
     ports:
       - 35456:5000
 ```
@@ -52,6 +54,8 @@ services:
     image: herberthe0229/iptv-sources:latest
     restart: always
     container_name: iptv-sources
+    user: root
+    network_mode: bridge
     ports:
       - 35457:5000
 ```
@@ -71,6 +75,8 @@ services:
     image: tindy2013/subconverter:latest
     restart: always
     container_name: subconverter
+    user: root
+    network_mode: bridge
     ports:
-      - "25500:25500"
+      - 25500:25500
 ```
