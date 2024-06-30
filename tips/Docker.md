@@ -8,7 +8,7 @@
 > [使用说明](https://github.com/youshandefeiyang/LiveRedirect/blob/main/Golang/README.md)
 >
 ```
-docker run -d --name allinone -p 35455:35455 --privileged=true --restart=always youshandefeiyang/allinone:latest
+docker run -d --name=allinone -p 35455:35455 --privileged=true --restart=always youshandefeiyang/allinone:latest
 ```
 > 
 ```
@@ -39,6 +39,24 @@ services:
     environment:
     ports:
       - 35456:5000
+```
+
+## herberthe0229/iptv-sources:latest
+> [使用说明](https://github.com/HerbertHe/iptv-sources)
+> 
+```
+docker run -d --name=iptv-sources -p 35457:8080 herberthe0229/iptv-sources:latest
+```
+> 
+```
+services:
+  iptv-sources:
+    image: herberthe0229/iptv-sources:latest
+    restart: always
+    container_name: iptv-sources
+    environment:
+    ports:
+      - 35457:5000
 ```
 
 ## tindy2013/subconverter:latest
