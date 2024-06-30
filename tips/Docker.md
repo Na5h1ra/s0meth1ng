@@ -18,7 +18,6 @@ services:
     restart: always
     container_name: allinone
     privileged: true
-    environment:
     ports:
       - 35455:5000
 ```
@@ -36,7 +35,6 @@ services:
     image: pixman/pixman:latest
     restart: always
     container_name: pixman
-    environment:
     ports:
       - 35456:5000
 ```
@@ -54,7 +52,6 @@ services:
     image: herberthe0229/iptv-sources:latest
     restart: always
     container_name: iptv-sources
-    environment:
     ports:
       - 35457:5000
 ```
