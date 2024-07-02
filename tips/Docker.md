@@ -87,3 +87,32 @@ services:
     ports:
       - 25500:25500
 ```
+
+## p3terx/aria2-pro:latest
+> [使用说明](https://p3terx.com/archives/docker-aria2-pro.html)
+> 
+> Docker CLI命令详见[这篇文章](https://p3terx.com/archives/synology-nas-docker-advanced-tutorial-deploy-aria2-pro.html)，注意-v 映射的文件夹是否正确
+```
+services:
+  aria2-pro:
+    container_name: aria2-pro
+    image: p3terx/aria2-pro:latest
+    user: root
+    environment:
+      - RPC_SECRET=nash1ra
+      - RPC_PORT=6800
+      - LISTEN_PORT=6888
+    volumes:
+      - /volume1/docker/aria2/configs:/config
+      - /volume1/Download/ariaDLs:/downloads
+    network_mode: bridge
+    ports:
+      - 6800:6800
+      - 6888:6888
+      - 6888:6888/udp
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: 1m
+```
