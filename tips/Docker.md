@@ -5,7 +5,7 @@
 >> 
 >> N1盒子使用root权限登录，命令行安装，默认网络模式是bridge。
 >> 
->> 群晖需要考虑权限问题,可添加privileged: true，user: root等命令。
+>> 群晖需要考虑权限问题,可添加privileged: true，user: root等命令。网络需要指定network_mode: bridge或者host，否则会创建新的桥接网络。
 
 
 ## youshandefeiyang/allinone:latest
@@ -115,4 +115,26 @@ services:
       driver: json-file
       options:
         max-size: 1m
+```
+
+## deluan/navidrome:latest
+> [使用说明](https://www.navidrome.org/docs/installation/docker/)，注意-v 映射的文件夹是否正确
+>
+```
+docker run -d --name navidrome --restart=unless-stopped --user $(id -u):$(id -g) -v /mnt/mydisk/Music/Songs:/music -v /mnt/mydisk/data/NavidromeSettings:/data -p 4533:4533 -e ND_LOGLEVEL=info deluan/navidrome:latest
+```
+> 
+```
+services:
+  navidrome:
+    container_name: navidrome
+    ports:
+      - "4533:4533"
+    user: root
+    restart: unless-stopped
+    network_mode: bridge
+    volumes:
+      - "/volume1/docker/navidrome/configs:/data"
+      - "/volume1/1-Backup/Phones/K70/Music/Songs:/music:ro"
+    image: deluan/navidrome:latest
 ```
