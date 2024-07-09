@@ -138,3 +138,27 @@ services:
       - "/volume1/1-Backup/Phones/K70/Music/Songs:/music:ro"
     image: deluan/navidrome:latest
 ```
+
+## alexta69/metube:latest
+> [使用说明](https://github.com/alexta69/metube)，注意-v 映射的文件夹是否正确。
+> 
+> 这个项目用的不是传统的PUID和PGID，N1我默认就是root用户，没啥问题。但是群晖默认可能会报权限错误，根据文档说明，需要添加两个环境变量UID和GID并设为0，将会以root权限写入文件。
+```
+docker run -d --name=metube -p 35550:8081 -v /mnt/mydisk/DLs/metubeDLs:/downloads ghcr.io/alexta69/metube:latest
+```
+> 
+```
+services:
+  metube:
+    image: alexta69/metube:latest
+    container_name: metube
+    environment:
+      - UID=0
+      - GID=0
+    network_mode: bridge
+    restart: unless-stopped
+    ports:
+      - "35500:8081"
+    volumes:
+      - /volume1/Download/metubeDLs:/downloads
+```
