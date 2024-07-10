@@ -162,3 +162,36 @@ services:
     volumes:
       - /volume1/Download/metubeDLs:/downloads
 ```
+
+## nyanmisaka/jellyfin:latest
+> [使用说明](https://hub.docker.com/r/nyanmisaka/jellyfin)，注意-v 映射的文件夹是否正确，注意映射/dev/dri以便于硬解。
+>
+> [来源](https://registry.hub.docker.com/r/nyanmisaka/jellyfin/)：latest-legacy标签用于旧硬件，latest-rockchip标签用于arm64的硬件，latest标签用于新硬件。
+> 
+> 群晖下需要一些[操作](https://anerg.com/2023/05/17/how-to-set-hard-decoding-for-jellyfin-built-by-docker-in-synology.html)，“需要获取权限，ssh进入终端，sudo -i提升至root用户，输入ll /dev/dri，可以看到核显信息，然后需要获取renderD128这个设备的用户组，也就是videodriver的GID，常规情况下，即普通Linux下应该使用如下命令getent group render | cut -d: -f3，但是群晖是没有这个命令的，所以需要变通一下，使用下面的命令：synogroup --get videodriver，查询得GID为937。” 
+```
+docker docker run -d --name jellyfin -p 8098:8096 -p 8922:8920 -v /mnt/myemmc/jellyfin/config:/config -v /mnt/myemmc/jellyfin/cache:/cache -v /mnt/sda1/Videos:/media --device /dev/dri:/dev/dri --restart=always nyanmisaka/jellyfin:latest-rockchip
+
+```
+> 
+```
+services:
+  jellyfin:
+    image: nyanmisaka/jellyfin:latest
+    container_name: jellyfin
+    network_mode: bridge
+    user: root
+    group_add:
+      - "937"
+    devices:
+      - /dev/dri:/dev/dri
+    environment:
+      - "TZ=Asia/Shanghai"
+    volumes:
+      - "/volume1/docker/jellyfin/config:/config"
+      - "/volume1/docker/jellyfin/cache:/cache"
+      - "/volume1/video:/media"
+    ports:
+      - 8096:8096
+    restart: unless-stopped
+```
