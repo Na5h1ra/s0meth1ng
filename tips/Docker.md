@@ -195,3 +195,30 @@ services:
       - 8096:8096
     restart: unless-stopped
 ```
+
+## xream/sub-store:latest
+> [使用说明](https://hub.docker.com/r/xream/sub-store)，注意-v 映射的文件夹是否正确。
+> 
+> 相关的[详细教程](https://xream.notion.site/Sub-Store-Docker-8efc1aea40fa431b9a562b78994e7fb8)
+```
+docker run -it -d --name=sub-store --restart=unless-stopped -p 25501:3001 -v /root/sub-store-data:/opt/app/data -e SUB_STORE_FRONTEND_BACKEND_PATH=/20位的数字与字母混合字符串 -e "SUB_STORE_PUSH_SERVICE=https://api.day.app/你自己的bark的token/[推送标题]/[推送内容]?group=SubStore&autoCopy=1&isArchive=1&sound=shake&level=timeSensitive&icon=https%3A%2F%2Fraw.githubusercontent.com%2F58xinian%2Ficon%2Fmaster%2FSub-Store1.png" xream/sub-store:latest
+```
+> 
+```
+services:
+  sub-store:
+    image: xream/sub-store:latest
+    container_name: sub-store
+    restart: unless-stopped
+    network_mode: bridge
+    user: root
+    stdin_open: true
+    tty: true
+    volumes:
+      - /volume1/docker/sub-store/data:/opt/app/data
+    environment:
+      - SUB_STORE_FRONTEND_BACKEND_PATH=/20位的数字与字母混合字符串
+      - SUB_STORE_PUSH_SERVICE=https://api.day.app/你自己的bark的token/[推送标题]/[推送内容]?group=SubStore&autoCopy=1&isArchive=1&sound=shake&level=timeSensitive&icon=https%3A%2F%2Fraw.githubusercontent.com%2F58xinian%2Ficon%2Fmaster%2FSub-Store1.png
+    ports:
+      - "25501:3001"
+```
