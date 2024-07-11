@@ -200,6 +200,8 @@ services:
 > [使用说明](https://hub.docker.com/r/xream/sub-store)，注意-v 映射的文件夹是否正确。
 > 
 > 相关的[详细教程](https://xream.notion.site/Sub-Store-Docker-8efc1aea40fa431b9a562b78994e7fb8)
+>
+> 用了一阵，又弃用了，还需要设置cron定时任务，不然得手动更新订阅，稍稍有点没搞明白，不像subconverter拉取的时候也会顺带更新一下订阅。主要是馋文件管理里的的 查询流量信息订阅链接，因为我的配置全在gist上，但是gist拉取的配置，代理软件不会读取配置里的proxy-provider处的订阅链接Header请求头的Subscription-Userinfo，因此在clash的订阅页面也不会显示剩余流量到期时间啥的。后来看看surge也没地方显示，surfboard更是在配置的3个小点里面的panel页面显示，还是静态的需要机场支持，单单为了几个Clash整个剩余流量显示感觉也没太大必要。不如加个分组叫机场信息，正好有节点有剩余流量到期时间等相关的信息。等到时换机场没有这种节点了再说。
 ```
 docker run -it -d --name=sub-store --restart=unless-stopped -p 25501:3001 -v /root/sub-store-data:/opt/app/data -e SUB_STORE_FRONTEND_BACKEND_PATH=/20位的数字与字母混合字符串 -e "SUB_STORE_PUSH_SERVICE=https://api.day.app/你自己的bark的token/[推送标题]/[推送内容]?group=SubStore&autoCopy=1&isArchive=1&sound=shake&level=timeSensitive&icon=https%3A%2F%2Fraw.githubusercontent.com%2F58xinian%2Ficon%2Fmaster%2FSub-Store1.png" xream/sub-store:latest
 ```
