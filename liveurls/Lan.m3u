@@ -287,6 +287,10 @@ http://192.168.10.99:35455/douyin/28029345784
 http://192.168.10.99:35455/douyin/47657471493
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 带蓝子
 http://192.168.10.99:35455/douyin/652574647741
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 芃
+http://192.168.10.99:35455/douyin/68780572439
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 越越
+http://192.168.10.99:35455/douyin/89843747641
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 小人鱼多莉亚
 http://192.168.10.99:35455/douyin/490149237506
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", qq的空间
@@ -321,5 +325,5 @@ http://192.168.10.99:35455/douyin/599659464222
 http://192.168.10.99:35455/douyin/369500103166
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音NN", 月野满lux
 http://192.168.10.99:35455/douyin/291539423392
-#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 啊嘉Baby
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音NN", 啊嘉Baby
 http://192.168.10.99:35455/douyin/168081160640
