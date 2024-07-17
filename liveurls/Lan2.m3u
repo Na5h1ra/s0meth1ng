@@ -287,10 +287,14 @@ http://192.168.10.100:35455/douyin/65565944115
 http://192.168.10.100:35455/douyin/28029345784
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 国博文物总店
 http://192.168.10.100:35455/douyin/47657471493
-#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 带蓝子
-http://192.168.10.100:35455/douyin/652574647741
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 芃
 http://192.168.10.100:35455/douyin/68780572439
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 是小朱吖
+http://192.168.10.100:35455/douyin/774314130552
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 半甜超人
+http://192.168.10.100:35455/douyin/151033567514
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 半甜超人
+http://192.168.10.100:35455/douyin/152390404254
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 一坨小红花
 http://192.168.10.100:35455/douyin/640123310447
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 三点水
@@ -317,6 +321,8 @@ http://192.168.10.100:35455/douyin/427155286962
 http://192.168.10.100:35455/douyin/363110179225
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 珺主_zZ
 http://192.168.10.100:35455/douyin/288210046701
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 带蓝子
+http://192.168.10.100:35455/douyin/652574647741
 
 
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音NN", 涵妹尊嘟可爱
@@ -335,3 +341,5 @@ http://192.168.10.100:35455/douyin/369500103166
 http://192.168.10.100:35455/douyin/291539423392
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音NN", 啊嘉Baby
 http://192.168.10.100:35455/douyin/168081160640
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音NN", 薯条娘
+http://192.168.10.100:35455/douyin/40231885791
