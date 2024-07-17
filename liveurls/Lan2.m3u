@@ -145,6 +145,8 @@ http://192.168.10.100:35455/bilibili/22145445
 http://192.168.10.100:35455/bilibili/10129699
 #EXTINF:-1 tvg-logo="https://i1.hdslb.com/bfs/face/2e30c58cfb6b4bf8d2f0055c9bfa680010cd108f.jpg" group-title="哔哩哔哩",_糖果果Candy_
 http://192.168.10.100:35455/bilibili/295476
+#EXTINF:-1 tvg-logo="https://i1.hdslb.com/bfs/face/2e30c58cfb6b4bf8d2f0055c9bfa680010cd108f.jpg" group-title="哔哩哔哩",王竹子教育频道
+http://192.168.10.100:35455/bilibili/32760877
 #EXTINF:-1 tvg-logo="https://i1.hdslb.com/bfs/face/0d9d456607b880d2767513dcf65f43c9d82dadea.jpg" group-title="哔哩哔哩",菠萝赛东
 http://192.168.10.100:35455/bilibili/37527
 #EXTINF:-1 tvg-logo="https://i2.hdslb.com/bfs/face/eebb406832f0de56b0c057700dd574eaa86b7461.jpg" group-title="哔哩哔哩",Stan李昂
@@ -289,6 +291,12 @@ http://192.168.10.100:35455/douyin/47657471493
 http://192.168.10.100:35455/douyin/652574647741
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 芃
 http://192.168.10.100:35455/douyin/68780572439
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 一坨小红花
+http://192.168.10.100:35455/douyin/640123310447
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 三点水
+http://192.168.10.100:35455/douyin/490149237506
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 王竹子
+http://192.168.10.100:35455/douyin/123456789000
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 越越
 http://192.168.10.100:35455/douyin/89843747641
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 小人鱼多莉亚
@@ -296,7 +304,7 @@ http://192.168.10.100:35455/douyin/490149237506
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", qq的空间
 http://192.168.10.100:35455/douyin/308005321709
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 天才少女拉克丝
-http://192.168.10.100:35455/46141673320
+http://192.168.10.100:35455/douyin/46141673320
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 呼呼大睡soso
 http://192.168.10.100:35455/douyin/669079250026
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 梨涡姐姐
