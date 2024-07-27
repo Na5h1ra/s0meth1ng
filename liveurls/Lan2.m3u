@@ -3,6 +3,8 @@
 http://192.168.10.100:35455/douyu/3168536
 #EXTINF:-1 tvg-logo="https://apic.douyucdn.cn/upload/avatar_v3/201905/badbf01f7ab943358bf78bcd9245305f_middle.jpg" group-title="斗鱼",玩机器丶Machine
 http://192.168.10.100:35455/douyu/6979222
+#EXTINF:-1 tvg-logo="https://apic.douyucdn.cn/upload/avatar_v3/202404/93a4a19e57c541b1a325dc687bfeba38_big.jpg" group-title="斗鱼",CSGO解说伟伟
+http://192.168.10.100:35455/douyu/293829
 #EXTINF:-1 tvg-logo="https://apic.douyucdn.cn/upload/avatar_v3/202101/c5933be31ee84fa882701795b634ad77_middle.jpg" group-title="斗鱼",4AM小海xx丶
 http://192.168.10.100:35455/douyu/701990
 #EXTINF:-1 tvg-logo="https://apic.douyucdn.cn/upload/avatar_v3/202204/f84ce4b7e1684b1793a700ea7df86e68_big.jpg" group-title="斗鱼",女流66
@@ -129,6 +131,16 @@ http://192.168.10.100:35455/bilibili/21587367
 http://192.168.10.100:35455/bilibili/10041310
 #EXTINF:-1 tvg-logo="https://i1.hdslb.com/bfs/face/fa08f80ac8c8ace532eebffecb1f2571408185e4.jpg" group-title="哔哩哔哩",无聊的Do君
 http://192.168.10.100:35455/bilibili/2292574
+#EXTINF:-1 tvg-logo="https://i2.hdslb.com/bfs/face/b8d3399db805113be38120a6221fc54a54d723b1.jpg" group-title="哔哩哔哩",么么小茜茜
+http://192.168.10.100:35455/bilibili/23423267
+#EXTINF:-1 tvg-logo="https://i0.hdslb.com/bfs/face/210401df1211b77642e5a63649a719aa37e43b68.jpg" group-title="哔哩哔哩",Takonana_
+http://192.168.10.100:35455/bilibili/25271306
+#EXTINF:-1 tvg-logo="https://i2.hdslb.com/bfs/face/b88bfe7ebea7231b07e691c0769bdf34a8637085.jpg" group-title="哔哩哔哩",郑羊羊
+http://192.168.10.100:35455/bilibili/929323
+#EXTINF:-1 tvg-logo="https://i0.hdslb.com/bfs/face/cfbc943e55aa0141fe2c9e1e0b62541b357f6870.jpg" group-title="哔哩哔哩",戒社
+http://192.168.10.100:35455/bilibili/22188468
+#EXTINF:-1 tvg-logo="https://i0.hdslb.com/bfs/face/51fcb701e4ce7714c8e27c1949444b937a83d452.jpg" group-title="哔哩哔哩",鱼鱼愈愈
+http://192.168.10.100:35455/bilibili/31476563
 #EXTINF:-1 tvg-logo="https://i1.hdslb.com/bfs/face/6237c423a25e6f6e79d78c738911e39c2d26bac9.jpg" group-title="哔哩哔哩",野生鱼白
 http://192.168.10.100:35455/bilibili/27564506
 #EXTINF:-1 tvg-logo="https://i2.hdslb.com/bfs/face/11c9840da5c2a333808bbe055ebdcf0cbefff7df.jpg" group-title="哔哩哔哩",中队长同志
@@ -249,8 +261,32 @@ http://192.168.10.100:35455/douyin/527696336035
 http://192.168.10.100:35455/douyin/814975434046
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 柯宝碎碎念
 http://192.168.10.100:35455/douyin/148272971953
-#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 愿你心之所向皆有回响
-http://192.168.10.100:35455/douyin/38619450364
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 留着短发的wife
+http://192.168.10.100:35455/douyin/465137033670
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 狐狸酱大魔王
+http://192.168.10.100:35455/douyin/635496257304
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", Darlene
+http://192.168.10.100:35455/douyin/223125492627
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 琳园长
+http://192.168.10.100:35455/douyin/405608999717
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 酒精过敏的修沟
+http://192.168.10.100:35455/douyin/714801956392
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 洗个蛋挞
+http://192.168.10.100:35455/douyin/898142498198
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 一只羊
+http://192.168.10.100:35455/douyin/103459382702
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 花碎花
+http://192.168.10.100:35455/douyin/719906374694
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 哇咔大王
+http://192.168.10.100:35455/douyin/231706611390
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 黄玉瑶
+http://192.168.10.100:35455/douyin/67936345393
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 糖心蛋
+http://192.168.10.100:35455/douyin/436448745081
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 深海蜜柚
+http://192.168.10.100:35455/douyin/851306624436
+#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 小奶酪
+http://192.168.10.100:35455/douyin/669779180524
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 薯条好吃
 http://192.168.10.100:35455/douyin/899550786194
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 无敌海苔
@@ -375,8 +411,6 @@ http://192.168.10.100:35455/douyin/125491111716
 http://192.168.10.100:35455/douyin/91429254810
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 越越
 http://192.168.10.100:35455/douyin/89843747641
-#EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 小人鱼多莉亚
-http://192.168.10.100:35455/douyin/490149237506
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", qq的空间
 http://192.168.10.100:35455/douyin/308005321709
 #EXTINF:-1 tvg-logo="https://p3-pc.douyinpic.com/img/aweme-avatar/aweme_default_avatar.png~c5_300x300.jpeg" group-title="抖音", 天才少女拉克丝
