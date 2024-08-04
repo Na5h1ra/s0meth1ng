@@ -6,7 +6,8 @@
 >> N1盒子使用root权限登录，命令行安装，默认网络模式是bridge。
 >> 
 >> 群晖需要考虑权限问题,可添加privileged: true，user: root等命令。网络需要指定network_mode: bridge或者host，否则会创建新的桥接网络。
-
+>> 
+>> 可以使用 sudo netstat -anp | grep 端口号，来查询端口号是否被占用
 
 ## youshandefeiyang/allinone:latest
 > [使用说明](https://github.com/youshandefeiyang/LiveRedirect/blob/main/Golang/README.md)
