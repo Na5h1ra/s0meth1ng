@@ -170,7 +170,7 @@ services:
 > 
 > 群晖下需要一些[操作](https://anerg.com/2023/05/17/how-to-set-hard-decoding-for-jellyfin-built-by-docker-in-synology.html)，“需要获取权限，ssh进入终端，sudo -i提升至root用户，输入ll /dev/dri，可以看到核显信息，然后需要获取renderD128这个设备的用户组，也就是videodriver的GID，常规情况下，即普通Linux下应该使用如下命令getent group render | cut -d: -f3，但是群晖是没有这个命令的，所以需要变通一下，使用下面的命令：synogroup --get videodriver，查询得GID为937。” 
 ```
-docker docker run -d --name jellyfin -p 8098:8096 -p 8922:8920 -v /mnt/myemmc/jellyfin/config:/config -v /mnt/myemmc/jellyfin/cache:/cache -v /mnt/sda1/Videos:/media --device /dev/dri:/dev/dri --restart=always nyanmisaka/jellyfin:latest-rockchip
+docker run -d --name jellyfin -p 8098:8096 -p 8922:8920 -v /mnt/myemmc/jellyfin/config:/config -v /mnt/myemmc/jellyfin/cache:/cache -v /mnt/sda1/Videos:/media --device /dev/dri:/dev/dri --restart=always nyanmisaka/jellyfin:latest-rockchip
 
 ```
 > 
@@ -223,4 +223,29 @@ services:
       - SUB_STORE_PUSH_SERVICE=https://api.day.app/你自己的bark的token/[推送标题]/[推送内容]?group=SubStore&autoCopy=1&isArchive=1&sound=shake&level=timeSensitive&icon=https%3A%2F%2Fraw.githubusercontent.com%2F58xinian%2Ficon%2Fmaster%2FSub-Store1.png
     ports:
       - "25501:3001"
+```
+
+## johngong/baidunetdisk:latest
+> [使用说明](https://github.com/gshang2017/docker/tree/master/baidunetdisk)，注意-v 映射的文件夹是否正确。
+>
+> 需要在右上角设置下载目录为/config/baidunetdiskdownload
+>
+> 并未在N1上部署，因为N1芯片很弱，假如下载拉满，带宽不足，很有可能N1的后台都进不去，故无Docker CLI,不过可以自己用[这个网站](https://www.decomposerize.com)转换
+> 
+```
+services:
+  baidunetdisk:
+    image: johngong/baidunetdisk:latest
+    container_name: baidunetdisk
+    network_mode: bridge
+    user: root
+    environment:
+      - NOVNC_LANGUAGE="zh_Hans"
+    ports:
+      - 5250:5800
+      - 5900:5900
+    volumes:
+      - /volume1/docker/baidunetdisk/configs:/config
+      - /volume1/docker/baidunetdisk/bdDLs:/config/baidunetdiskdownload
+    restart: unless-stopped
 ```
