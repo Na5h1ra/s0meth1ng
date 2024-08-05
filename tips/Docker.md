@@ -231,7 +231,7 @@ services:
 >
 > 需要在右上角设置下载目录为/config/baidunetdiskdownload
 >
-> 并未在N1上部署，因为N1芯片很弱，假如下载拉满，带宽不足，很有可能N1的后台都进不去，故无Docker CLI,不过可以自己用[这个网站](https://www.decomposerize.com)转换
+> 并未在N1上部署，因为N1芯片很弱，假如下载拉满，带宽不足，很有可能N1的后台都进不去，故无Docker CLI,不过可以自己用[这个网站](https://www.decomposerize.com)来转换
 > 
 ```
 services:
@@ -249,4 +249,101 @@ services:
       - /volume1/docker/baidunetdisk/configs:/config
       - /volume1/docker/baidunetdisk/bdDLs:/config/baidunetdiskdownload
     restart: unless-stopped
+```
+
+## ghcr.io/gethomepage/homepage:latest
+> [使用说明](https://gethomepage.dev/latest/)，注意-v 映射的文件夹是否正确。
+>
+> 图标来自[需这个网站](https://wiki.slarker.me/application/homepage.html)
+>
+> 并未在N1上部署，可用[这个网站](https://www.decomposerize.com)进行转换
+> 
+```
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    ports:
+      - 35450:3000
+    volumes:
+      - /volume1/docker/homepage/config:/app/config
+      - /volume1/docker/homepage/public/images/:/app/public/images
+      - /var/run/docker.sock:/var/run/docker.sock
+```
+> Service.yaml示例，注意yaml有非常严格的缩进，不正确的缩进会疯狂报错。widget可在[这里](https://gethomepage.dev/latest/widgets/)查看，注意缩进。
+```
+- 我的设备:
+    - 路由器名称:
+        icon: /images/dashboard_icons/xiaomi.png
+        href: 路由器ip
+        description: 路由器
+        siteMonitor: 路由器ip
+
+- 文件服务:
+    - Alist on PC:
+        icon: /images/HD-Icons-main/svg/Alist_A.svg
+        href: Alist地址
+        description: 网盘挂载
+
+- 实用工具:
+    - Metube:
+        icon: /images/HD-Icons-main/circle/Youtube-dl_A.png
+        href: Metube地址
+        description: 视频下载
+
+- 影音视听:
+    - Jellyfin:
+        icon: /images/dashboard_icons/svg/jellyfin.svg
+        href: jellyfin地址
+        description: 影视媒体库
+        container: jellyfin
+        widget:
+          type: jellyfin
+          url: jellyfin地址
+          key: 可去jellyfin后台申请
+          enableBlocks: true
+          enableNowPlaying: true
+          enableUser: false
+          showEpisodeNumber: false
+          expandOneStreamToTwoRows: false
+    - Navidrome:
+        icon: /images/dashboard_icons/svg/navidrome.svg
+        href: Navidrome地址
+        description: 音乐库
+        container: navidrome
+        widget:
+          type: navidrome
+          url: Navidrome地址
+          user: 用户名
+          token: 可用F12刷新后查看
+          salt: 可用F12刷新后查看
+```
+> settings.yaml示例，详细设置可在[这里](https://gethomepage.dev/latest/configs/settings/)查询
+```
+theme: dark
+
+background:
+  image: /images/background.jpg
+  blur: sm
+
+layout:
+  我的设备:
+    style: row
+    columns: 5
+
+  文件服务:
+    style: column
+    columns: 5
+
+  实用工具:
+    style: column
+    columns: 5
+
+  影音视听:
+    style: column
+    columns: 5
+
+language: zh-CN
+
+hideVersion: true
 ```
