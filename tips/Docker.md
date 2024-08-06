@@ -263,6 +263,7 @@ services:
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
+    network_mode: bridge
     ports:
       - 35450:3000
     volumes:
