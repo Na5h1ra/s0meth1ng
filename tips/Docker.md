@@ -8,6 +8,8 @@
 >> 群晖需要考虑权限问题,可添加privileged: true，user: root等命令。网络需要指定network_mode: bridge或者host，否则会创建新的桥接网络。
 >> 
 >> 可以使用 sudo netstat -anp | grep 端口号，来查询端口号是否被占用
+>>
+>> 注册表镜像，可以填写[1panel](https://docker.1panel.live)和[耗子面板](https://hub.rat.dev)两个国内加速源，[来源](https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6)
 
 ## youshandefeiyang/allinone:latest
 > [使用说明](https://github.com/youshandefeiyang/LiveRedirect/blob/main/Golang/README.md)
