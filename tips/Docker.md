@@ -3,7 +3,9 @@
 > 自用Docker安装命令
 >> 用于群晖和N1盒子。
 >> 
->> N1盒子使用root权限登录，命令行安装，默认网络模式是bridge。
+>> N1盒子使用root权限登录，命令行安装，默认网络模式是bridge
+>>
+>> 所有:的左边都是外部实际的端口或者映射地址，可以按照情况更改，所有:的右边一定要和镜像作者写的一样
 >> 
 >> 群晖需要考虑权限问题,可添加privileged: true，user: root等命令。网络需要指定network_mode: bridge或者host，否则会创建新的桥接网络。
 >> 
@@ -349,4 +351,29 @@ layout:
 language: zh-CN
 
 hideVersion: true
+```
+
+
+## gotson/komga:latest
+> 某大佬的[使用介绍与体验](https://www.himiku.com/archives/komga.html)，注意-v 映射的文件夹是否正确。
+>
+> 需要设置目录，注意开启文件哈希会占用很多内存，谨慎开启。刮削有点复杂，所以没搞，具体可以看大佬的博客及其评论区。
+>
+> 并未在N1上部署，因为在N100上光看1篇300MB的PDF，后台的java进程就飙升到了惊人的3.24G，对于只有2G内存的N1盒子实在是捉襟见肘。
+> 
+```
+services:
+  komga:
+    container_name: komga
+    image: gotson/komga:latest
+    user: root
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - "23333:25600"
+    environment:
+      - "TZ=Asia/Shanghai"
+    volumes:
+      - "/volume1/docker/komga/config:/config"
+      - "/volume1/manga:/comic"
 ```
