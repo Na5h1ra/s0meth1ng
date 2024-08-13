@@ -1,6 +1,7 @@
 # Docker
 
 > 自用Docker安装命令
+>> 更新时间：2024.8.14
 >> 用于群晖和N1盒子。
 >> 
 >> N1盒子使用root权限登录，命令行安装，默认网络模式是bridge
@@ -91,6 +92,25 @@ services:
     network_mode: bridge
     ports:
       - 25500:25500
+```
+
+## youshandefeiyang/sub-web-modify:latest
+> [使用说明](https://github.com/youshandefeiyang/sub-web-modify)
+>
+```
+docker run -d --name=sub-web-modify -p 25501:80 --restart=always youshandefeiyang/sub-web-modify:latest
+```
+> 
+```
+services:
+  sub-web-modify:
+    image: youshandefeiyang/sub-web-modify:latest
+    restart: always
+    container_name: sub-web-modify
+    user: root
+    network_mode: bridge
+    ports:
+      - 25501:80
 ```
 
 ## p3terx/aria2-pro:latest
@@ -359,8 +379,9 @@ hideVersion: true
 >
 > 需要设置目录，注意开启文件哈希会占用很多内存，谨慎开启。刮削有点复杂，所以没搞，具体可以看大佬的博客及其评论区。
 >
-> 并未在N1上部署，因为在N100上光看1篇300MB的PDF，后台的java进程就飙升到了惊人的3.24G，对于只有2G内存的N1盒子实在是捉襟见肘。
-> 
+> 并未在N1上部署，因为在N100上光看1篇300MB的PDF，后台的java进程就飙升到了惊人的3.2G，对于只有2G内存的N1盒子实在是捉襟见肘。
+>
+> 由于是内网使用，邮箱密码可以随便输入
 ```
 services:
   komga:
