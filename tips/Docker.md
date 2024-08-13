@@ -95,9 +95,33 @@ services:
       - 25500:25500
 ```
 
+## asdlokj1qpi23/subconverter:latest
+> 使用SSH进入后台，键入`curl http://localhost:25501/version`，出现`subconverter vx.x.x backend`说明搭建成功
+> 
+> 支持singbox作为target，原版tindy2013的有可能会报no node错误
+> 
+> [使用说明](https://github.com/asdlokj1qpi23/subconverter/blob/master/README-cn.md)
+>
+```
+docker run -d --name=subc0nverter -p 25501:25500 --restart=always asdlokj1qpi23/subconverter:latest
+```
+> 
+```
+services:
+  subc0nverter:
+    image: asdlokj1qpi23/subconverter:latest
+    restart: always
+    container_name: subc0nverter
+    user: root
+    network_mode: bridge
+    ports:
+      - "25501:25500"
+```
+
 ## youshandefeiyang/sub-web-modify:latest
 > [使用说明](https://github.com/youshandefeiyang/sub-web-modify)
 >
+> 是前端页面，但是不能选本地后端
 ```
 docker run -d --name=sub-web-modify -p 25501:80 --privileged=true --restart=always youshandefeiyang/sub-web-modify:latest
 ```
@@ -111,7 +135,7 @@ services:
     user: root
     network_mode: bridge
     ports:
-      - 25501:80
+      - 25502:80
 ```
 
 ## p3terx/aria2-pro:latest
