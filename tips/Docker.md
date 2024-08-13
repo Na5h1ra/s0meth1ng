@@ -2,6 +2,7 @@
 
 > 自用Docker安装命令
 >> 更新时间：2024.8.14
+>> 
 >> 用于群晖和N1盒子。
 >> 
 >> N1盒子使用root权限登录，命令行安装，默认网络模式是bridge
@@ -98,7 +99,7 @@ services:
 > [使用说明](https://github.com/youshandefeiyang/sub-web-modify)
 >
 ```
-docker run -d --name=sub-web-modify -p 25501:80 --restart=always youshandefeiyang/sub-web-modify:latest
+docker run -d --name=sub-web-modify -p 25501:80 --privileged=true --restart=always youshandefeiyang/sub-web-modify:latest
 ```
 > 
 ```
