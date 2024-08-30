@@ -1,3 +1,4 @@
+# 1. 压缩每n份文件且相互独立（Win）
 ## 第1步
   右键打开Powershell，输入命令： cmd /r dir /b >listfile.txt 输出目录下所有文件
 ## 第2步
