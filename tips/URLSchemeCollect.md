@@ -1,4 +1,4 @@
-# URL Schemes 收集与整理
+# URL Schemes & Intent收集与整理
 
 ## 更新时间 2024.09.03
 ## 来源与相关文章：
@@ -13,11 +13,32 @@
    [云端筑梦师的博客：完整参数URL Scheme大全查询](https://www.ydzms.com/archives/58/)
 
    自己摸索与收集
+### 1. 小米系统
 
-### 支付宝 com.eg.android.AlipayGphone
+可作为磁贴使用，如比较常用的小爱同学
+
+**小米妙播：** 包名miui.systemui.plugin，类名miui.systemui.miplay.MiPlayDetailActivity
+
+**小米妙享：** 包名com.milink.service，类名com.miui.circulate.world.CirculateWorldActivity
+
+**小爱同学：** 包名com.miui.voiceassist，类名com.xiaomi.voiceassistant.CTAAlertActivity，IntentAction为android.intent.action.ASSIST
+
+**垃圾清理：** #Intent;action=miui.intent.action.GARBAGE_CLEANUP;package=com.miui.cleanmaster;end
+
+**应用数据清理：** #Intent;component=com.miui.cleanmaster/com.miui.optimizecenter.deepclean.appdata.AppDataActivity;package=com.miui.cleanmaster;S.enter_homepage_way=phone_manage;end
+
+**原生电池优化界面：** 包名com.android.settings，类名.Settings$HighPowerApplicationsActivity
+
+**设置默认应用：** 包名com.android.settings，类名.Settings$AdvancedAppsActivity  或者使用  #Intent;action=android.settings.MANAGE_DEFAULT_APPS_SETTINGS;package=com.android.settings;component=com.android.settings/.Settings%24AdvancedAppsActivity;end
+
+**小米社区 每日积分签到：** mio://web.vip.miui.com/page/info/mio/mio/checkIn?ref=longpressshortcuts
+
+### 2. 支付宝 com.eg.android.AlipayGphone
   常用小程序一般为alipays://platformapi/startapp?appId=数字
-
+  
   可能后面会跟一些参数
+
+  或是扫一扫alipayqr://platformapi/startapp?saId=10000007&qrcode=淘宝或支付宝相关的网址，比如下面的快递取件码
 
   #### 数字来源1：
   小程序若能分享，则右上角分享出去，得到链接后，在浏览器里打开，得到一串网址后，使用URLdecode解码后可得到appid（通用方法）
@@ -36,7 +57,8 @@
 |出行|alipays://platformapi/startapp?appId=20002047|
 |付款码|alipays://platformapi/startapp?appId=20000056|
 |收款码|alipays://platformapi/startapp?appId=20000123|
-|乘车码|alipayqr://platformapi/startapp?saId=200011235|
+|乘车码|alipays://platformapi/startapp?appId=200011235|
+|快递取件码|alipayqr://platformapi/startapp?saId=10000007&qrcode=https://market.m.taobao.com/app/cn-yz/multi-activity/authCode.html?needStartTake=true&packageId=null&entrance=logisticDetail|
 |花呗|alipays://platformapi/startapp?appId=20000199|
 |神奇海洋|alipays://platformapi/startapp?appId=2021003115672468|
 |蚂蚁森林|alipays://platformapi/startapp?appId=60000002|
@@ -55,3 +77,43 @@
 |电影演出|alipays://platformapi/startapp?appId=2021001110648550|
 |红包|alipays://platformapi/startapp?appId=88886666|
 |话费充值|alipays://platformapi/startapp?appId=10000003|
+
+
+### 3. 淘宝 com.taobao.taobao
+|名称|URL Schemes|
+|-------------|-------------|
+|淘宝 快递身份码|taobao://market.m.taobao.com/app/cn-yz/multi-activity/authCode.html?needStartTake=true&packageId=null&entrance=logisticDetail|
+|淘宝人生|taobao://pages.tmall.com/wow/z/tblife/solution2/game-tblife?wh_biz=tm&disableNav=YES&uniqueTag=hdtblife&from=mytaobaoqd#/home|
+|淘宝店铺的跳转|taobao://shop.m.taobao.com/shop/shop_index.htm?shopId=店铺数字id|
+
+
+### 4. 网易云音乐 com.netease.cloudmusic
+|名称|URL Schemes|
+|-------------|-------------|
+|网易云榜单|orpheus://ranking|
+|网易云歌曲跳转|orpheus://song/一串数字 （分享出来的song?id=后面的数字）|
+|网易云签到|orpheus://rnpage?component=rn-cloudshell-center|
+|网易云音乐 每日推荐|orpheus://songrcmd|
+|网易云音乐 听歌识曲|orpheus://identify（iOS版本为orpheuswidget://recognize）|
+|网易云音乐 我喜欢的音乐|orpheus://playlist/417760994|
+|网易云音乐 私人雷达|orpheus://playlist/3136952023|
+|网易云音乐 私人FM|orpheus://radio|
+
+### 5. QQ音乐 com.tencent.qqmusic
+|名称|URL Schemes|
+|-------------|-------------|
+|每日30首|qqmusic://qq.com/ui/gedan?p={"id":"4487164108"}|
+|我的收藏|qqmusic://qq.com/ui/myTab?p=%7B%22tab%22%3A%22fav%22%7D|
+|听歌识曲|qqmusic://qq.com/ui/recognize|
+
+### 6. 京东 com.jingdong.app.mall
+|名称|URL Schemes|
+|-------------|-------------|
+|领签到的京豆|openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com"}
+|白条账单|openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://m.jr.jd.com/rn/BTMonthBill/index.html?page=page_bill_page&monthlyBillType=0&channelName=&channelcode=Z01"}
+|订单列表|openapp.jdmobile://virtual?params={"category":"jump","des":"orderlist"}|
+
+### 7. 高德地图 com.autonavi.minimap
+|名称|URL Schemes|
+|-------------|-------------|
+|实时公交|amapuri://realtimeBus/home?from=shortcut&netAcc={"path":"amapservice://amap_bundle_realbus/RequestScheduleService","requestKeys":"busStation"}|
