@@ -44,7 +44,7 @@
   小程序若能分享，则右上角分享出去，得到链接后，在浏览器里打开，得到一串网址后，使用URLdecode解码后可得到appid（通用方法）
 
   #### 数字来源2：
-  小程序若不能分享，且手机能root，可去/data/data/com.eg.android.AlipayGphone/files/nebulaInstallApps/下，打开每个文件夹里的Manifest.xml（可得到名称和数字），或去查看/data/data/com.eg.android.AlipayGphone/databases/nebulax_app.db数据库文件（2021年8月尝试有效，现可能已经失效）
+  小程序若不能分享，且设备能root，可去/data/data/com.eg.android.AlipayGphone/files/nebulaInstallApps/下，打开每个文件夹里的Manifest.xml（可得到名称和数字），或去查看/data/data/com.eg.android.AlipayGphone/databases/nebulax_app.db数据库文件（2021年8月尝试有效，现可能已经失效）
   
   #### 数字来源3：
   他人的分享，比如上面的来源与相关文章
