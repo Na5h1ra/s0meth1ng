@@ -1,6 +1,7 @@
 # URL Schemes & Intent收集与整理
 
-## 更新时间 2024.09.03
+## 更新时间 2024.09.06
+
 ## 来源与相关文章：
    酷安[Anywhere-](https://www.coolapk.com/apk/com.absinthe.anywhere_)与[快捷方式](https://www.coolapk.com/apk/com.syyf.quickpay)的评论区
 
@@ -13,6 +14,7 @@
    [云端筑梦师的博客：完整参数URL Scheme大全查询](https://www.ydzms.com/archives/58/)
 
    自己摸索与收集
+
 ### 1. 小米系统
 
 可作为磁贴使用，如比较常用的小爱同学
@@ -58,6 +60,7 @@
 |付款码|alipays://platformapi/startapp?appId=20000056|
 |收款码|alipays://platformapi/startapp?appId=20000123|
 |乘车码|alipays://platformapi/startapp?appId=200011235|
+|Apple专区|alipays://platformapi/startapp?appId=2021003125614874&page=pages/index/index|
 |快递取件码|alipayqr://platformapi/startapp?saId=10000007&qrcode=https://market.m.taobao.com/app/cn-yz/multi-activity/authCode.html?needStartTake=true&packageId=null&entrance=logisticDetail|
 |花呗|alipays://platformapi/startapp?appId=20000199|
 |神奇海洋|alipays://platformapi/startapp?appId=2021003115672468|
@@ -68,7 +71,6 @@
 |铁路12306|alipays://platformapi/startapp?appId=2018122062695048|
 |会员领积分|alipays://platformapi/startapp?appId=20000160&url=%2Fwww%2FmyPoints.html|
 |市民中心|alipays://platformapi/startapp?appId=20000178|
-|苹果专区|alipays://platformapi/startapp?appId=20000042&publicId=2017011104987367|
 |菜鸟裹裹|alipays://platformapi/startapp?appId=2021001141626787|
 |运动|alipays://platformapi/startapp?appId=20000869|
 |饿了么|alipays://platformapi/startapp?appId=2021001110676437|
@@ -77,11 +79,13 @@
 |电影演出|alipays://platformapi/startapp?appId=2021001110648550|
 |红包|alipays://platformapi/startapp?appId=88886666|
 |话费充值|alipays://platformapi/startapp?appId=10000003|
+|PockytShop 礼品卡充值(慎用)|alipays://platformapi/startapp?appId=2021003191605547|
 
 
 ### 3. 淘宝 com.taobao.taobao
 |名称|URL Schemes|
 |-------------|-------------|
+|淘宝一键价保|tbopen://m.taobao.com/tbopen/index.html?h5Url=https%3A%2F%2Fpages.tmall.com%2Fwow%2Fz%2Fmarketing-tools%2Fmkt%2Fprice-center%3FdisableNav%3DYES%26sourceChannel%3D2%26spm%3Da311a.7996332.0.0&action=ali.open.nav&module=h5&bootImage=0&afcPromotionOpen=false|
 |淘宝 快递身份码|taobao://market.m.taobao.com/app/cn-yz/multi-activity/authCode.html?needStartTake=true&packageId=null&entrance=logisticDetail|
 |淘宝人生|taobao://pages.tmall.com/wow/z/tblife/solution2/game-tblife?wh_biz=tm&disableNav=YES&uniqueTag=hdtblife&from=mytaobaoqd#/home|
 |淘宝店铺的跳转|taobao://shop.m.taobao.com/shop/shop_index.htm?shopId=店铺数字id|
@@ -107,8 +111,14 @@
 |听歌识曲|qqmusic://qq.com/ui/recognize|
 
 ### 6. 京东 com.jingdong.app.mall
+
+常用命令openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"网址"}
+
 |名称|URL Schemes|
 |-------------|-------------|
+|京东一键价保|openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://h5.m.jd.com/babelDiy/Zeus/2RePMzTqg6UoffvMwtwVeMcnPGeg/index.html?defaultViewTab=0&appId=cuser&type=25#/"}
+|京东一键价保2(瞎折腾试出来的，慎用)|openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://h5.m.jd.com/pb/016454810"}
+|京东一键价保3(瞎折腾试出来的，慎用)|openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://h5.m.jd.com/pb/016454811"}
 |领签到的京豆|openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com"}
 |白条账单|openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://m.jr.jd.com/rn/BTMonthBill/index.html?page=page_bill_page&monthlyBillType=0&channelName=&channelcode=Z01"}
 |订单列表|openapp.jdmobile://virtual?params={"category":"jump","des":"orderlist"}|
