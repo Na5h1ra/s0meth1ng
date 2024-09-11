@@ -1,7 +1,6 @@
 # Docker
-
+## 更新时间 2024.09.11
 > 自用Docker安装命令
->> 更新时间：2024.09.06
 >> 
 >> 用于群晖和N1盒子。
 >> 
@@ -71,6 +70,7 @@ services:
         image: 1activegeek/airconnect:latest
 
 ```
+
 
 ## herberthe0229/iptv-sources:latest
 > [使用说明](https://github.com/HerbertHe/iptv-sources)
