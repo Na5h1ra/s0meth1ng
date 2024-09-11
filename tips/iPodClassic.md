@@ -2,6 +2,7 @@
 ## [iPod Classic的Rockbox文档](https://download.rockbox.org/release/3.15/rockbox-ipod6g-3.15.pdf)
 ## [iPod Classic介绍](https://en.wikipedia.org/wiki/IPod_classic)
 
+## 更新时间 2024.09.11
 
 ## iPod Classic的Rockbox里的[Mpeg Player plugin介绍](https://www.rockbox.org/wiki/PluginMpegplayer)：
 
@@ -12,10 +13,10 @@ video streams with MPEG audio multiplexed into .mpg files.
 
 
 ### 单个flv文件转码为Rockbox支持的mpeg视频，代码为：
-  ffmpeg -i input.flv -s 320x180 -vcodec mpeg2video -b:v 320k -b:a 192k -ac 2 -ar 44100 -acodec mp3 output.mpg 
+  `ffmpeg -i input.flv -s 320x180 -vcodec mpeg2video -b:v 320k -b:a 192k -ac 2 -ar 44100 -acodec mp3 output.mpg`
 
 ### 批量转换文件夹下的flv为mpeg视频，代码为：
-  for %%i in (.\*.flv) do ffmpeg -i "%%i" -s 320x180 -vcodec mpeg2video -b:v 320k -b:a 192k -ac 2 -ar 44100 -acodec mp3 "%%~dpni.mpg"
+  `for %%i in (.\*.flv) do ffmpeg -i "%%i" -s 320x180 -vcodec mpeg2video -b:v 320k -b:a 192k -ac 2 -ar 44100 -acodec mp3 "%%~dpni.mpg"`
 
 ### 以下是2021年写的一次iPodClassic刷机体验，仅供参考
 
@@ -35,7 +36,7 @@ video streams with MPEG audio multiplexed into .mpg files.
 
   心想能不能用自己的字体，但是发现这个Rockbox用的是专有的位图fnt格式的字体，Rockbox网站上的字体转换工具又太复杂看不懂，而且网上关于介绍Rockbox中文字体的帖子几乎没有，都是介绍文泉驿字体的。
 
-  功夫不负有心人，知乎上搜到一篇关于[Rockbox 的字体折腾](https://zhuanlan.zhihu.com/p/70392435)的文章，提到了可以用convttf工具来转换字体，用法是convttf -p [字号] -c [字符间像素间隔] xxx.ttf。中文找个合你口味的字体即可，我找的是豆瓣上这篇[推荐几个Kindle的字体](https://www.douban.com/note/269330253/)里的華康細明體12.ttf，然后自己修改了一些标点符号的自制魔改字体，字体大佬@落霞孤鹜lxgw也分享了许多好看的字体，字号的话基本都是16，18，20三个当中看实际情况挑选，字符像素间隔为0。
+  功夫不负有心人，知乎上搜到一篇关于[Rockbox 的字体折腾](https://zhuanlan.zhihu.com/p/70392435)的文章，提到了可以用convttf工具来转换字体，用法是`convttf -p [字号] -c [字符间像素间隔] xxx.ttf`。中文找个合你口味的字体即可，我找的是豆瓣上这篇[推荐几个Kindle的字体](https://www.douban.com/note/269330253/)里的華康細明體12.ttf，然后自己修改了一些标点符号的自制魔改字体，字体大佬@落霞孤鹜lxgw也分享了许多好看的字体，字号的话基本都是16，18，20三个当中看实际情况挑选，字符像素间隔为0。
 
   但是知乎这篇文章提到的这个工具似乎是在Linux系统下运行的，于是在[一个韩国Naver博客](https://blog.naver.com/clove7802/221225440257)，看到一个Windows下能用的程序，解压缩上面提供的convttf.zip后把字体文件放在该文件夹内，打开CMD或者PowerShell，输入上一段的命令（报错可把convttf换成convttf.exe，PowerShell需输入.\convttf.exe），进行转换，就能得到fnt字体文件了，然后放在.rockbox下面的fonts文件夹，在设置里设置字体即可。
 
@@ -43,7 +44,7 @@ video streams with MPEG audio multiplexed into .mpg files.
 
   原本iPod的系统支持mp4，但是刷了Rockbox后只支持mpg格式，因此需要采用ffmpeg转码，可参考[这篇科普](https://www.rockbox.org/wiki/PluginMpegplayer)。
 
-  其中的ffmpeg用法有点旧，我参考科普后采用的是ffmpeg -i input.mp4 -s 320x180 -vcodec mpeg2video -b:v 320k -b:a 192k -ac 2 -ar 44100 -acodec mp3 output.mpg，具体的参数想修改的话，可以结合ffmpeg官方文档和上面那篇科普文里ffmpeg的参数解释部分，有些视频可能长宽比有问题，可以试试320x240
+  其中的ffmpeg用法有点旧，我参考科普后采用的是`ffmpeg -i input.mp4 -s 320x180 -vcodec mpeg2video -b:v 320k -b:a 192k -ac 2 -ar 44100 -acodec mp3 output.mpg`，具体的参数想修改的话，可以结合ffmpeg官方文档和上面那篇科普文里ffmpeg的参数解释部分，有些视频可能长宽比有问题，可以试试320x240
 
   图片浏览实测能看.png/.jpg/.gif格式的图片。
 
