@@ -1,6 +1,6 @@
 # Moonlight游戏串流
 
-## 更新时间 2024.09.03
+## 更新时间 2024.09.11
 ## 来源：
   [摄影师云飞：自动切换屏幕、分辨率？基地版sunshine+魔改moonlight 串流毕业](https://www.bilibili.com/video/BV1Yi421h7nX)及其评论区
 
@@ -44,7 +44,7 @@
 
 **b.** 自由导入与导出moonlight配置文件
 
-## 5. 砖家版Moonlight
+## 5. [砖家版Moonlight](https://apps.apple.com/us/app/moonlight-zwm/id6590630545)
 
 **开发者：** [True砖家](https://space.bilibili.com/329885323)
 
@@ -53,3 +53,5 @@
 **a.** 支持多点触控
 
 **b.** 支持屏显触摸手柄按钮
+
+**b.** 屏幕上可以弹出虚拟键盘
