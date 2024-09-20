@@ -1,10 +1,14 @@
 # Moonlight游戏串流
 
-## 更新时间 2024.09.11
+## 更新时间 2024.09.20
+## 下面几个
 ## 来源：
+
+  [摄影师云飞：【串流教程】全网最好的串流教程，没有之一](https://www.bilibili.com/video/BV13i421r7Ff)及其评论区
+
   [摄影师云飞：自动切换屏幕、分辨率？基地版sunshine+魔改moonlight 串流毕业](https://www.bilibili.com/video/BV1Yi421h7nX)及其评论区
 
-  [Moonlight进阶教程](https://flowus.cn/lecheng/share/3a591f93-f48b-4164-9028-bade2c35ef58)
+  [原串流吧吧主：Moonlight进阶教程](https://flowus.cn/lecheng/share/3a591f93-f48b-4164-9028-bade2c35ef58)
 
 ## 1. 基地版Sunshine
 
@@ -34,7 +38,7 @@
   
 **a.** 屏幕上可以弹出虚拟键盘，直接操作串流的PC端
 
-## 4. 王冠版Moonlight
+## 4. [王冠版Moonlight（Android）](https://github.com/WACrown/moonlight-android/releases)
 
 **开发者：** [西瓜hub](https://space.bilibili.com/393593468)
 
@@ -44,9 +48,9 @@
 
 **b.** 自由导入与导出moonlight配置文件
 
-## 5. [砖家版Moonlight](https://apps.apple.com/us/app/moonlight-zwm/id6590630545)
+## 5. [砖家版Moonlight（iOS）](https://apps.apple.com/us/app/moonlight-zwm/id6590630545)
 
-**开发者：** [True砖家](https://space.bilibili.com/329885323)
+**开发者：** [True砖家](https://space.bilibili.com/329885323)，[Github页面](https://github.com/Moonlight-the-Fried-Fish/moonlight-ios-NativeMultiTouchPassthrough/releases)
 
 **特性与效果：** 
   
@@ -55,3 +59,11 @@
 **b.** 支持屏显触摸手柄按钮
 
 **b.** 屏幕上可以弹出虚拟键盘
+
+## 6. [威力增强版Moonlight（Android）](https://github.com/qiin2333/moonlight-android/releases)
+
+**开发者：** [绮音](https://github.com/qiin2333)
+
+**特性与效果：** 
+  
+**a.** 合并了王冠版和砖家特性
