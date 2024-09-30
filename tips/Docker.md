@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2024.09.11
+## 更新时间 2024.10.1
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -7,10 +7,12 @@
 >> N1盒子使用root权限登录，命令行安装，默认网络模式是bridge
 >>
 >> 所有:的左边都是外部实际的端口或者映射地址，可以按照情况更改，所有:的右边一定要和镜像作者写的一样
+>>
+>> 可使用`sudo netstat -anp | grep 端口号`，来查询目标端口号是否被占用
 >> 
->> 群晖需要考虑权限问题,可添加privileged: true，user: root等命令。网络需要指定network_mode: bridge或者host，否则会创建新的桥接网络。
->> 
->> 可以使用 sudo netstat -anp | grep 端口号，来查询端口号是否被占用
+>> 群晖需要考虑权限问题,可添加`privileged: true`，`user: root`等命令，或利用`id 用户名`来确定PUID和PGID。网络需要指定`network_mode: bridge`或者`host`，否则会创建新的桥接网络。
+>>
+>> 可使用[这个网站](https://www.composerize.com/)将Docker CLI命令行，转换为Docker Compose的yaml文件格式。逆转换则是[这个网站](https://www.decomposerize.com/)
 >>
 >> 注册表镜像，可以填写[1panel](https://docker.1panel.live)和[耗子面板](https://hub.rat.dev)两个国内加速源，[来源](https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6)
 
@@ -30,7 +32,7 @@ services:
     container_name: allinone
     network_mode: bridge
     ports:
-      - 35455:35455
+      - "35455:35455"
 ```
 
 ## pixman/pixman:latest
@@ -50,7 +52,7 @@ services:
         user: root
         network_mode: bridge
         ports:
-            - 35456:5000
+            - "35456:5000"
 
 ```
 
@@ -88,7 +90,7 @@ services:
     user: root
     network_mode: bridge
     ports:
-      - 35457:8080
+      - "35457:8080"
 ```
 
 ## tindy2013/subconverter:latest
@@ -109,7 +111,7 @@ services:
     user: root
     network_mode: bridge
     ports:
-      - 25500:25500
+      - "25500:25500"
 ```
 
 ## asdlokj1qpi23/subconverter:latest
@@ -152,7 +154,7 @@ services:
     user: root
     network_mode: bridge
     ports:
-      - 25502:80
+      - "25502:80"
 ```
 
 ## p3terx/aria2-pro:latest
@@ -259,7 +261,7 @@ services:
       - "/volume1/docker/jellyfin/cache:/cache"
       - "/volume1/video:/media"
     ports:
-      - 8096:8096
+      - "8096:8096"
     restart: unless-stopped
 ```
 
@@ -317,6 +319,100 @@ services:
     restart: unless-stopped
 ```
 
+## zack357/douban-tool:latest
+> [配置流程及报错解决办法](https://www.bilibili.com/opus/950624026692157449)，注意-v 映射的文件夹是否正确。
+>
+> 是B站up主`@ZDhimself`开发的观影与下载镜像
+> 
+```
+services:
+  douban-tool:
+    image: zack357/douban-tool:latest
+    user: root
+    container_name: douban-tool
+    network_mode: bridge
+    ports:
+      - "2346:5000"
+    volumes:
+      - /volume1/docker/doubantool/data:/app/data
+      - /volume1/docker/doubantool/configs:/app/config
+      - /volume1/Download/doubantoolDLs:/downloads
+    restart: unless-stopped
+```
+
+## cnk3x/xunlei:latest
+> [使用说明](https://github.com/cnk3x/xunlei)，注意-v 映射的文件夹是否正确。
+>
+> 是从群晖套件里提取出来的非官方远程下载服务
+>
+> 并未在N1上部署，因为N1芯片很弱，假如下载拉满，带宽不足，很有可能N1的后台都进不去，故无Docker CLI,不过可以自己用[这个网站](https://www.decomposerize.com)来转换
+> 
+```
+services:
+  xunlei:
+    image: cnk3x/xunlei:latest
+    privileged: true
+    container_name: xunlei
+    network_mode: bridge
+    ports:
+      - "2345:2345"
+    volumes:
+      - /volume1/docker/xunlei/configs:/xunlei/data
+      - /volume1/Download/doubantoolDLs:/xunlei/downloads
+    restart: unless-stopped
+```
+
+## superng6/qbittorrent:latest:latest
+> [使用说明](https://sleele.com/2020/04/09/docker-qbittorrent-optimizing)，注意-v 映射的文件夹是否正确。
+> 
+> 此镜像为sleele大佬优化的qbittorrent。默认中文，全平台架构支持x86-64、arm64、arm32，但启动会访问Trackers的[更新列表](https://githubraw.sleele.workers.dev/XIU2/TrackersListCollection/master/best.txt)，访问不通畅会一直卡在启动容器阶段
+> 
+> 群晖可使用`id 用户名`来查看`PUID和PGID，此处使用的是root权限，故都为0
+>
+> 并未在N1上部署，因为N1芯片很弱，假如下载拉满，带宽不足，很有可能N1的后台都进不去，故无Docker CLI,不过可以自己用[这个网站](https://www.decomposerize.com)来转换
+> 
+```
+services:
+  qbittorrentee:
+    image: superng6/qbittorrent:latest
+    container_name: qbittorrentee
+    user: root
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Shanghai
+    volumes:
+      - /volume1/docker/qbittorrentee/configs:/config
+      - /volume1/Download/doubantoolDLs:/downloads
+    ports:
+      - 6881:6881
+      - 6881:6881/udp
+      - 8080:8080
+    restart: unless-stopped
+```
+
+## cnk3x/xunlei:latest
+> [使用说明](https://github.com/cnk3x/xunlei)，注意-v 映射的文件夹是否正确。
+>
+> 是从群晖套件里提取出来的非官方远程下载服务
+>
+> 并未在N1上部署，因为N1芯片很弱，假如下载拉满，带宽不足，很有可能N1的后台都进不去，故无Docker CLI,不过可以自己用[这个网站](https://www.decomposerize.com)来转换
+> 
+```
+services:
+  xunlei:
+    image: cnk3x/xunlei:latest
+    privileged: true
+    container_name: xunlei
+    network_mode: bridge
+    ports:
+      - "2345:2345"
+    volumes:
+      - /volume1/docker/xunlei/configs:/xunlei/data
+      - /volume1/Download/doubantoolDLs:/xunlei/downloads
+    restart: unless-stopped
+```
+
 ## ghcr.io/gethomepage/homepage:latest
 > [使用说明](https://gethomepage.dev/latest/)，注意-v 映射的文件夹是否正确。
 >
@@ -331,7 +427,7 @@ services:
     container_name: homepage
     network_mode: bridge
     ports:
-      - 35450:3000
+      - "35450:3000"
     volumes:
       - /volume1/docker/homepage/config:/app/config
       - /volume1/docker/homepage/public/images/:/app/public/images
