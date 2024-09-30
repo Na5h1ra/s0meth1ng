@@ -362,6 +362,41 @@ services:
     restart: unless-stopped
 ```
 
+## johngong/qbittorrent:latest
+> [使用说明](https://hub.docker.com/r/johngong/qbittorrent)，注意-v 映射的文件夹是否正确。
+> 
+> 此镜像可使用`QB_EE_BIN=true`启用增强版，比下面那个版本的qbittorrent优点在于可以自行设定Tracker列表
+> 
+> 群晖可使用`id 用户名`来查看`PUID和PGID，此处使用的是root权限，故都为0
+>
+> 并未在N1上部署，因为N1芯片很弱，假如下载拉满，带宽不足，很有可能N1的后台都进不去，故无Docker CLI,不过可以自己用[这个网站](https://www.decomposerize.com)来转换
+> 
+```
+services:
+  qbittorrentee:
+    image: johngong/qbittorrent:latest
+    container_name: qbittorrentee
+    user: root
+    network_mode: bridge
+    environment:
+      - QB_WEBUI_PORT=8989
+      - QB_EE_BIN=true
+      - QB_TRACKERS_UPDATE_AUTO=true
+      - QB_TRACKERS_LIST_URL=https://cdn.jsdelivr.net/gh/ngosang/trackerslist@master/trackers_all.txt
+      - UID=0
+      - GID=0
+      - UMASK=022
+      - TZ=Asia/Shanghai
+    volumes:
+      - /volume1/docker/qbittorrentee/configs:/config
+      - /volume1/Download/doubantoolDLs:/Downloads
+    ports:
+      - 6881:6881
+      - 6881:6881/udp
+      - 8989:8989
+    restart: unless-stopped
+```
+
 ## superng6/qbittorrent:latest:latest
 > [使用说明](https://sleele.com/2020/04/09/docker-qbittorrent-optimizing)，注意-v 映射的文件夹是否正确。
 > 
@@ -377,6 +412,7 @@ services:
     image: superng6/qbittorrent:latest
     container_name: qbittorrentee
     user: root
+    network_mode: bridge
     environment:
       - PUID=0
       - PGID=0
