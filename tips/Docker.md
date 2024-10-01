@@ -10,7 +10,7 @@
 >>
 >> 可使用`sudo netstat -anp | grep 端口号`，来查询目标端口号是否被占用
 >> 
->> 群晖需要考虑权限问题,可添加`privileged: true`，`user: root`等命令，或利用`id 用户名`来确定PUID和PGID。网络需要指定`network_mode: bridge`或者`host`，否则会创建新的桥接网络。
+>> 群晖需要考虑权限问题,可添加`privileged: true`，`user: root`等命令，或利用`id 用户名`来确定UID和GID。网络需要指定`network_mode: bridge`或者`host`，否则会创建新的桥接网络。
 >>
 >> 可使用[这个网站](https://www.composerize.com/)将Docker CLI命令行，转换为Docker Compose的yaml文件格式。逆转换则是[这个网站](https://www.decomposerize.com/)
 >>
@@ -211,7 +211,7 @@ services:
 ## alexta69/metube:latest
 > [使用说明](https://github.com/alexta69/metube)，注意-v 映射的文件夹是否正确。
 > 
-> 这个项目用的不是传统的PUID和PGID，N1我默认就是root用户，没啥问题。但是群晖默认可能会报权限错误，根据文档说明，需要添加两个环境变量UID和GID并设为0，将会以root权限写入文件。
+> 这个项目根据文档说明，群晖需要添加两个环境变量UID和GID，并将其设为0，将会以root权限写入文件。
 ```
 docker run -d --name=metube -p 35550:8081 -v /mnt/mydisk/DLs/metubeDLs:/downloads ghcr.io/alexta69/metube:latest
 ```
@@ -367,7 +367,7 @@ services:
 > 
 > 此镜像可使用`QB_EE_BIN=true`启用增强版，比下面那个版本的qbittorrent优点在于可以自行设定Tracker列表
 > 
-> 群晖可使用`id 用户名`来查看`PUID和PGID，此处使用的是root权限，故都为0
+> 群晖可使用`id 用户名`来查看`UID和GID，此处使用的是root权限，故都为0
 >
 > 并未在N1上部署，因为N1芯片很弱，假如下载拉满，带宽不足，很有可能N1的后台都进不去，故无Docker CLI,不过可以自己用[这个网站](https://www.decomposerize.com)来转换
 > 
@@ -402,7 +402,7 @@ services:
 > 
 > 此镜像为sleele大佬优化的qbittorrent。默认中文，全平台架构支持x86-64、arm64、arm32，但启动会访问Trackers的[更新列表](https://githubraw.sleele.workers.dev/XIU2/TrackersListCollection/master/best.txt)，访问不通畅会一直卡在启动容器阶段
 > 
-> 群晖可使用`id 用户名`来查看`PUID和PGID，此处使用的是root权限，故都为0
+> 群晖可使用`id 用户名`来查看`UID和GID，此处环境变量采用的是PUID和PGID，使用的是root权限，故都为0
 >
 > 并未在N1上部署，因为N1芯片很弱，假如下载拉满，带宽不足，很有可能N1的后台都进不去，故无Docker CLI,不过可以自己用[这个网站](https://www.decomposerize.com)来转换
 > 
