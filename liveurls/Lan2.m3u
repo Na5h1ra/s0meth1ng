@@ -59,6 +59,16 @@ http://192.168.10.100:35455/huya/11342396
 http://192.168.10.100:35455/huya/11342430
 #EXTINF:-1 tvg-logo="https://huyaimg.msstatic.com/avatar/1042/0e/356fe2b69229b3b6e59517597aaa75_180_135.jpg?1446129774" group-title="虎牙",康熙民间私访
 http://192.168.10.100:35455/huya/11342418
+#EXTINF:-1 tvg-logo="https://huyaimg.msstatic.com/avatar/1075/77/3bf1bb9032d601d9857f47aa9505f6_180_135.jpg" group-title="虎牙", 军统店小二
+http://192.168.10.100:35455/huya/30080244
+#EXTINF:-1 tvg-logo="https://huyaimg.msstatic.com/avatar/1078/fc/8bec6d0793db116484afbf1768e5e9_180_135.jpg" group-title="虎牙", 亮剑
+http://192.168.10.100:35455/huya/30080238
+#EXTINF:-1 tvg-logo="https://huyaimg.msstatic.com/avatar/1042/31/acbbe18041f7127171e91973b9a0a7_180_135.jpg" group-title="虎牙", 哆啦A梦
+http://192.168.10.100:35455/huya/11601963
+#EXTINF:-1 tvg-logo="https://huyaimg.msstatic.com/avatar/1024/42/a76285b1991c82d9aeca97ca7b7601_180_135.jpg" group-title="虎牙", 樱桃小丸子
+http://192.168.10.100:35455/huya/11342394
+#EXTINF:-1 tvg-logo="https://diy-assets.msstatic.com/lzlfilefolder/2024default_20241031.png" group-title="虎牙", 海绵宝宝
+http://192.168.10.100:35455/huya/11352919
 #EXTINF:-1 tvg-logo="https://huyaimg.msstatic.com/avatar/1005/79/2eae9c0ebcb64ffcf5365fcd892f42_180_135.jpg?468252" group-title="虎牙",网球王子
 http://192.168.10.100:35455/huya/11352882
 #EXTINF:-1 tvg-logo="https://huyaimg.msstatic.com/avatar/1030/a1/6ed0639048c730a7cbfca75ac0caee_180_135.jpg?1606718755" group-title="虎牙",张卫健版西游记
