@@ -1,12 +1,13 @@
 # URL Schemes & Intent收集与整理
 
-## 更新时间 2024.09.11
+## 更新时间 2024.12.27
 
 ## 来源与相关文章：
-   酷安[Anywhere-](https://www.coolapk.com/apk/com.absinthe.anywhere_)与[快捷方式](https://www.coolapk.com/apk/com.syyf.quickpay)的评论区
 
    [小贝塔教程资源导航：安卓软件界面Shell](https://xbta.cc/shell)
-
+   
+   酷安[Anywhere-](https://www.coolapk.com/apk/com.absinthe.anywhere_)与[快捷方式](https://www.coolapk.com/apk/com.syyf.quickpay)的评论区
+   
    [少数派：入门 iOS 自动化：读懂 URL Schemes](https://sspai.com/post/44591)
    
    [少数派：URL Schemes 使用详解](https://sspai.com/post/31500)
@@ -31,9 +32,15 @@
 
 **原生电池优化界面：** 包名`com.android.settings`，类名`.Settings$HighPowerApplicationsActivity`
 
+**最近任务：** 包名`com.miui.home`，类名`.recents.RecentsActivity`
+
 **设置默认应用：** 包名`com.android.settings`，类名`.Settings$AdvancedAppsActivity` 或者使用`#Intent;action=android.settings.MANAGE_DEFAULT_APPS_SETTINGS;package=com.android.settings;component=com.android.settings/.Settings%24AdvancedAppsActivity;end`
 
 **小米社区 每日积分签到：** `mio://web.vip.miui.com/page/info/mio/mio/checkIn?ref=longpressshortcuts`
+
+**直接拨打电话号码** Shell命令 `am start -a android.intent.action.CALL -d tel:电话号码`
+
+**按出拨号盘暗语** Shell命令，比如在root设备上按出Sui的管理界面 `am broadcast -a android.provider.Telephony.SECRET_CODE -d "android_secret_code://784784"`
 
 ### 2. 支付宝 `com.eg.android.AlipayGphone`
   常用小程序一般为`alipays://platformapi/startapp?appId=数字`
@@ -79,6 +86,7 @@
 |电影演出|alipays://platformapi/startapp?appId=2021001110648550|
 |红包|alipays://platformapi/startapp?appId=88886666|
 |话费充值|alipays://platformapi/startapp?appId=10000003|
+|电子医保凭证|alipays://platformapi/startapp?appId=20002069&fromSource=quickWay&source=shortcut#Intent;component=com.eg.android.AlipayGphone/com.alipay.mobile.quinox.LauncherActivity;B.directly=true;B.fromDesktop=true;end|
 |PockytShop 礼品卡充值(慎用)|alipays://platformapi/startapp?appId=2021003191605547|
 
 
