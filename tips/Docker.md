@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2024.10.1
+## 更新时间 2025.01.12
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -17,10 +17,10 @@
 >> 注册表镜像，可以填写[1panel](https://docker.1panel.live)和[耗子面板](https://hub.rat.dev)两个国内加速源，[来源](https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6)
 
 ## youshandefeiyang/allinone:latest
-> [使用说明](https://github.com/youshandefeiyang/LiveRedirect/blob/main/Golang/README.md)
+> 作者新加了鉴权[使用说明](https://github.com/youshandefeiyang/LiveRedirect/blob/main/Golang/README.md)
 > 
 ```
-docker run -d --name=allinone -p 35455:35455 --privileged=true --restart=always youshandefeiyang/allinone:latest
+docker run -d --name=allinone -p 35455:35455 --privileged=true --restart=always youshandefeiyang/allinone:latest -tv=true -aesKey=生成的key -userid=TG的id -token=生成的token
 ```
 > 
 ```
@@ -33,6 +33,7 @@ services:
     network_mode: bridge
     ports:
       - "35455:35455"
+    command: -tv=true -aesKey=生成的key -userid=TG的id -token=生成的token
 ```
 
 ## pixman/pixman:latest
