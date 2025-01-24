@@ -1,6 +1,6 @@
 # URL Schemes & Intent收集与整理
 
-## 更新时间 2024.12.27
+## 更新时间 2025.01.24
 
 ## 来源与相关文章：
 
@@ -130,8 +130,15 @@
 |领签到的京豆|openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com"}
 |白条账单|openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://m.jr.jd.com/rn/BTMonthBill/index.html?page=page_bill_page&monthlyBillType=0&channelName=&channelcode=Z01"}
 |订单列表|openapp.jdmobile://virtual?params={"category":"jump","des":"orderlist"}|
+|所有账单|android-app://com.jingdong.app.mall/https/bill.jd.com/bill/mList.html?source=61&entrance=5#Intent;component=com.jingdong.app.mall/.open.BrowserActivity;end|
 
 ### 7. 高德地图 `com.autonavi.minimap`
 |名称|URL Schemes|
 |-------------|-------------|
 |实时公交|amapuri://realtimeBus/home?from=shortcut&netAcc={"path":"amapservice://amap_bundle_realbus/RequestScheduleService","requestKeys":"busStation"}|
+
+### 8. 抖音 `com.ss.android.ugc.aweme`
+|名称|URL Schemes|
+|-------------|-------------|
+|清理缓存|snssdk1128://polaris/lynxview/?surl=https://lf-dy-sourcecdn-tos.bytegecko.com/obj/byte-gurd-source/1325/gecko/resource/aweme_ug_popups/pages/uninstallShortcutPage/template.js?hide_loading=1&hide_nav_bar=true&use_bdx=1&hide_loading=1&hide_nav_bar=1&use_bdx=1&should_full_screen=1&use_xbridge3=1&use_bullet_container=1&bdx_launch_mode=remove_same_page&bdx_tag=uninstall_page_ug&buriedInfo={"business":"touch","business_tag":"uninstall","title":"卸载","user_touch":"user_touch"}&enable_pad_adapter=true&launch_mode=os_3dtouch&enter_to=shortcut_retain&item_type=shortcut_retain|
+|商城订单|sslocal://webcast_lynxview?type=fullscreen&url=https%3A%2F%2Flf-webcast-sourcecdn-tos.bytegecko.com%2Fobj%2Fbyte-gurd-source%2Fwebcast%2Ffalcon%2Fdouyin%2Fecommerce_orders_douyin%2Fapp_new%2Ftemplate.js%3Fenter_from%3Dug_ecom_widget.order_logistics_info_tab%26page_name%3Dorder_list_page%26tab_id%3D0&page=ecom_mall&hide_nav_bar=1&hide_status_bar=0&status_bar_color=black&show_close=0&trans_status_bar=1&hide_loading=1&enable_share=0&web_bg_color=ffffff&show_back=0&inject_config_channel=ecom_mall_awemelite&inject_scene=default&enable_latch=1|
