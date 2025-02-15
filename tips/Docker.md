@@ -17,7 +17,7 @@
 >> 注册表镜像，可以填写[1panel](https://docker.1panel.live)和[耗子面板](https://hub.rat.dev)两个国内加速源，[来源](https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6)
 
 ## youshandefeiyang/allinone:latest
-> 作者新加了鉴权[使用说明](https://github.com/youshandefeiyang/LiveRedirect/blob/main/Golang/README.md)
+> 作者新加了鉴权,[使用说明](https://github.com/youshandefeiyang/LiveRedirect/blob/main/Golang/README.md)
 > 
 ```
 docker run -d --name=allinone -p 35455:35455 --privileged=true --restart=always youshandefeiyang/allinone:latest -tv=true -aesKey=生成的key -userid=TG的id -token=生成的token
@@ -659,4 +659,35 @@ services:
       - READER_APP_CACHECHAPTERCONTENT=true
       - READER_APP_SECURE=true
       - READER_APP_SECUREKEY=admin
+```
+
+
+
+## ghcr.io/haishanh/yacd:master
+> 经典Clash面板
+```
+services:
+  yacd:
+    image: ghcr.io/haishanh/yacd:master
+    container_name: yacd
+    user: root
+    network_mode: bridge
+    restart: always
+    ports:
+      - 8995:80
+```
+
+
+## ghcr.io/zephyruso/zashboard:latest
+> 新出的Clash面板
+```
+services:
+  zashboard:
+    image: ghcr.io/zephyruso/zashboard:latest
+    container_name: zashboard
+    user: root
+    network_mode: bridge
+    restart: always
+    ports:
+      - 8996:80
 ```
