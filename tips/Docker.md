@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.01.12
+## 更新时间 2025.02.16
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -368,7 +368,7 @@ services:
 > 
 > 此镜像可使用`QB_EE_BIN=true`启用增强版，比下面那个版本的qbittorrent优点在于可以自行设定Tracker列表
 > 
-> 群晖可使用`id 用户名`来查看`UID和GID，此处使用的是root权限，故都为0
+> 群晖可使用`id 用户名`来查看UID和GID，此处使用的是root权限，故都为0
 >
 > 并未在N1上部署，因为N1芯片很弱，假如下载拉满，带宽不足，很有可能N1的后台都进不去，故无Docker CLI,不过可以自己用[这个网站](https://www.decomposerize.com)来转换
 > 
@@ -572,4 +572,91 @@ services:
     volumes:
       - "/volume1/docker/komga/config:/config"
       - "/volume1/manga:/comic"
+```
+
+
+## homeassistant/home-assistant:latest（未完善）
+> 官方搭建[指南](https://www.home-assistant.io/installation/alternative)，注意-v 映射的文件夹是否正确。
+```
+services:
+  homeassistant:
+    image: homeassistant/home-assistant:latest
+    container_name: homeassistant
+    restart: unless-stopped
+    user: root
+    network_mode: bridge
+    volumes:
+      - /volume1/docker/homeassistant/config:/config
+    ports:
+      - '8123:8123'
+    environment:
+      - TZ=Asia/Shanghai
+```
+
+
+## gitea/gitea:latest
+> 官方搭建[指南](https://docs.gitea.com/zh-cn/installation/install-with-docker)，注意-v 映射的文件夹是否正确。
+```
+services:
+  gitea:
+    image: gitea/gitea:latest
+    container_name: gitea
+    restart: always
+    network_mode: bridge
+    user: root
+    volumes:
+      - /volume1/docker/gitea/data:/var/lib/gitea
+      - /volume1/docker/gitea/config:/etc/gitea
+    ports:
+      - "8991:3000"
+      - "8992:2222"
+```
+
+
+
+## ghcr.io/advplyr/audiobookshelf:latest
+> 官方搭建[指南](https://www.audiobookshelf.org/docs/#docker-compose-install)，注意-v 映射的文件夹是否正确。
+```
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: audiobookshelf
+    user: root
+    network_mode: bridge
+    restart: unless-stopped
+    ports:
+      - 8990:80
+    volumes:
+      - /volume1/docker/audiobookshelf/audiobooks:/audiobooks
+      - /volume1/docker/audiobookshelf/podcasts:/podcasts
+      - /volume1/docker/audiobookshelf/config:/config
+      - /volume1/docker/audiobookshelf/metadata:/metadata
+    environment:
+      - TZ=Asia/Shanghai
+```
+
+
+## hectorqin/reader:latest
+> 官方搭建[指南](https://github.com/hectorqin/reader/blob/master/doc.md)，以及注释[文档](https://raw.githubusercontent.com/hectorqin/reader/master/docker-compose.yaml)注意-v 映射的文件夹是否正确。
+> 
+> 不管配置文件如何编写，用户上限为15个
+```
+services:
+  reader3:
+    image: hectorqin/reader:latest
+    container_name: reader3
+    restart: always
+    network_mode: bridge
+    ports:
+      - 8993:8080
+    volumes:
+      - /volume1/docker/reader3/logs:/logs
+      - /volume1/docker/reader3/storage:/storage
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - READER_APP_USERLIMIT=50
+      - READER_APP_USERBOOKLIMIT=1000
+      - READER_APP_CACHECHAPTERCONTENT=true
+      - READER_APP_SECURE=true
+      - READER_APP_SECUREKEY=admin
 ```
