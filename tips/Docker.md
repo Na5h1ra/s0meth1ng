@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.02.16
+## 更新时间 2025.02.18
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -637,7 +637,7 @@ services:
 
 
 ## hectorqin/reader:latest
-> 官方搭建[指南](https://github.com/hectorqin/reader/blob/master/doc.md)，以及注释[文档](https://raw.githubusercontent.com/hectorqin/reader/master/docker-compose.yaml)注意-v 映射的文件夹是否正确。
+> 官方搭建[指南](https://github.com/hectorqin/reader/blob/master/doc.md)，以及注释[文档](https://raw.githubusercontent.com/hectorqin/reader/master/docker-compose.yaml)，注意-v 映射的文件夹是否正确。
 > 
 > 不管配置文件如何编写，用户上限为15个
 ```
@@ -678,6 +678,20 @@ services:
 ```
 
 
+## ghcr.io/metacubex/metacubexd
+> Meta内核开发者的Clash面板
+```
+services:
+  metacubexd:
+    image: ghcr.io/metacubex/metacubexd
+    container_name: metacubexd
+    user: root
+    network_mode: bridge
+    restart: always
+    ports:
+      - 8998:80
+```
+
 ## ghcr.io/zephyruso/zashboard:latest
 > 新出的Clash面板
 ```
@@ -690,4 +704,22 @@ services:
     restart: always
     ports:
       - 8996:80
+```
+
+
+## ghcr.io/metacubex/metacubexd
+> Kiwix离线维基百科，此处为搭建的[详细说明](https://github.com/kiwix/kiwix-tools/tree/main/docker/server)，注意-v 映射的文件夹是否正确。
+```
+services:
+  kiwix:
+    image: ghcr.io/kiwix/kiwix-serve:latest
+    container_name: kiwix
+    user: root
+    network_mode: bridge
+    volumes:
+      - "/volume2/Kiwix/data:/data"
+    ports:
+      - 8999:8080
+    command:
+      - '*.zim'
 ```
