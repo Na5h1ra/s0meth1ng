@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.02.18
+## 更新时间 2025.02.21
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -185,6 +185,22 @@ services:
       driver: json-file
       options:
         max-size: 1m
+```
+
+## p3terx/ariang:latest
+> 此处为搭建的[详细说明](https://p3terx.com/archives/aria2-frontend-ariang-tutorial.html)
+```
+services:
+  ariang:
+    image: p3terx/ariang:latest
+    container_name: ariang
+    network_mode: bridge
+    restart: unless-stopped
+    ports:
+      - 6880:6880
+    logging:
+        options:
+            max-size: 1m
 ```
 
 ## deluan/navidrome:latest
