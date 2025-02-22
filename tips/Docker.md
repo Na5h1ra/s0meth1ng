@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.02.21
+## 更新时间 2025.02.22
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -723,7 +723,7 @@ services:
 ```
 
 
-## ghcr.io/metacubex/metacubexd
+## ghcr.io/kiwix/kiwix-serve:latest
 > Kiwix离线维基百科，此处为搭建的[详细说明](https://github.com/kiwix/kiwix-tools/tree/main/docker/server)，注意-v 映射的文件夹是否正确。
 ```
 services:
@@ -738,4 +738,28 @@ services:
       - 8999:8080
     command:
       - '*.zim'
+```
+
+## stirlingtools/stirling-pdf:latest
+> 本地PDF处理工具，注意-v 映射的文件夹是否正确。
+```
+services:
+  stirlingpdf:
+    image: stirlingtools/stirling-pdf:latest
+    container_name: stirlingpdf
+    network_mode: bridge
+    user: root
+    restart: unless-stopped
+    ports:
+      - '9001:8080'
+    volumes:
+      - /volume1/docker/stirlingpdf/trainingData:/usr/share/tessdata
+      - /volume1/docker/stirlingpdf/extraConfigs:/configs
+      - /volume1/docker/stirlingpdf/customFiles:/customFiles
+      - /volume1/docker/stirlingpdf/logs:/logs
+      - /volume1/docker/stirlingpdf/pipeline:/pipeline
+    environment:
+      - DOCKER_ENABLE_SECURITY=false
+      - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
+      - LANGS=zh_CN
 ```
