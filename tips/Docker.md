@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.02.22
+## 更新时间 2025.02.23
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -762,4 +762,36 @@ services:
       - DOCKER_ENABLE_SECURITY=false
       - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
       - LANGS=zh_CN
+```
+
+## amilys/embyserver:beta
+> lovechen的版本应该是删库了，应该只有个/config要映射，如果有多个媒体文件夹要映射也无所谓(:后面跟具体的名字然后映射到宿主机即可)。
+>
+> 似乎只有beta版能硬解，注意映射/dev/dri以便于硬解。
+>
+> （未完善）有些参数没有搞懂怎么配置，只好找网上别人的参考一下，比如[这个](https://wiki.mynas.chat/synology/emby_decode.html)
+> 
+```
+services:
+  emby:
+    image: amilys/embyserver:beta
+    container_name: emby
+    network_mode: bridge
+    privileged: true
+    restart: always
+    environment:
+      - UID=0
+      - GID=0
+      - GIDLIST=0
+      - TZ=Asia/Shanghai
+    volumes :
+      - /volume1/docker/emby/config:/config
+      - /volume1/video:/media
+    ports:
+      - 8097:8096
+      - 8920:8920
+      - 1901:1900
+      - 7359:7359
+    devices:
+      - /dev/dri:/dev/dri
 ```
