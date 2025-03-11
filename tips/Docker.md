@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.02.23
+## 更新时间 2025.03.11
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -419,7 +419,7 @@ services:
 > 
 > 此镜像为sleele大佬优化的qbittorrent。默认中文，全平台架构支持x86-64、arm64、arm32，但启动会访问Trackers的[更新列表](https://githubraw.sleele.workers.dev/XIU2/TrackersListCollection/master/best.txt)，访问不通畅会一直卡在启动容器阶段
 > 
-> 群晖可使用`id 用户名`来查看`UID和GID，此处环境变量采用的是PUID和PGID，使用的是root权限，故都为0
+> 群晖可使用`id 用户名`来查看UID和GID，此处环境变量采用的是PUID和PGID，使用的是root权限，故都为0
 >
 > 并未在N1上部署，因为N1芯片很弱，假如下载拉满，带宽不足，很有可能N1的后台都进不去，故无Docker CLI,不过可以自己用[这个网站](https://www.decomposerize.com)来转换
 > 
@@ -794,4 +794,37 @@ services:
       - 7359:7359
     devices:
       - /dev/dri:/dev/dri
+```
+
+
+## yaotutu/folder2podcast:latest
+> 将本地文件夹变为RSS播客的转换器，安装文档和注意事项在[这](https://github.com/yaotutu/folder2podcast)
+>
+> 注意BASE_URL和healthcheck是实际内网地址(假如局域网搭建的话)且需要相同，PUID和PGID由于是root用户所以为0，注意-v 映射的文件夹是否正确
+>
+> 规范的文件目录还没搞懂如何编排，先放一放，当前只需建一个文件夹，放好音频和封面cover.jpg即可
+> 
+```
+services:
+  folder2podcast:
+    image: yaotutu/folder2podcast:latest
+    container_name: folder2podcast
+    ports:
+      - "9000:3000"
+    volumes:
+      - /volume1/docker/folder2podcast/audiobooks:/podcasts:ro
+    restart: unless-stopped
+    network_mode: bridge
+    user: root
+    environment:
+      - PORT=3000
+      - AUDIO_DIR=/podcasts
+      - BASE_URL=内网IP
+      - PUID=0
+      - PGID=0
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "内网IP/podcasts"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 ```
