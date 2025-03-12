@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.03.11
+## 更新时间 2025.03.13
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -803,7 +803,8 @@ services:
 > 注意BASE_URL和healthcheck是实际内网地址(假如局域网搭建的话)且需要相同，PUID和PGID由于是root用户所以为0，注意-v 映射的文件夹是否正确
 >
 > 规范的文件目录还没搞懂如何编排，先放一放，当前只需建一个文件夹，放好音频和封面cover.jpg即可
-> 
+>
+> 尝试在每个文件夹下放入podcast.json，试了很久，有3个参数`"titleFormat": "full"`，`"episodeNumberStrategy": "last"`，`"useMTime": false`，需要这么设置，iOS的播客客户端才能正确识别顺序
 ```
 services:
   folder2podcast:
