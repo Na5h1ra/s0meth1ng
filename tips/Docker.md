@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.03.13
+## 更新时间 2025.03.16
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -485,6 +485,8 @@ services:
       - /volume1/docker/homepage/config:/app/config
       - /volume1/docker/homepage/public/images/:/app/public/images
       - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=IP地址或域名:端口号
 ```
 > Service.yaml示例，注意yaml有非常严格的缩进，不正确的缩进会疯狂报错。widget可在[这里](https://gethomepage.dev/latest/widgets/)查看，注意缩进。
 ```
@@ -630,12 +632,12 @@ services:
 
 
 
-## ghcr.io/advplyr/audiobookshelf:latest
+## advplyr/audiobookshelf:latest
 > 官方搭建[指南](https://www.audiobookshelf.org/docs/#docker-compose-install)，注意-v 映射的文件夹是否正确。
 ```
 services:
   audiobookshelf:
-    image: ghcr.io/advplyr/audiobookshelf:latest
+    image: advplyr/audiobookshelf:latest
     container_name: audiobookshelf
     user: root
     network_mode: bridge
@@ -804,7 +806,7 @@ services:
 >
 > 规范的文件目录还没搞懂如何编排，先放一放，当前只需建一个文件夹，放好音频和封面cover.jpg即可
 >
-> 尝试在每个文件夹下放入podcast.json，试了很久，有3个参数`"titleFormat": "full"`，`"episodeNumberStrategy": "last"`，`"useMTime": false`，需要这么设置，iOS的播客客户端才能正确识别顺序
+> 尝试在每个文件夹下放入podcast.json，试了很久，有3个参数`"titleFormat": "full"`，`"episodeNumberStrategy": "last"`，`"useMTime": false`，需要这么设置，iOS的播客客户端才能正确识别顺序（Android端不加这些参数，序号也是对的，为了两端都兼容还是加这些参数比较好）
 ```
 services:
   folder2podcast:
