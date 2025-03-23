@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.03.16
+## 更新时间 2025.03.23
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -830,4 +830,47 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+```
+
+
+## xxnuo/mtranserver:latest
+> 安装文档和注意事项在[此](https://github.com/xxnuo/MTranServer)，注意-v 映射的文件夹是否正确
+>
+> 小众软件论坛上看见的，基于 Firefox 模型的本地私有翻译服务，目前支持的翻译种类比较少
+> 
+```
+services:
+  mtranserver:
+    image: xxnuo/mtranserver:latest
+    container_name: mtranserver
+    user: root
+    network_mode: bridge
+    restart: unless-stopped
+    ports:
+      - 9002:8989
+    volumes:
+      - /volume1/docker/mtranserver/models:/app/models
+```
+
+## freshrss/freshrss:latest
+> 安装文档和注意事项在[此](https://github.com/FreshRSS/FreshRSS/tree/edge/Docker)，注意-v 映射的文件夹是否正确
+> 
+```
+services:
+  freshrss:
+    image: freshrss/freshrss:latest
+    container_name: freshrss
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - 9003:80
+    logging:
+      options:
+        max-size: 10m
+    volumes:
+      - /volume1/docker/freshrss/data:/var/www/FreshRSS/data
+      - /volume1/docker/freshrss/extensions:/var/www/FreshRSS/extensions
+    environment:
+      - TZ=Asia/Shanghai
+      - CRON_MIN=45
 ```
