@@ -1,20 +1,23 @@
 # Docker
-## 更新时间 2025.03.23
+## 更新时间 2025.03.30
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
 >> 
 >> N1盒子使用root权限登录，命令行安装，默认网络模式是bridge
 >>
->> 所有:的左边都是外部实际的端口或者映射地址，可以按照情况更改，所有:的右边一定要和镜像作者写的一样
+>> 所有 **`:`** 的左边都是外部实际的端口或者映射地址，可以按照情况更改，所有 **`:`** 的右边一定要和镜像作者写的一样
 >>
 >> 可使用`sudo netstat -anp | grep 端口号`，来查询目标端口号是否被占用
 >> 
 >> 群晖需要考虑权限问题,可添加`privileged: true`，`user: root`等命令，或利用`id 用户名`来确定UID和GID。网络需要指定`network_mode: bridge`或者`host`，否则会创建新的桥接网络。
 >>
->> 可使用[这个网站](https://www.composerize.com/)将Docker CLI命令行，转换为Docker Compose的yaml文件格式。逆转换则是[这个网站](https://www.decomposerize.com/)
+>> 可使用[这个网站](https://www.composerize.com/) 使得Docker CLI  →→→  Docker-Compose.yml
+>>
+>> [这个网站](https://www.decomposerize.com/)，则是逆转换 Docker-Compose.yml  →→→  Docker CLI
 >>
 >> 注册表镜像，可以填写[1panel](https://docker.1panel.live)和[耗子面板](https://hub.rat.dev)两个国内加速源，[来源](https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6)
+>>
 
 ## youshandefeiyang/allinone:latest
 > 作者新加了鉴权,[使用说明](https://github.com/youshandefeiyang/LiveRedirect/blob/main/Golang/README.md)
@@ -873,4 +876,93 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - CRON_MIN=45
+```
+
+
+## linuxserver/plex:latest
+> 镜像[来源](https://hub.docker.com/r/linuxserver/plex)，注意-v 映射的文件夹是否正确，可以多映射几个文件夹，比如music和tv可以分开
+>
+> 整了个Plex Pass，试试看效果怎么样，搭建参考来源是几个博客（[初之音](https://www.himiku.com/archives/build-my-music-library-service.html)，[RIN](https://blog.hinatarin.com/2021/04/21/set-up-your-own-media-server-with-plex-and-docker/)，[Tom](https://d3ac.xlog.app/Docker-an-zhuang-Plexmd?locale=zh)和官方的[支持文档](https://support.plex.tv/articles/201543147-what-network-ports-do-i-need-to-allow-through-my-firewall/)
+>
+> 知乎用户x1ao4的[专栏](https://www.zhihu.com/column/c_1627108324322734080)有较为详细的使用教程
+>
+> Docker版的装完,才发现有[群晖版本](https://www.plex.tv/media-server-downloads/?cat=nas&plat=synology-dsm7#plex-media-server)，但我估计DSM上权限应该会收的比较紧，不一定能访问别的文件夹，就先不装群晖版本
+> 
+> 下面是 **`错误`** 的示例，不要使用，网络模式使用bridge方式，就是不知道错在哪了，搭完plex后台的内部网络是docker使用的172开头的IP地址（局域网设备完全没法用，一直会请求172开头的地址），而且还一直提示使用Plex中转
+>
+
+```
+services:
+  plex:
+    image: linuxserver/plex:latest
+    container_name: plex
+    network_mode: bridge
+    user: root
+    ports:
+      - 32400:32400/tcp
+      - 5354:5353/tcp
+      - 8324:8324/tcp
+      - 32469:32469/tcp
+      - 1902:1900/udp
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Shanghai
+      - PLEX_CLAIM=申请的CLAIM代码
+      - VERSION=docker
+    volumes:
+      - /volume1/docker/plex/config:/config
+      - /volume1/video/:/tv
+      - /volume1/Music/:/music
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
+```
+
+> 遂将网络模式换成了host（官方还有macvlan方式，感觉更加的复杂）
+>
+> 可以使用，重启容器之后基本正常，其中 **`设置`** -  **`网络`** - **`无需身份验证即可获得允许的 IP 地址和网络列表`** ，可以设置成 **`IP端/子网掩码`** 的形式，比如我这里使用`192.168.10.0/255.255.255.0`
+>
+> 示例如下
+```
+services:
+  plex:
+    image: linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    user: root
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Shanghai
+      - PLEX_CLAIM=申请的CLAIM代码
+      - VERSION=docker
+    volumes:
+      - /volume1/docker/plex/config:/config
+      - /volume1/video/:/tv
+      - /volume1/Music/Songs:/music
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
+```
+
+## hisatri/lrcapi:latest
+> [使用说明](https://github.com/HisAtri/LrcApi/)
+> 
+> 给音流等音乐软件提供歌词和封面api的一个工具
+```
+services:
+    lrcapi:
+        image: hisatri/lrcapi:latest
+        restart: unless-stopped
+        container_name: lrcapi
+        network_mode: bridge
+        ports:
+            - 9005:28883
+        volumes:
+            - /volume1/1-Backup/Phones/K70/Music/Songs:/music
 ```
