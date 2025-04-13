@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.03.30
+## 更新时间 2025.04.13
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -966,3 +966,17 @@ services:
         volumes:
             - /volume1/1-Backup/Phones/K70/Music/Songs:/music
 ```
+
+## makedie/noname_kill:latest
+> 无名杀本地网页版，没找到官方的搭建指南，这是某网站的 [使用说明](https://newzone.top/services/dockers-on-nas/noname.html#%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81)
+```
+services:
+  nonamekill:
+    image: makedie/noname_kill:latest
+    restart: unless-stopped
+    container_name: nonamekill
+    network_mode: bridge
+    ports:
+      - 9006:80
+```
+
