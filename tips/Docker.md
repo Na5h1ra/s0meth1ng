@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.04.13
+## 更新时间 2025.04.19
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -980,3 +980,25 @@ services:
       - 9006:80
 ```
 
+## haroldli/xiaoya-tvbox:latest
+> 小雅的tvbox版，可以顺便把tvbox源整合，以及可以生成猫影视使用的源， [使用说明](https://har01d.cn/#/notes/alist-tvbox)
+>
+> 可以搭配[Vidplay](https://apps.apple.com/us/app/vidplay-vod-player/id6467240929)使用
+>
+> 或者就当成普通的tvbox用
+```
+services:
+  xiaoyatvbox:
+    image: haroldli/xiaoya-tvbox:latest
+    container_name: xiaoyatvbox
+    user: root
+    network_mode: bridge
+    restart: always
+    ports:
+      - 5344:80
+      - 4567:4567
+    volumes:
+      - /volume1/docker/xiaoyatvbox/xiaoya:/data
+    environment:
+      - ALIST_PORT=5344
+``
