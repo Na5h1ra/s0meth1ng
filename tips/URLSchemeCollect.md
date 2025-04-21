@@ -1,6 +1,6 @@
 # URL Schemes & Intent收集与整理
 
-## 更新时间 2025.01.24
+## 更新时间 2025.04.21
 
 ## 来源与相关文章：
 
@@ -33,6 +33,8 @@
 **原生电池优化界面：** 包名`com.android.settings`，类名`.Settings$HighPowerApplicationsActivity`
 
 **最近任务：** 包名`com.miui.home`，类名`.recents.RecentsActivity`
+
+**原生系统内存显示：** 包名`com.android.settings`，类名`.Settings$MemorySettingsActivity`
 
 **设置默认应用：** 包名`com.android.settings`，类名`.Settings$AdvancedAppsActivity` 或者使用`#Intent;action=android.settings.MANAGE_DEFAULT_APPS_SETTINGS;package=com.android.settings;component=com.android.settings/.Settings%24AdvancedAppsActivity;end`
 
@@ -142,3 +144,9 @@
 |-------------|-------------|
 |清理缓存|snssdk1128://polaris/lynxview/?surl=https://lf-dy-sourcecdn-tos.bytegecko.com/obj/byte-gurd-source/1325/gecko/resource/aweme_ug_popups/pages/uninstallShortcutPage/template.js?hide_loading=1&hide_nav_bar=true&use_bdx=1&hide_loading=1&hide_nav_bar=1&use_bdx=1&should_full_screen=1&use_xbridge3=1&use_bullet_container=1&bdx_launch_mode=remove_same_page&bdx_tag=uninstall_page_ug&buriedInfo={"business":"touch","business_tag":"uninstall","title":"卸载","user_touch":"user_touch"}&enable_pad_adapter=true&launch_mode=os_3dtouch&enter_to=shortcut_retain&item_type=shortcut_retain|
 |商城订单|sslocal://webcast_lynxview?type=fullscreen&url=https%3A%2F%2Flf-webcast-sourcecdn-tos.bytegecko.com%2Fobj%2Fbyte-gurd-source%2Fwebcast%2Ffalcon%2Fdouyin%2Fecommerce_orders_douyin%2Fapp_new%2Ftemplate.js%3Fenter_from%3Dug_ecom_widget.order_logistics_info_tab%26page_name%3Dorder_list_page%26tab_id%3D0&page=ecom_mall&hide_nav_bar=1&hide_status_bar=0&status_bar_color=black&show_close=0&trans_status_bar=1&hide_loading=1&enable_share=0&web_bg_color=ffffff&show_back=0&inject_config_channel=ecom_mall_awemelite&inject_scene=default&enable_latch=1|
+
+### 9. 拼多多 `com.xunmeng.pinduoduo`
+|名称|URL Schemes|
+|-------------|-------------|
+|多多买菜包裹列表|pinduoduo://com.xunmeng.pinduoduo/psnl_goods_help.html?_t_module_name=assistant_pickup|
+|百亿补贴|pinduoduo://com.xunmeng.pinduoduo/brand_activity_subsidy.html?_pdd_fs=1&_pdd_tc=ffffff&_pdd_sbs=1&refer_share_channel=copy_link&refer_share_form=text|
