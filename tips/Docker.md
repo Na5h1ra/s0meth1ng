@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.04.19
+## 更新时间 2025.04.27
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -1001,4 +1001,62 @@ services:
       - /volume1/docker/xiaoyatvbox/xiaoya:/data
     environment:
       - ALIST_PORT=5344
-``
+```
+
+## wbsu2003/drawnix:latest
+> 开源思维导图/白板/流程图，可导出图片[使用说明](https://github.com/plait-board/drawnix)
+> 
+```
+services:
+  drawnix:
+    image: wbsu2003/drawnix:latest
+    container_name: drawnix
+    network_mode: bridge
+    restart: unless-stopped
+    ports:
+      - 9007:7200
+```
+
+## oldiy/dosgame-web-docker:latest
+> 本地搭建网页DOS游戏，[使用说明](https://poiblog.com/archives/ZHwUHFTm)
+> 
+> 如果要全部下载，需要在 volumes 映射 /app/static/games 到实际的目录，下载并放置游戏于文件夹内
+```
+services:
+  dosgame:
+    image: oldiy/dosgame-web-docker:latest
+    container_name: dosgame
+    network_mode: bridge
+    ports:
+      - 9008:262
+```
+
+## neosmemo/memos:stable
+> 碎片化笔记备忘录memeos，类似flomo，[使用说明](https://github.com/usememos/memos)
+```
+services:
+  memos:
+    image: neosmemo/memos:stable
+    container_name: memos
+    network_mode: bridge
+    restart: unless-stopped
+    volumes:
+      - /volume1/docker/memos/memos:/var/opt/memos
+    ports:
+      - 9009:5230
+```
+
+## lovasoa/wbo:latest
+>  本地涂鸦白板[使用说明](https://github.com/lovasoa/whitebophir)
+```
+services:
+  wbo:
+    image: lovasoa/wbo:latest
+    container_name: wbo
+    network_mode: bridge
+    user: root
+    volumes:
+      - /volume1/docker/wbo/wbo:/opt/app/server-data
+    ports:
+      - 9010:80
+```
