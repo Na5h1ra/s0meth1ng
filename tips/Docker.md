@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.04.27
+## 更新时间 2025.05.07
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -953,7 +953,7 @@ services:
 ## hisatri/lrcapi:latest
 > [使用说明](https://github.com/HisAtri/LrcApi/)
 > 
-> 给音流等音乐软件提供歌词和封面api的一个工具
+> 给音流等音乐软件提供歌词和封面api的一个工具，注意-v 映射的文件夹是否正确
 ```
 services:
     lrcapi:
@@ -964,7 +964,7 @@ services:
         ports:
             - 9005:28883
         volumes:
-            - /volume1/1-Backup/Phones/K70/Music/Songs:/music
+            - /volume1/Music:/music
 ```
 
 ## makedie/noname_kill:latest
@@ -981,7 +981,7 @@ services:
 ```
 
 ## haroldli/xiaoya-tvbox:latest
-> 小雅的tvbox版，可以顺便把tvbox源整合，以及可以生成猫影视使用的源， [使用说明](https://har01d.cn/#/notes/alist-tvbox)
+> 小雅的tvbox版，可以顺便把tvbox源整合，以及可以生成 **`猫影视`** 使用的源， [使用说明](https://har01d.cn/#/notes/alist-tvbox)，注意-v 映射的文件夹是否正确
 >
 > 可以搭配[Vidplay](https://apps.apple.com/us/app/vidplay-vod-player/id6467240929)使用
 >
@@ -1020,7 +1020,7 @@ services:
 ## oldiy/dosgame-web-docker:latest
 > 本地搭建网页DOS游戏，[使用说明](https://poiblog.com/archives/ZHwUHFTm)
 > 
-> 如果要全部下载，需要在 volumes 映射 /app/static/games 到实际的目录，下载并放置游戏于文件夹内
+> 如果要全部下载，需要在 volumes 映射 /app/static/games 到实际的目录，下载并放置游戏于文件夹内，注意-v 映射的文件夹是否正确
 ```
 services:
   dosgame:
@@ -1032,7 +1032,7 @@ services:
 ```
 
 ## neosmemo/memos:stable
-> 碎片化笔记备忘录memeos，类似flomo，[使用说明](https://github.com/usememos/memos)
+> 碎片化笔记备忘录memeos，类似flomo，[使用说明](https://github.com/usememos/memos)，注意-v 映射的文件夹是否正确
 ```
 services:
   memos:
@@ -1047,7 +1047,7 @@ services:
 ```
 
 ## lovasoa/wbo:latest
->  本地涂鸦白板[使用说明](https://github.com/lovasoa/whitebophir)
+>  本地涂鸦白板[使用说明](https://github.com/lovasoa/whitebophir)，注意-v 映射的文件夹是否正确
 ```
 services:
   wbo:
@@ -1059,4 +1059,25 @@ services:
       - /volume1/docker/wbo/wbo:/opt/app/server-data
     ports:
       - 9010:80
+```
+
+## jvmilazz0/kavita:latest
+>  类似于komga的美漫日漫轻小说管理工具[使用说明](https://wiki.kavitareader.com/installation/docker/)，注意-v 映射的文件夹是否正确
+```
+services:
+  kavita:
+    image: jvmilazz0/kavita:latest
+    container_name: kavita
+    network_mode: bridge
+    restart: unless-stopped
+    user: root
+    ports:
+      - 9025:5000
+    volumes:
+      - /volume1/readings:/manga
+      - /volume1/readings:/comics
+      - /volume1/readings:/books
+      - /volume1/docker/kavita/config:/kavita/config
+    environment:
+      - TZ=Asia/Shanghai
 ```
