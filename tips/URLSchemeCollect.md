@@ -1,6 +1,6 @@
 # URL Schemes & Intent收集与整理
 
-## 更新时间 2025.04.21
+## 更新时间 2025.06.08
 
 ## 来源与相关文章：
 
@@ -37,6 +37,12 @@
 **原生系统内存显示：** 包名`com.android.settings`，类名`.Settings$MemorySettingsActivity`
 
 **设置默认应用：** 包名`com.android.settings`，类名`.Settings$AdvancedAppsActivity` 或者使用`#Intent;action=android.settings.MANAGE_DEFAULT_APPS_SETTINGS;package=com.android.settings;component=com.android.settings/.Settings%24AdvancedAppsActivity;end`
+
+**手机激活信息：** 包名`com.miui.cloudservice`，类名`.ui.DeviceActivationInfoActivity`
+
+**手机管家的网络助手：** #Intent;action=miui.intent.action.NETWORKASSISTANT_ENTRANCE;component=com.miui.securitycenter/com.miui.networkassistant.ui.NetworkAssistantActivity;end
+
+**打开某个应用的应用信息设置：** #Intent;component=com.miui.securitycenter/com.miui.appmanager.ApplicationsDetailsActivity;S.package_name=应用包名;end
 
 **小米社区 每日积分签到：** `mio://web.vip.miui.com/page/info/mio/mio/checkIn?ref=longpressshortcuts`
 
@@ -150,3 +156,4 @@
 |-------------|-------------|
 |多多买菜包裹列表|pinduoduo://com.xunmeng.pinduoduo/psnl_goods_help.html?_t_module_name=assistant_pickup|
 |百亿补贴|pinduoduo://com.xunmeng.pinduoduo/brand_activity_subsidy.html?_pdd_fs=1&_pdd_tc=ffffff&_pdd_sbs=1&refer_share_channel=copy_link&refer_share_form=text|
+|拼多多下单的包裹列表|pinduoduo://com.xunmeng.pinduoduo/psnl_goods_help.html?_t_module_name=assistant_search&pr_page_from=scheme&tab_id=400&tab_type=1&list_index=10|
