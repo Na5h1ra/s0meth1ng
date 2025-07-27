@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.05.07
+## 更新时间 2025.07.27
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -1004,7 +1004,7 @@ services:
 ```
 
 ## wbsu2003/drawnix:latest
-> 开源思维导图/白板/流程图，可导出图片[使用说明](https://github.com/plait-board/drawnix)
+> 开源思维导图/白板/流程图，可导出图片，[使用说明](https://github.com/plait-board/drawnix)
 > 
 ```
 services:
@@ -1032,7 +1032,9 @@ services:
 ```
 
 ## neosmemo/memos:stable
-> 碎片化笔记备忘录memeos，类似flomo，[使用说明](https://github.com/usememos/memos)，注意-v 映射的文件夹是否正确
+> 碎片化笔记备忘录memeos，类似flomo，注意-v 映射的文件夹是否正确
+> 
+> [使用说明](https://github.com/usememos/memos)
 ```
 services:
   memos:
@@ -1047,7 +1049,9 @@ services:
 ```
 
 ## lovasoa/wbo:latest
->  本地涂鸦白板[使用说明](https://github.com/lovasoa/whitebophir)，注意-v 映射的文件夹是否正确
+>  本地涂鸦白板，注意-v 映射的文件夹是否正确
+> 
+>  [使用说明](https://github.com/lovasoa/whitebophir)
 ```
 services:
   wbo:
@@ -1062,7 +1066,9 @@ services:
 ```
 
 ## jvmilazz0/kavita:latest
->  类似于komga的美漫日漫轻小说管理工具[使用说明](https://wiki.kavitareader.com/installation/docker/)，注意-v 映射的文件夹是否正确
+>  类似于komga的美漫日漫轻小说管理工具，注意-v 映射的文件夹是否正确
+> 
+>  [使用说明](https://wiki.kavitareader.com/installation/docker/)
 ```
 services:
   kavita:
@@ -1080,4 +1086,25 @@ services:
       - /volume1/docker/kavita/config:/kavita/config
     environment:
       - TZ=Asia/Shanghai
+```
+
+## wukongdaily/box:latest
+>  使用电脑、NAS等一切能运行docker的设备变成盒子的ADB安装助手，让你的安卓盒子用起来更加得心应手。
+> 
+>  [使用说明](https://github.com/wukongdaily/tvhelper-docker)
+```
+services:
+  tvhelper:
+    image: wukongdaily/box:latest
+    container_name: tvhelper
+    network_mode: bridge
+    user: root
+    restart: unless-stopped
+    volumes:
+      - /volume1/docker/tvhelper/apk:/data
+    ports:
+      - 9080:80
+      - 9022:22
+    environment:
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/android-sdk/platform-tools
 ```
