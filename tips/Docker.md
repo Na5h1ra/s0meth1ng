@@ -1108,3 +1108,32 @@ services:
     environment:
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/android-sdk/platform-tools
 ```
+
+## linuxserver/chromium:latest
+>  尝试安装docker版的chromium浏览器，失败了，因为它强制了需要https访问，我的本地NAS没去搞证书，隔壁的firefox也是这个要求
+> 
+>  [使用说明](https://github.com/linuxserver/docker-chromium)
+```
+services:
+  chromium:
+    image: linuxserver/chromium:latest
+    container_name: chromium
+    network_mode: bridge
+    user: root
+    restart: unless-stopped
+    shm_size: "1gb"
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Shanghai
+      - LC_ALL=zh_CN.UTF-8
+    volumes:
+      - /volume1/docker/chromium/config:/config
+    ports:
+      - 9011:3000
+      - 9012:3001
+    devices:
+      - /dev/dri:/dev/dri
+```
