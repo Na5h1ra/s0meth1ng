@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.07.27
+## 更新时间 2025.09.01
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -1110,7 +1110,7 @@ services:
 ```
 
 ## linuxserver/chromium:latest
->  尝试安装docker版的chromium浏览器，失败了，因为它强制了需要https访问，我的本地NAS没去搞证书，隔壁的firefox也是这个要求
+>  尝试安装docker版的chromium浏览器，失败了，因为它强制了需要https访问，本地NAS没去搞证书，隔壁的firefox也是这个要求
 > 
 >  [使用说明](https://github.com/linuxserver/docker-chromium)
 ```
@@ -1136,4 +1136,50 @@ services:
       - 9012:3001
     devices:
       - /dev/dri:/dev/dri
+```
+
+## johngong/anki-sync-server:latest
+>  Anki的同步服务，没连接成功，AnkiDroid自定义同步服务器强制需要https
+> 
+>  [使用说明](https://hub.docker.com/r/johngong/anki-sync-server)
+```
+services:
+  ankisync:
+    image: johngong/anki-sync-server:latest
+    container_name: ankisync
+    network_mode: bridge
+    user: root
+    restart: unless-stopped
+    environment:
+      - SYNC_USER1=用户名:密码
+      - UID=0
+      - GID=0
+      - TZ=Asia/Shanghai
+      - MAX_SYNC_PAYLOAD_MEGS=2000
+    volumes:
+      - /volume1/docker/ankisync/syncdir:/ankisyncdir
+    ports:
+      - 9013:8080
+```
+
+## ghcr.io/luckyturtledev/anki
+>  另一个大佬的Anki的同步服务，同样没连接成功，AnkiDroid自定义同步服务器强制需要https
+> 
+>  [使用说明](https://github.com/LuckyTurtleDev/docker-images/blob/main/dockerfiles/anki/README.md)
+```
+services:
+  ankisync:
+    image: ghcr.io/luckyturtledev/anki
+    container_name: ankisync
+    network_mode: bridge
+    restart: unless-stopped
+    environment:
+      - SYNC_USER1=用户名:密码
+      - UID=0
+      - GID=0
+      - MAX_SYNC_PAYLOAD_MEGS=2000
+    volumes:
+      - /volume1/docker/ankisync/syncdir:/data
+    ports:
+      - 9013:8080
 ```
