@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.09.01
+## 更新时间 2025.09.02
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -1182,4 +1182,121 @@ services:
       - /volume1/docker/ankisync/syncdir:/data
     ports:
       - 9013:8080
+```
+
+## josh5/steam-headless:latest
+>  容器内安装steam，体验类似于steamdeck，使用proton兼容层游玩游戏
+> 
+>  由于是N100装了群晖，在尝试特权模式失败后，采用了不带特权模式的compose文件，devices里把默认的card1改成了card0
+>
+>  同文件夹下还需要一个.env文件，shm_size改大一点，时区也改一改，底下的3个目录也改成实际的目录
+> 
+>  群晖估计大概率会有权限问题，索性直接把权限改成PUID=0，PGID=0，UMASK=022
+> 
+>  FORCE_X11_DUMMY_CONFIG改成了true，似乎与虚拟显示器有关
+>
+>  但是这样构建还是报错，提示/dev/uinput不存在，估计飞牛或者Unraid就没这个问题，索性直接删除/dev/uinput那一行，成功启动
+>
+>  steam启动后改中文会有乱码，先`sudo apt update`，然后`sudo apt install fonts-noto-cjk`安装中文字体
+>
+>  又发现sunshine的设置界面打不开，默认的firefox不知哪出了问题，索性直接安装esr版本的firefox
+>
+>  装完后去系统设置里，修改默认的应用程序为刚才安装的esr版本的firefox，成功打开浏览器
+>
+>  体验感觉并不是很好，核显还是太弱了，尝试游玩老游戏植物大战僵尸，CPU占用率从 12% 飙升到 79%，卡顿还是很明显的
+>
+>  估计要想体验好，还得有额外的独显才行，不过在容器里运行steam还真是一次有趣的尝试
+> 
+>  详细的[安装与使用说明](https://github.com/Steam-Headless/docker-steam-headless/blob/master/docs/docker-compose.md)
+```
+steamheadless 的 docker-compose.yml 内容：
+
+services:
+  steamheadless:
+    image: josh5/steam-headless:latest
+    container_name: steamheadless
+    restart: unless-stopped
+    shm_size: ${SHM_SIZE}
+    ipc: host # Could also be set to 'shareable'
+    ulimits:
+      nofile:
+        soft: 1024
+        hard: 524288
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - SYS_NICE
+    security_opt:
+      - seccomp:unconfined
+      - apparmor:unconfined
+    network_mode: host
+    hostname: ${NAME}
+    extra_hosts:
+      - "${NAME}:127.0.0.1"
+    environment:
+      - TZ=${TZ}
+      - USER_LOCALES=${USER_LOCALES}
+      - DISPLAY=${DISPLAY}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=${UMASK}
+      - USER_PASSWORD=${USER_PASSWORD}
+      - MODE=${MODE}
+      - WEB_UI_MODE=${WEB_UI_MODE}
+      - ENABLE_VNC_AUDIO=${ENABLE_VNC_AUDIO}
+      - PORT_NOVNC_WEB=${PORT_NOVNC_WEB}
+      - NEKO_NAT1TO1=${NEKO_NAT1TO1}
+      - ENABLE_STEAM=${ENABLE_STEAM}
+      - STEAM_ARGS=${STEAM_ARGS}
+      - ENABLE_SUNSHINE=${ENABLE_SUNSHINE}
+      - SUNSHINE_USER=${SUNSHINE_USER}
+      - SUNSHINE_PASS=${SUNSHINE_PASS}
+      - ENABLE_EVDEV_INPUTS=${ENABLE_EVDEV_INPUTS}
+      - FORCE_X11_DUMMY_CONFIG=${FORCE_X11_DUMMY_CONFIG}
+      - NVIDIA_DRIVER_CAPABILITIES=${NVIDIA_DRIVER_CAPABILITIES}
+      - NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES}
+      - NVIDIA_DRIVER_VERSION=${NVIDIA_DRIVER_VERSION}
+    devices:
+      - /dev/fuse
+      - /dev/dri/card0
+      - /dev/dri/renderD128
+    device_cgroup_rules:
+      - 'c 13:* rmw'
+    volumes:
+      - ${HOME_DIR}/:/home/default/:rw
+      - ${GAMES_DIR}/:/mnt/games/:rw
+      - ${SHARED_SOCKETS_DIR}/.X11-unix/:/tmp/.X11-unix/:rw
+      - ${SHARED_SOCKETS_DIR}/pulse/:/tmp/pulse/:rw
+
+
+
+.env 内容：
+
+NAME=SteamHeadless
+TZ=TZ=Asia/Shanghai
+USER_LOCALES=en_US.UTF-8 UTF-8
+SHM_SIZE=8G
+DISPLAY=:55
+HOME_DIR=/volume1/docker/steamheadless/home
+SHARED_SOCKETS_DIR=/volume1/docker/steamheadless/sockets
+GAMES_DIR=/volume1/docker/steamheadless/games
+PUID=0
+PGID=0
+UMASK=022
+USER_PASSWORD=password
+MODE=primary
+WEB_UI_MODE=vnc
+ENABLE_VNC_AUDIO=true
+PORT_NOVNC_WEB=8083
+NEKO_NAT1TO1=
+ENABLE_STEAM=true
+STEAM_ARGS=-silent
+ENABLE_SUNSHINE=true
+SUNSHINE_USER=admin
+SUNSHINE_PASS=admin
+ENABLE_EVDEV_INPUTS=true
+FORCE_X11_DUMMY_CONFIG=true
+NVIDIA_DRIVER_CAPABILITIES=all
+NVIDIA_VISIBLE_DEVICES=all
+NVIDIA_DRIVER_VERSION=
 ```
