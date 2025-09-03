@@ -1,6 +1,6 @@
 # URL Schemes & Intent收集与整理
 
-## 更新时间 2025.06.08
+## 更新时间 2025.09.03
 
 ## 来源与相关文章：
 
@@ -155,5 +155,7 @@
 |名称|URL Schemes|
 |-------------|-------------|
 |多多买菜包裹列表|pinduoduo://com.xunmeng.pinduoduo/psnl_goods_help.html?_t_module_name=assistant_pickup|
+|多多买菜驿站快递列表|pinduoduo://com.xunmeng.pinduoduo/mdkd/package|
+|拼多多内浏览某个网址|pinduoduo://com.xunmeng.pinduoduo/`https://某个网址(比如多多驿站m.pinduoduo.net/mdkd/package)`|
 |百亿补贴|pinduoduo://com.xunmeng.pinduoduo/brand_activity_subsidy.html?_pdd_fs=1&_pdd_tc=ffffff&_pdd_sbs=1&refer_share_channel=copy_link&refer_share_form=text|
 |拼多多下单的包裹列表|pinduoduo://com.xunmeng.pinduoduo/psnl_goods_help.html?_t_module_name=assistant_search&pr_page_from=scheme&tab_id=400&tab_type=1&list_index=10|
