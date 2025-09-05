@@ -1,13 +1,15 @@
 # Docker
-## 更新时间 2025.09.02
+## 更新时间 2025.09.05
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
 >> 
 >> N1盒子使用root权限登录，命令行安装，默认网络模式是bridge
 >>
->> 所有 **`:`** 的左边都是外部实际的端口或者映射地址，可以按照情况更改，所有 **`:`** 的右边一定要和镜像作者写的一样
+>> 所有 **`:`** 的左边都是外部实际的端口或者映射位置，可以按照情况更改，所有 **`:`** 的右边一定要和镜像作者写的一样，
 >>
+>> 注意-v映射的文件或文件夹，确保它是正确的
+>> 
 >> 可使用`sudo netstat -anp | grep 端口号`，来查询目标端口号是否被占用
 >> 
 >> 群晖需要考虑权限问题,可添加`privileged: true`，`user: root`等命令，或利用`id 用户名`来确定UID和GID。网络需要指定`network_mode: bridge`或者`host`，否则会创建新的桥接网络。
@@ -164,7 +166,7 @@ services:
 ## p3terx/aria2-pro:latest
 > [使用说明](https://p3terx.com/archives/docker-aria2-pro.html)
 > 
-> Docker CLI命令详见[这篇文章](https://p3terx.com/archives/synology-nas-docker-advanced-tutorial-deploy-aria2-pro.html)，注意-v 映射的文件夹是否正确
+> Docker CLI命令详见[这篇文章](https://p3terx.com/archives/synology-nas-docker-advanced-tutorial-deploy-aria2-pro.html)
 ```
 services:
   aria2-pro:
@@ -207,7 +209,7 @@ services:
 ```
 
 ## deluan/navidrome:latest
-> [使用说明](https://www.navidrome.org/docs/installation/docker/)，注意-v 映射的文件夹是否正确
+> [使用说明](https://www.navidrome.org/docs/installation/docker/)
 >
 ```
 docker run -d --name navidrome --restart=unless-stopped --user $(id -u):$(id -g) -v /mnt/mydisk/Music/Songs:/music -v /mnt/mydisk/data/NavidromeSettings:/data -p 4533:4533 -e ND_LOGLEVEL=info deluan/navidrome:latest
@@ -229,7 +231,7 @@ services:
 ```
 
 ## alexta69/metube:latest
-> [使用说明](https://github.com/alexta69/metube)，注意-v 映射的文件夹是否正确。
+> [使用说明](https://github.com/alexta69/metube)
 > 
 > 这个项目根据文档说明，群晖需要添加两个环境变量UID和GID，并将其设为0，将会以root权限写入文件。
 ```
@@ -253,7 +255,7 @@ services:
 ```
 
 ## nyanmisaka/jellyfin:latest
-> [使用说明](https://hub.docker.com/r/nyanmisaka/jellyfin)，注意-v 映射的文件夹是否正确，注意映射/dev/dri以便于硬解。
+> [使用说明](https://hub.docker.com/r/nyanmisaka/jellyfin)，注意映射/dev/dri以便于硬解。
 >
 > [来源](https://registry.hub.docker.com/r/nyanmisaka/jellyfin/)：latest-legacy标签用于旧硬件，latest-rockchip标签用于arm64的硬件，latest标签用于新硬件。
 > 
@@ -286,7 +288,7 @@ services:
 ```
 
 ## xream/sub-store:latest
-> [使用说明](https://hub.docker.com/r/xream/sub-store)，注意-v 映射的文件夹是否正确。
+> [使用说明](https://hub.docker.com/r/xream/sub-store)
 > 
 > 相关的[详细教程](https://xream.notion.site/Sub-Store-Docker-8efc1aea40fa431b9a562b78994e7fb8)
 >
@@ -315,7 +317,7 @@ services:
 ```
 
 ## johngong/baidunetdisk:latest
-> [使用说明](https://github.com/gshang2017/docker/tree/master/baidunetdisk)，注意-v 映射的文件夹是否正确。
+> [使用说明](https://github.com/gshang2017/docker/tree/master/baidunetdisk)
 >
 > 需要在右上角设置下载目录为/config/baidunetdiskdownload
 >
@@ -340,7 +342,7 @@ services:
 ```
 
 ## zack357/douban-tool:latest
-> [配置流程及报错解决办法](https://www.bilibili.com/opus/950624026692157449)，注意-v 映射的文件夹是否正确。
+> [配置流程及报错解决办法](https://www.bilibili.com/opus/950624026692157449)
 >
 > 是B站up主`@ZDhimself`开发的观影与下载镜像
 > 
@@ -361,7 +363,7 @@ services:
 ```
 
 ## cnk3x/xunlei:latest
-> [使用说明](https://github.com/cnk3x/xunlei)，注意-v 映射的文件夹是否正确。
+> [使用说明](https://github.com/cnk3x/xunlei)
 >
 > 是从群晖套件里提取出来的非官方远程下载服务
 >
@@ -383,7 +385,7 @@ services:
 ```
 
 ## johngong/qbittorrent:latest
-> [使用说明](https://hub.docker.com/r/johngong/qbittorrent)，注意-v 映射的文件夹是否正确。
+> [使用说明](https://hub.docker.com/r/johngong/qbittorrent)
 > 
 > 此镜像可使用`QB_EE_BIN=true`启用增强版，比下面那个版本的qbittorrent优点在于可以自行设定Tracker列表
 > 
@@ -418,7 +420,7 @@ services:
 ```
 
 ## superng6/qbittorrent:latest:latest
-> [使用说明](https://sleele.com/2020/04/09/docker-qbittorrent-optimizing)，注意-v 映射的文件夹是否正确。
+> [使用说明](https://sleele.com/2020/04/09/docker-qbittorrent-optimizing)
 > 
 > 此镜像为sleele大佬优化的qbittorrent。默认中文，全平台架构支持x86-64、arm64、arm32，但启动会访问Trackers的[更新列表](https://githubraw.sleele.workers.dev/XIU2/TrackersListCollection/master/best.txt)，访问不通畅会一直卡在启动容器阶段
 > 
@@ -448,7 +450,7 @@ services:
 ```
 
 ## cnk3x/xunlei:latest
-> [使用说明](https://github.com/cnk3x/xunlei)，注意-v 映射的文件夹是否正确。
+> [使用说明](https://github.com/cnk3x/xunlei)
 >
 > 是从群晖套件里提取出来的非官方远程下载服务
 >
@@ -470,7 +472,7 @@ services:
 ```
 
 ## ghcr.io/gethomepage/homepage:latest
-> [使用说明](https://gethomepage.dev/latest/)，注意-v 映射的文件夹是否正确。
+> [使用说明](https://gethomepage.dev/latest/)
 >
 > 图标来自[需这个网站](https://wiki.slarker.me/application/homepage.html)
 >
@@ -571,7 +573,7 @@ hideVersion: true
 
 
 ## gotson/komga:latest
-> 某大佬的[使用介绍与体验](https://www.himiku.com/archives/komga.html)，注意-v 映射的文件夹是否正确。
+> 某大佬的[使用介绍与体验](https://www.himiku.com/archives/komga.html)
 >
 > 需要设置目录，注意开启文件哈希会占用很多内存，谨慎开启。刮削有点复杂，所以没搞，具体可以看大佬的博客及其评论区。
 >
@@ -597,7 +599,7 @@ services:
 
 
 ## homeassistant/home-assistant:latest（未完善）
-> 官方搭建[指南](https://www.home-assistant.io/installation/alternative)，注意-v 映射的文件夹是否正确。
+> 官方搭建[指南](https://www.home-assistant.io/installation/alternative)
 ```
 services:
   homeassistant:
@@ -616,7 +618,7 @@ services:
 
 
 ## gitea/gitea:latest
-> 官方搭建[指南](https://docs.gitea.com/zh-cn/installation/install-with-docker)，注意-v 映射的文件夹是否正确。
+> 官方搭建[指南](https://docs.gitea.com/zh-cn/installation/install-with-docker)
 ```
 services:
   gitea:
@@ -636,7 +638,7 @@ services:
 
 
 ## advplyr/audiobookshelf:latest
-> 官方搭建[指南](https://www.audiobookshelf.org/docs/#docker-compose-install)，注意-v 映射的文件夹是否正确。
+> 官方搭建[指南](https://www.audiobookshelf.org/docs/#docker-compose-install)
 ```
 services:
   audiobookshelf:
@@ -658,7 +660,7 @@ services:
 
 
 ## hectorqin/reader:latest
-> 官方搭建[指南](https://github.com/hectorqin/reader/blob/master/doc.md)，以及注释[文档](https://raw.githubusercontent.com/hectorqin/reader/master/docker-compose.yaml)，注意-v 映射的文件夹是否正确。
+> 官方搭建[指南](https://github.com/hectorqin/reader/blob/master/doc.md)，以及注释[文档](https://raw.githubusercontent.com/hectorqin/reader/master/docker-compose.yaml)
 > 
 > 不管配置文件如何编写，用户上限为15个
 ```
@@ -729,7 +731,7 @@ services:
 
 
 ## ghcr.io/kiwix/kiwix-serve:latest
-> Kiwix离线维基百科，此处为搭建的[详细说明](https://github.com/kiwix/kiwix-tools/tree/main/docker/server)，注意-v 映射的文件夹是否正确。
+> Kiwix离线维基百科，此处为搭建的[详细说明](https://github.com/kiwix/kiwix-tools/tree/main/docker/server)
 ```
 services:
   kiwix:
@@ -746,7 +748,7 @@ services:
 ```
 
 ## stirlingtools/stirling-pdf:latest
-> 本地PDF处理工具，注意-v 映射的文件夹是否正确。
+> 本地PDF处理工具
 ```
 services:
   stirlingpdf:
@@ -805,7 +807,7 @@ services:
 ## yaotutu/folder2podcast:latest
 > 将本地文件夹变为RSS播客的转换器，安装文档和注意事项在[这](https://github.com/yaotutu/folder2podcast)
 >
-> 注意BASE_URL和healthcheck是实际内网地址(假如局域网搭建的话)且需要相同，PUID和PGID由于是root用户所以为0，注意-v 映射的文件夹是否正确
+> 注意BASE_URL和healthcheck是实际内网地址(假如局域网搭建的话)且需要相同，PUID和PGID由于是root用户所以为0
 >
 > 规范的文件目录还没搞懂如何编排，先放一放，当前只需建一个文件夹，放好音频和封面cover.jpg即可
 >
@@ -837,7 +839,7 @@ services:
 
 
 ## xxnuo/mtranserver:latest
-> 安装文档和注意事项在[此](https://github.com/xxnuo/MTranServer)，注意-v 映射的文件夹是否正确
+> 安装文档和注意事项在[此](https://github.com/xxnuo/MTranServer)
 >
 > 小众软件论坛上看见的，基于 Firefox 模型的本地私有翻译服务，目前支持的翻译种类比较少
 > 
@@ -856,7 +858,7 @@ services:
 ```
 
 ## freshrss/freshrss:latest
-> 安装文档和注意事项在[此](https://github.com/FreshRSS/FreshRSS/tree/edge/Docker)，注意-v 映射的文件夹是否正确
+> 安装文档和注意事项在[此](https://github.com/FreshRSS/FreshRSS/tree/edge/Docker)
 > 
 ```
 services:
@@ -880,7 +882,7 @@ services:
 
 
 ## linuxserver/plex:latest
-> 镜像[来源](https://hub.docker.com/r/linuxserver/plex)，注意-v 映射的文件夹是否正确，可以多映射几个文件夹，比如music和tv可以分开
+> 镜像[来源](https://hub.docker.com/r/linuxserver/plex)，可以多映射几个文件夹，比如music和tv可以分开
 >
 > 整了个Plex Pass，试试看效果怎么样，搭建参考来源是几个博客（[初之音](https://www.himiku.com/archives/build-my-music-library-service.html)，[RIN](https://blog.hinatarin.com/2021/04/21/set-up-your-own-media-server-with-plex-and-docker/)，[Tom](https://d3ac.xlog.app/Docker-an-zhuang-Plexmd?locale=zh)和官方的[支持文档](https://support.plex.tv/articles/201543147-what-network-ports-do-i-need-to-allow-through-my-firewall/)
 >
@@ -953,7 +955,7 @@ services:
 ## hisatri/lrcapi:latest
 > [使用说明](https://github.com/HisAtri/LrcApi/)
 > 
-> 给音流等音乐软件提供歌词和封面api的一个工具，注意-v 映射的文件夹是否正确
+> 给音流等音乐软件提供歌词和封面api的一个工具
 ```
 services:
     lrcapi:
@@ -981,7 +983,7 @@ services:
 ```
 
 ## haroldli/xiaoya-tvbox:latest
-> 小雅的tvbox版，可以顺便把tvbox源整合，以及可以生成 **`猫影视`** 使用的源， [使用说明](https://har01d.cn/#/notes/alist-tvbox)，注意-v 映射的文件夹是否正确
+> 小雅的tvbox版，可以顺便把tvbox源整合，以及可以生成 **`猫影视`** 使用的源， [使用说明](https://har01d.cn/#/notes/alist-tvbox)
 >
 > 可以搭配[Vidplay](https://apps.apple.com/us/app/vidplay-vod-player/id6467240929)使用
 >
@@ -1020,7 +1022,7 @@ services:
 ## oldiy/dosgame-web-docker:latest
 > 本地搭建网页DOS游戏，[使用说明](https://poiblog.com/archives/ZHwUHFTm)
 > 
-> 如果要全部下载，需要在 volumes 映射 /app/static/games 到实际的目录，下载并放置游戏于文件夹内，注意-v 映射的文件夹是否正确
+> 如果要全部下载，需要在 volumes 映射 /app/static/games 到实际的目录，下载并放置游戏于文件夹内
 ```
 services:
   dosgame:
@@ -1032,7 +1034,7 @@ services:
 ```
 
 ## neosmemo/memos:stable
-> 碎片化笔记备忘录memeos，类似flomo，注意-v 映射的文件夹是否正确
+> 碎片化笔记备忘录memeos，类似flomo
 > 
 > [使用说明](https://github.com/usememos/memos)
 ```
@@ -1049,7 +1051,7 @@ services:
 ```
 
 ## lovasoa/wbo:latest
->  本地涂鸦白板，注意-v 映射的文件夹是否正确
+>  本地涂鸦白板
 > 
 >  [使用说明](https://github.com/lovasoa/whitebophir)
 ```
@@ -1066,7 +1068,7 @@ services:
 ```
 
 ## jvmilazz0/kavita:latest
->  类似于komga的美漫日漫轻小说管理工具，注意-v 映射的文件夹是否正确
+>  类似于komga的美漫日漫轻小说管理工具
 > 
 >  [使用说明](https://wiki.kavitareader.com/installation/docker/)
 ```
@@ -1299,4 +1301,31 @@ FORCE_X11_DUMMY_CONFIG=true
 NVIDIA_DRIVER_CAPABILITIES=all
 NVIDIA_VISIBLE_DEVICES=all
 NVIDIA_DRIVER_VERSION=
+```
+
+
+## szabis/iventoy:latest
+>  docker部署PXE服务器，通过网络重装电脑系统
+> 
+>  [使用说明](https://hub.docker.com/r/szabis/iventoy)
+```
+services:
+  iventoy:
+    image: szabis/iventoy:latest
+    container_name: iventoy
+    network_mode: host
+    restart: unless-stopped
+    privileged: true
+    user: root
+    environment:
+      - "67:67/udp" # DHCP Server
+      - "69:69/udp" # TFTP Server
+      - "10809:10809" # NBD Server (NBD)
+      - "16000:16000" # PXE Service HTTP Server (iVentoy PXE Service)
+      - "26000:26000" # PXE GUI HTTP Server (iVentoy GUI)
+    volumes:
+      - /volume1/docker/iventoy/data:/opt/iventoy/data
+      - /volume1/docker/iventoy/iso:/opt/iventoy/iso
+      - /volume1/docker/iventoy/log:/opt/iventoy/log
+      - /volume1/docker/iventoy/user:/opt/iventoy/user
 ```
