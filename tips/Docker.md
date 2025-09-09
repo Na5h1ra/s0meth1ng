@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.09.05
+## 更新时间 2025.09.09
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -1328,4 +1328,134 @@ services:
       - /volume1/docker/iventoy/iso:/opt/iventoy/iso
       - /volume1/docker/iventoy/log:/opt/iventoy/log
       - /volume1/docker/iventoy/user:/opt/iventoy/user
+```
+
+
+## xiaozhu674/gameservermanager:latest
+>  B站用户"[又菜又爱玩的小朱猪](https://space.bilibili.com/401680975)"开发的，一个用于Steam上相关游戏开服的工具。
+> 
+>  目前支持50多款游戏，还支持MC。但是我部署下来，似乎好像有点bug，可能是映射或者权限问题，不知道怎么修复
+> 
+>  [使用说明](https://github.com/GSManagerXZ/GameServerManager)
+```
+services:
+  gsmanager3:
+    container_name: gsmanager3
+    image: xiaozhu674/gameservermanager:latest
+    privileged: true
+    user: root
+    network_mode: bridge
+    restart: unless-stopped
+    ports:
+      - "9015:3001"
+      - "27015:27015"
+    volumes:
+      - ./game_data:/home/.config
+      - ./game_data:/home/.local
+      - ./game_file:/home/steam/games
+      - ./game_data:/root/.config
+      - ./game_data:/root/.local
+      - ./game_file:/root/steam/games
+      - ./gsm3_data:/root/server/data
+    environment:
+      - TZ=Asia/Shanghai
+      - SERVER_PORT=3001
+    stdin_open: true
+    tty: true
+```
+
+## githubyumao/mcsmanager-daemon:v10.6.0
+>  比较有名的MC开服面板工具
+>
+>  网上的建议是局域网的话，拉取web:v10.6.1和daemon:v10.6.0，最新的latest强制只支持公网IP连接
+>
+>  新增节点后，密钥是在daemon的日志里查看
+> 
+>  [使用说明](https://docs.mcsmanager.com/zh_cn)
+```
+services:
+  web:
+    image: githubyumao/mcsmanager-web:v10.6.1
+    container_name: mcsmanager-web
+    ports:
+      - "9018:23333"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /volume1/docker/mcsmanager/web/data:/opt/mcsmanager/web/data
+      - /volume1/docker/mcsmanager/web/logs:/opt/mcsmanager/web/logs
+
+  daemon:
+    image: githubyumao/mcsmanager-daemon:v10.6.0
+    container_name: mcsmanager-daemon
+    restart: unless-stopped
+    ports:
+      - "9019:24444"
+    environment:
+      - MCSM_DOCKER_WORKSPACE_PATH=/volume1/docker/mcsmanager/daemon/data/InstanceData
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /volume1/docker/mcsmanager/daemon/data:/opt/mcsmanager/daemon/data
+      - /volume1/docker/mcsmanager/daemon/logs:/opt/mcsmanager/daemon/logs
+      - /var/run/docker.sock:/var/run/docker.sock
+```
+
+
+## nextcloud:latest
+>  非All-in-one方式安装Nextcloud，一般也用不上
+> 
+>  解决一个奇怪的笔记软件[Saber](https://saber.adil.hanney.org)的同步问题，它只支持Nextcloud同步
+> 
+>  [安装参考](https://www.bilibili.com/opus/828057484080971780)
+```
+networks:
+  default:
+    name: nextcloud
+
+services:
+  nextcloud:
+    image: nextcloud:latest
+    container_name: nextcloud
+    restart: unless-stopped
+    volumes:
+      - /volume1/docker/nextcloud/app:/var/www/html
+    environment:
+      - MYSQL_PASSWORD=adminadmin
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=db
+      - TZ=Asia/Shanghai
+    ports:
+      - 9016:80
+    networks:
+      - default
+
+  cache:
+    image: redis:latest
+    container_name: nextcloud-redis
+    restart: unless-stopped
+    expose:
+     - 6379
+    volumes:
+     - /volume1/docker/nextcloud/cache:/data
+    command: redis-server --requirepass redis_password
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      - default
+
+  db:
+    image: mariadb:latest
+    container_name: nextcloud-mariadb
+    restart: unless-stopped
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-file-per-table=1 --skip-innodb-read-only-compressed
+    volumes:
+      - /volume1/docker/nextcloud/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_PASSWORD=adminadmin
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - TZ=Asia/Shanghai
+    networks:
+      - default
 ```
