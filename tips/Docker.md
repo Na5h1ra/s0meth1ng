@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.09.09
+## 更新时间 2025.09.20
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -1373,6 +1373,10 @@ services:
 > 
 >  [使用说明](https://docs.mcsmanager.com/zh_cn)
 ```
+networks:
+  default:
+    name: mcsmanager
+
 services:
   web:
     image: githubyumao/mcsmanager-web:v10.6.1
@@ -1383,6 +1387,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /volume1/docker/mcsmanager/web/data:/opt/mcsmanager/web/data
       - /volume1/docker/mcsmanager/web/logs:/opt/mcsmanager/web/logs
+    networks:
+      - default
 
   daemon:
     image: githubyumao/mcsmanager-daemon:v10.6.0
@@ -1397,6 +1403,8 @@ services:
       - /volume1/docker/mcsmanager/daemon/data:/opt/mcsmanager/daemon/data
       - /volume1/docker/mcsmanager/daemon/logs:/opt/mcsmanager/daemon/logs
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - default
 ```
 
 
