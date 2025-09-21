@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.09.20
+## 更新时间 2025.09.21
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -9,10 +9,18 @@
 >> 所有 **`:`** 的左边都是外部实际的端口或者映射位置，可以按照情况更改，所有 **`:`** 的右边一定要和镜像作者写的一样，
 >>
 >> 注意-v映射的文件或文件夹，确保它是正确的
+>>
+>> 如果compose.yml相同路径下有文件夹，可简略成`./`,如`/volume1/docker/data:/data`  →→→  `./data:/data`
+>>
+>> depends_on参数用于定义依赖容器的启动顺序，healthcheck参数用于确保启动服务健康运行，假如有的话一般不更改原作者的这两个参数
 >> 
 >> 可使用`sudo netstat -anp | grep 端口号`，来查询目标端口号是否被占用
 >> 
->> 群晖需要考虑权限问题,可添加`privileged: true`，`user: root`等命令，或利用`id 用户名`来确定UID和GID。网络需要指定`network_mode: bridge`或者`host`，否则会创建新的桥接网络。
+>> 群晖需要考虑权限问题,可添加`privileged: true`，`user: root`等命令，或利用`id 用户名`来确定UID和GID
+>>
+>> 网络需要指定`network_mode: bridge`或者`host`，否则会创建新的桥接网络。
+>>
+>> 或者创建一个指定名称的桥接网络，这样不用对外暴露内部端口，这在多个容器依赖时比较安全
 >>
 >> 可使用[这个网站](https://www.composerize.com/) 使得Docker CLI  →→→  Docker-Compose.yml
 >>
@@ -1269,11 +1277,9 @@ services:
       - ${GAMES_DIR}/:/mnt/games/:rw
       - ${SHARED_SOCKETS_DIR}/.X11-unix/:/tmp/.X11-unix/:rw
       - ${SHARED_SOCKETS_DIR}/pulse/:/tmp/pulse/:rw
-
-
-
-.env 内容：
-
+```
+> .env 内容如下
+```
 NAME=SteamHeadless
 TZ=TZ=Asia/Shanghai
 USER_LOCALES=en_US.UTF-8 UTF-8
@@ -1363,6 +1369,7 @@ services:
     stdin_open: true
     tty: true
 ```
+
 
 ## githubyumao/mcsmanager-daemon:v10.6.0
 >  比较有名的MC开服面板工具
@@ -1466,4 +1473,205 @@ services:
       - TZ=Asia/Shanghai
     networks:
       - default
+```
+
+
+## yajuhua/podcast2:latest
+>  将视频网站转换成播客订阅的一个服务
+> 
+>  [使用说明](https://github.com/yajuhua/podcast2)
+```
+services:
+  podcast2:
+    image: yajuhua/podcast2:latest
+    container_name: podcast2
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - 9021:8088
+    volumes:
+      - ./data:/data
+```
+
+
+## ghcr.i0/moontechlab/lunatv:latest
+>  一个vod视频聚合工具，空壳无订阅源
+> 
+>  [使用说明](https://github.c0m/MoonTechLab/LunaTV)
+```
+networks:
+    default:
+      name: moontv
+
+services:
+    moontv-core:
+      image: ghcr.i0/moontechlab/lunatv:latest
+      container_name: moontv-core
+      restart: unless-stopped
+      user: root
+      ports:
+        - '9025:3000'
+      environment:
+        - USERNAME=admin
+        - PASSWORD=adminadmin
+        - NEXT_PUBLIC_STORAGE_TYPE=kvrocks
+        - KVROCKS_URL=redis://moontv-kvrocks:6666
+      depends_on:
+        - moontv-kvrocks
+      networks:
+        - default
+
+    moontv-kvrocks:
+      image: apache/kvrocks
+      container_name: moontv-kvrocks
+      restart: unless-stopped
+      user: root
+      volumes:
+        - ./kvrocksdata:/var/lib/kvrocks
+      networks:
+        - default
+```
+
+
+## diygod/rsshub
+>  rss订阅项目，几乎很多东西都能订阅
+> 
+>  [使用说明](https://docs.rsshub.app/zh/guide)
+```
+networks:
+    default:
+        name: rsshub
+
+services:
+    rsshub:
+        image: diygod/rsshub
+        container_name: rsshub
+        restart: unless-stopped
+        ports:
+            - "9030:1200"
+        environment:
+            NODE_ENV: production
+            CACHE_TYPE: redis
+            REDIS_URL: "redis://redis:6379/"
+            PUPPETEER_WS_ENDPOINT: "ws://browserless:3000"
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:1200/healthz"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+        depends_on:
+            - redis
+            - browserless
+        networks:
+            - default
+
+    browserless:
+        image: browserless/chrome
+        container_name: rsshub_browserless
+        restart: unless-stopped
+        ulimits:
+            core:
+                hard: 0
+                soft: 0
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:3000/pressure"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+        networks:
+            - default
+
+    redis:
+        image: redis:alpine
+        container_name: rsshub_redis
+        restart: unless-stopped
+        volumes:
+            - ./redisdata:/data
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+            start_period: 5s
+        networks:
+            - default
+```
+
+
+## ghcr.io/imagegenius/immich:latest
+>  一个开源的相册服务，支持识别人和物，以及地理位置相册，参考了初之音的[这篇文章](https://www.himiku.com/archives/immich.html)
+>
+>  国内则是mt photos，但是要付费，而且部署文档写的比较乱，就不部署了
+> 
+>  [使用说明](https://immich.app/docs/overview/welcome)
+```
+networks:
+  default:
+    name: immich
+
+services:
+  immich:
+    image: ghcr.io/imagegenius/immich:latest
+    container_name: immich
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - DB_HOSTNAME=immich_database
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE_NAME=immich
+      - REDIS_HOSTNAME=immich_redis
+      - DB_PORT=5432
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - MACHINE_LEARNING_HOST=0.0.0.0
+      - MACHINE_LEARNING_PORT=3003
+      - MACHINE_LEARNING_WORKERS=1
+      - MACHINE_LEARNING_WORKER_TIMEOUT=120
+    volumes:
+      - ./config:/config
+      - ${PHOTOS_LOCATION}:/photos
+      - ${IMPORT_LOCATION}:/import
+      - ./geodata:/build/geodata
+      - ./i18n-iso-countries/langs:/usr/src/app/server/node_modules/i18n-iso-countries/langs
+    ports:
+      - ${IMMICH_PORT}:8080
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
+    networks:
+      - default
+
+  immich_redis:
+    image: redis
+    container_name: immich_redis
+    restart: unless-stopped
+    networks:
+      - default
+
+  immich_database:
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0
+    container_name: immich_database
+    user: ${PUID}:${PGID}
+    environment:
+      - TZ=${TZ}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=immich
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - default
+```
+>  .env内容如下
+```
+IMMICH_PORT=9020
+PHOTOS_LOCATION=./photos
+IMPORT_LOCATION=/volume1/Pictures
+PUID=0
+PGID=0
+TZ=Asia/Shanghai
+DB_PASSWORD=immich
 ```
