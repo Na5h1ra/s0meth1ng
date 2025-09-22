@@ -1,6 +1,6 @@
 # URL Schemes & Intent收集与整理
 
-## 更新时间 2025.09.03
+## 更新时间 2025.09.20
 
 ## 来源与相关文章：
 
@@ -96,6 +96,7 @@
 |话费充值|alipays://platformapi/startapp?appId=10000003|
 |电子医保凭证|alipays://platformapi/startapp?appId=20002069&fromSource=quickWay&source=shortcut#Intent;component=com.eg.android.AlipayGphone/com.alipay.mobile.quinox.LauncherActivity;B.directly=true;B.fromDesktop=true;end|
 |PockytShop 礼品卡充值(慎用)|alipays://platformapi/startapp?appId=2021003191605547|
+|支付宝AQ健康管家|alipays://platformapi/startapp?appId=2060090000317856|
 
 
 ### 3. 淘宝 `com.taobao.taobao`
