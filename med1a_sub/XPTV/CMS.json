@@ -1,31 +1,149 @@
-[
-	{"name": "360资源","api": "https://360zy.com/api.php/provide/vod/"},
-	{"name": "1080资源","api": "https://api.1080zyku.com/inc/apijson.php/"},
-	{"name": "佰度资源","api": "https://api.apibdzy.com/api.php/provide/vod/"},
-	{"name": "非凡资源","api": "https://api.ffzyapi.com/api.php/provide/vod/"},
-	{"name": "牛牛资源","api": "https://api.niuniuzy.me/api.php/provide/vod/"},
-	{"name": "U酷资源","api": "https://api.ukuapi.com/api.php/provide/vod/"},
-	{"name": "无尽资源","api": "https://api.wujinapi.com/api.php/provide/vod/"},
-	{"name": "旺旺资源","api": "https://api.wwzy.tv/api.php/provide/vod/"},
-	{"name": "新浪资源","api": "https://api.xinlangapi.com/xinlangapi.php/provide/vod/"},
-	{"name": "最大资源","api": "https://api.zuidapi.com/api.php/provide/vod/"},
-	{"name": "暴风资源","api": "https://bfzyapi.com/api.php/provide/vod/"},
-	{"name": "荳瓣资源","api": "https://caiji.dbzy.tv/api.php/provide/vod/at/josn/"},
-	{"name": "电影天堂资源","api": "https://caiji.dyttzyapi.com/api.php/provide/vod/"},
-	{"name": "茅台资源","api": "https://caiji.maotaizy.cc/api.php/provide/vod/"},
-	{"name": "魔都资源","api": "https://caiji.moduapi.cc/api.php/provide/vod/"},
-	{"name": "量子资源","api": "https://cj.lziapi.com/api.php/provide/vod/"},
-	{"name": "丫丫资源","api": "https://cj.yayazy.net/api.php/provide/vod/"},
-	{"name": "CK资源","api": "https://ckzy.me/api.php/provide/vod/"},
-	{"name": "卧龙资源","api": "https://collect.wolongzyw.com/api.php/provide/vod/"},
-	{"name": "豪华资源","api": "https://hhzyapi.com/api.php/provide/vod/"},
-	{"name": "ikun资源","api": "https://ikunzyapi.com/api.php/provide/vod/"},
-	{"name": "金鹰资源","api": "https://jinyingzy.com/api.php/provide/vod/"},
-	{"name": "樱花资源","api": "https://m3u8.apiyhzy.com/api.php/provide/vod/"},
-	{"name": "飘零资源","api": "https://p2100.net/api.php/provide/vod/"},
-	{"name": "闪电资源","api": "https://sdzyapi.com/api.php/provide/vod/"},
-	{"name": "速博资源","api": "https://subocaiji.com/api.php/provide/vod/"},
-	{"name": "索尼资源","api": "https://suoniapi.com/api.php/provide/vod/"},
-	{"name": "红牛资源","api": "https://www.hongniuzy2.com/api.php/provide/vod/"},
-	{"name": "虎芽资源","api": "https://www.huyaapi.com/api.php/provide/vod/"}
-]
+{
+  "sites": [
+    {
+      "name": "360资源",
+      "type": 1,
+      "api": "https://360zy.com/api.php/provide/vod/"
+    },
+    {
+      "name": "1080资源",
+      "type": 1,
+      "api": "https://api.1080zyku.com/inc/apijson.php/"
+    },
+    {
+      "name": "佰度资源",
+      "type": 1,
+      "api": "https://api.apibdzy.com/api.php/provide/vod/"
+    },
+    {
+      "name": "非凡资源",
+      "type": 1,
+      "api": "https://api.ffzyapi.com/api.php/provide/vod/"
+    },
+    {
+      "name": "牛牛资源",
+      "type": 1,
+      "api": "https://api.niuniuzy.me/api.php/provide/vod/"
+    },
+    {
+      "name": "U酷资源",
+      "type": 1,
+      "api": "https://api.ukuapi.com/api.php/provide/vod/"
+    },
+    {
+      "name": "无尽资源",
+      "type": 1,
+      "api": "https://api.wujinapi.com/api.php/provide/vod/"
+    },
+    {
+      "name": "旺旺资源",
+      "type": 1,
+      "api": "https://api.wwzy.tv/api.php/provide/vod/"
+    },
+    {
+      "name": "新浪资源",
+      "type": 1,
+      "api": "https://api.xinlangapi.com/xinlangapi.php/provide/vod/"
+    },
+    {
+      "name": "最大资源",
+      "type": 1,
+      "api": "https://api.zuidapi.com/api.php/provide/vod/"
+    },
+    {
+      "name": "暴风资源",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod/"
+    },
+    {
+      "name": "荳瓣资源",
+      "type": 1,
+      "api": "https://caiji.dbzy.tv/api.php/provide/vod/at/josn/"
+    },
+    {
+      "name": "电影天堂资源",
+      "type": 1,
+      "api": "https://caiji.dyttzyapi.com/api.php/provide/vod/"
+    },
+    {
+      "name": "茅台资源",
+      "type": 1,
+      "api": "https://caiji.maotaizy.cc/api.php/provide/vod/"
+    },
+    {
+      "name": "魔都资源",
+      "type": 1,
+      "api": "https://caiji.moduapi.cc/api.php/provide/vod/"
+    },
+    {
+      "name": "量子资源",
+      "type": 1,
+      "api": "https://cj.lziapi.com/api.php/provide/vod/"
+    },
+    {
+      "name": "丫丫资源",
+      "type": 1,
+      "api": "https://cj.yayazy.net/api.php/provide/vod/"
+    },
+    {
+      "name": "CK资源",
+      "type": 1,
+      "api": "https://ckzy.me/api.php/provide/vod/"
+    },
+    {
+      "name": "卧龙资源",
+      "type": 1,
+      "api": "https://collect.wolongzyw.com/api.php/provide/vod/"
+    },
+    {
+      "name": "豪华资源",
+      "type": 1,
+      "api": "https://hhzyapi.com/api.php/provide/vod/"
+    },
+    {
+      "name": "ikun资源",
+      "type": 1,
+      "api": "https://ikunzyapi.com/api.php/provide/vod/"
+    },
+    {
+      "name": "金鹰资源",
+      "type": 1,
+      "api": "https://jinyingzy.com/api.php/provide/vod/"
+    },
+    {
+      "name": "樱花资源",
+      "type": 1,
+      "api": "https://m3u8.apiyhzy.com/api.php/provide/vod/"
+    },
+    {
+      "name": "飘零资源",
+      "type": 1,
+      "api": "https://p2100.net/api.php/provide/vod/"
+    },
+    {
+      "name": "闪电资源",
+      "type": 1,
+      "api": "https://sdzyapi.com/api.php/provide/vod/"
+    },
+    {
+      "name": "速博资源",
+      "type": 1,
+      "api": "https://subocaiji.com/api.php/provide/vod/"
+    },
+    {
+      "name": "索尼资源",
+      "type": 1,
+      "api": "https://suoniapi.com/api.php/provide/vod/"
+    },
+    {
+      "name": "红牛资源",
+      "type": 1,
+      "api": "https://www.hongniuzy2.com/api.php/provide/vod/"
+    },
+    {
+      "name": "虎芽资源",
+      "type": 1,
+      "api": "https://www.huyaapi.com/api.php/provide/vod/"
+    }
+	]
+}
