@@ -1,6 +1,6 @@
 # URL Schemes & Intent收集与整理
 
-## 更新时间 2025.09.22
+## 更新时间 2025.09.30
 
 ## 来源与相关文章：
 
@@ -97,7 +97,9 @@
 |电子医保凭证|alipays://platformapi/startapp?appId=20002069&fromSource=quickWay&source=shortcut#Intent;component=com.eg.android.AlipayGphone/com.alipay.mobile.quinox.LauncherActivity;B.directly=true;B.fromDesktop=true;end|
 |PockytShop 礼品卡充值(慎用)|alipays://platformapi/startapp?appId=2021003191605547|
 |支付宝AQ健康管家|alipays://platformapi/startapp?appId=2060090000317856|
-
+|大润发会员码|alipays://platformapi/startapp?appId=2019030663402947&page=pages/member-card/index|
+|大润发购物卡|alipays://platformapi/startapp?appId=2019030663402947&page=pkg-my/pages/shopping-card-code/index|
+|好想来会员码|alipays://platformapi/startapp?appId=2021005130648524&page=%2Fpages%2Fentry%2Findex%3FshareType%3D1%26pageName%3DMEMBER_CODE|
 
 ### 3. 淘宝 `com.taobao.taobao`
 |名称|URL Schemes|
