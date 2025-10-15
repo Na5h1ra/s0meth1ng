@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.09.21
+## 更新时间 2025.10.15
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -1674,4 +1674,66 @@ PUID=0
 PGID=0
 TZ=Asia/Shanghai
 DB_PASSWORD=immich
+```
+
+## couchdb:latest
+>  给 MoonFM 配置`couchdb`同步
+> 
+>  参考了这篇[博客文章](https://www.whrr.cc/article/how-to-set-MoonFM-sync)
+>
+>  以及这篇[知乎文章](https://zhuanlan.zhihu.com/p/645030276)
+> 
+>  按照知乎文章配置`local.ini`后，终端里面可以少输入下面的命令，因为`_users`数据库已经生成了
+> 
+>  `curl -X PUT http://admin:password@IP:端口号/_users -H "Accept: application/json" -H "Content-Type: application/json"`
+>  
+>  终端里输入以下命令来产生一个`userdb_xxxxxxxx`的数据库
+>  
+>  `curl -X PUT http://admin:password@ip:端口/_users/org.couchdb.user:admin -H "Accept: application/json" -H "Content-Type: application/json" -d '{"name": "admin", "password": "password", "roles": [], "type": "user"}'`
+> 
+>  注意最后的`userdb_xxxxxxxx`的中间是横杠`-`还是下划线`_`，新版的应该是下划线
+```
+services:
+  couchdb:
+    container_name: couchdb
+    image: couchdb:latest
+    user: root
+    network_mode: bridge
+    restart: unless-stopped
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password
+    volumes:
+      - /volume1/docker/couchdb/data:/opt/couchdb/data
+      - /volume1/docker/couchdb/data/local.ini:/opt/couchdb/etc/local.ini
+    ports:
+      - 5984:5984
+```
+>  `local.ini`内容如下，参考了上面那篇知乎文章
+```
+[couchdb]
+single_node=true
+
+[chttpd]
+require_valid_user = true
+
+[chttpd_auth]
+require_valid_user = true
+authentication_redirect = /_utils/session.html
+
+[httpd]
+WWW-Authenticate = Basic realm="couchdb"
+enable_cors = true
+
+[cors]
+origins = app://obsidian.md,capacitor://localhost,http://localhost
+credentials = true
+headers = accept, authorization, content-type, origin, referer
+methods = GET, PUT, POST, HEAD, DELETE
+max_age = 3600
+
+[couch_peruser]
+database_prefix = userdb_
+delete_dbs = false
+enable = true
 ```
