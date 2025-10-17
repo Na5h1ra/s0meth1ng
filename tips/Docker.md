@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.10.17
+## 更新时间 2025.10.18
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -1787,4 +1787,222 @@ HEALTH_CHECK_ENABLED=true
 HEALTH_CHECK_INTERVAL=30
 LOG_LEVEL=info
 LOG_FORMAT=json
+```
+## neosmemo/memos:0.21.0
+>  InkRoot，对于0.21.0特别优化的一个第三方memos客户端
+> 
+>  [使用说明](https://github.com/yyyyymmmmm/IntRoot)
+```
+services:
+  inkroot:
+    image: neosmemo/memos:0.21.0
+    container_name: inkroot
+    network_mode: bridge
+    restart: unless-stopped
+    volumes:
+      - /volume1/docker/inkroot/memos:/var/opt/memos
+    ports:
+      - 9009:5230
+```
+
+## dko0/squoosh:latest
+>  谷歌开源的图片压缩工具的docker版本
+```
+services:
+  squoosh:
+    image: dko0/squoosh:latest
+    container_name: squoosh
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - 9035:8080
+```
+
+## jiangrui1994/cloudsaver:latest
+>  一个网盘资源搜索与转存工具
+> 
+>  [使用说明](https://github.com/jiangrui1994/CloudSaver)
+```
+services:
+  cloudsaver:
+    image: jiangrui1994/cloudsaver:latest
+    container_name: cloudsaver
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - "9031:8008"
+    volumes:
+      - /volume1/docker/cloudsaver/data:/app/data
+      - /volume1/docker/cloudsaver/config:/app/config
+```
+
+## ghcr.io/fish2018/pansou-web:latest
+>  带前后端的网盘资源搜索工具
+> 
+>  [使用说明](https://github.com/fish2018/pansou-web)
+```
+services:
+  pansou:
+    image: ghcr.io/fish2018/pansou-web:latest
+    container_name: pansou
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - "9050:80"
+    environment:
+      - DOMAIN=localhost
+      - PANSOU_PORT=8888
+      - PANSOU_HOST=127.0.0.1
+      - ENABLED_PLUGINS=labi,zhizhen,shandian,duoduo,muou,wanou
+    volumes:
+      - /volume1/docker/pansou/data:/app/data
+      - /volume1/docker/pansou/logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+```
+
+## wu529778790/panhub.shenzjd.com:latest
+>  一个简约的网盘资源搜索工具
+> 
+>  [使用说明](https://github.com/wu529778790/panhub.shenzjd.com)
+```
+services:
+  panhub:
+    image: wu529778790/panhub.shenzjd.com:latest
+    container_name: panhub
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - 9032:3000
+```
+
+## dockpeek/dockpeek:latest
+>  查看docker部署在哪些端口的工具
+>  
+>  实测并不能看到没有启动的容器的端口，只能看那些已经启动的容器
+> 
+>  [使用说明](https://github.com/dockpeek/dockpeek)
+```
+services:
+  dockpeek:
+    image: dockpeek/dockpeek:latest
+    container_name: dockpeek
+    restart: unless-stopped
+    network_mode: bridge
+    privileged: true
+    environment:
+      - SECRET_KEY=password
+      - USERNAME=admin
+      - PASSWORD=password
+    ports:
+      - "9060:8000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+```
+
+## dr34m/tao-sync:latest
+>  一个用于Alist/Openlist之间自动化同步的工具
+> 
+>  [使用说明](https://github.com/dr34m-cn/taosync)
+```
+services:
+  taosync:
+    image: dr34m/tao-sync:latest
+    container_name: taosync
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - 9051:8023
+    volumes:
+      - /volume1/docker/taosync/data:/app/data
+```
+
+## hslr/sun-panel:latest
+>  一款NAS服务器的导航面板
+> 
+>  [使用说明](https://github.com/hslr-s/sun-panel)
+```
+services:
+  sunpanel:
+    image: hslr/sun-panel:latest
+    container_name: sunpanel
+    restart: unless-stopped
+    network_mode: bridge
+    volumes:
+      - /volume1/docker/sunpanel/conf:/app/conf
+    ports:
+      - 9055:3002
+```
+
+## jgraph/drawio:latest
+>  一款开源绘图工具，用于流程图建模、经济分析图、系统结构图与学术演示
+> 
+>  [使用说明](https://www.drawio.com)
+```
+services:
+  drawio:
+    image: jgraph/drawio:latest
+    container_name: drawio
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - 9052:8080
+```
+
+## doocs/md:latest
+>  一款高度简洁的微信 Markdown 编辑器
+> 
+>  [使用说明](https://github.com/doocs/md)
+```
+services:
+  doocs:
+    image: doocs/md:latest
+    container_name: doocs
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - 9053:80
+```
+
+## surveyking/surveyking:latest
+>  卷王问卷考试系统，用来发布和回答问卷的工具
+> 
+>  [使用说明](https://surveyking.cn/open-source/quickstart)
+```
+services:
+  surveyking:
+    image: surveyking/surveyking:latest
+    container_name: surveyking
+    restart: unless-stopped
+    network_mode: bridge
+    volumes:
+      - /volume1/docker/surveyking/files:/app/files
+      - /volume1/docker/surveyking/logs:/app/logs
+    ports:
+      - 9056:1991
+```
+
+## b3log/siyuan:latest
+>  思源笔记docker版本
+> 
+>  不支持桌面端和移动端应用连接，仅支持在浏览器上使用，不支持导出 PDF、HTML 和 Word 格式，不支持导入 Markdown 文件
+> 
+>  [使用说明](https://github.com/siyuan-note/siyuan/blob/master/README_zh_CN.md)
+```
+services:
+  siyuan:
+    image: b3log/siyuan:latest
+    restart: unless-stopped
+    user: root
+    container_name: siyuan
+    network_mode: bridge
+    ports:
+      - "9070:6806"
+    volumes:
+      - /volume1/docker/siyuan/workspace:/siyuan/workspace
+    command: --workspace=/siyuan/workspace --accessAuthCode=password --lang=zh_CN
 ```
