@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.10.15
+## 更新时间 2025.10.17
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -182,7 +182,7 @@ services:
     image: p3terx/aria2-pro:latest
     user: root
     environment:
-      - RPC_SECRET=nash1ra
+      - RPC_SECRET=password
       - RPC_PORT=6800
       - LISTEN_PORT=6888
     volumes:
@@ -340,12 +340,14 @@ services:
     user: root
     environment:
       - NOVNC_LANGUAGE="zh_Hans"
+      - USER_ID=0
+      - GROUP_ID=0
     ports:
       - 5250:5800
-      - 5900:5900
+      - 5910:5900
     volumes:
       - /volume1/docker/baidunetdisk/configs:/config
-      - /volume1/docker/baidunetdisk/bdDLs:/config/baidunetdiskdownload
+      - /volume1/Download/bdDLs:/config/baidunetdiskdownload
     restart: unless-stopped
 ```
 
@@ -366,7 +368,7 @@ services:
     volumes:
       - /volume1/docker/doubantool/data:/app/data
       - /volume1/docker/doubantool/configs:/app/config
-      - /volume1/Download/doubantoolDLs:/downloads
+      - /volume1/Download/xunleiDLs:/downloads
     restart: unless-stopped
 ```
 
@@ -388,7 +390,7 @@ services:
       - "2345:2345"
     volumes:
       - /volume1/docker/xunlei/configs:/xunlei/data
-      - /volume1/Download/doubantoolDLs:/xunlei/downloads
+      - /volume1/Download/xunleiDLs:/xunlei/downloads
     restart: unless-stopped
 ```
 
@@ -454,28 +456,6 @@ services:
       - 6881:6881
       - 6881:6881/udp
       - 8080:8080
-    restart: unless-stopped
-```
-
-## cnk3x/xunlei:latest
-> [使用说明](https://github.com/cnk3x/xunlei)
->
-> 是从群晖套件里提取出来的非官方远程下载服务
->
-> 并未在N1上部署，因为N1芯片很弱，假如下载拉满，带宽不足，很有可能N1的后台都进不去，故无Docker CLI,不过可以自己用[这个网站](https://www.decomposerize.com)来转换
-> 
-```
-services:
-  xunlei:
-    image: cnk3x/xunlei:latest
-    privileged: true
-    container_name: xunlei
-    network_mode: bridge
-    ports:
-      - "2345:2345"
-    volumes:
-      - /volume1/docker/xunlei/configs:/xunlei/data
-      - /volume1/Download/doubantoolDLs:/xunlei/downloads
     restart: unless-stopped
 ```
 
@@ -608,6 +588,8 @@ services:
 
 ## homeassistant/home-assistant:latest（未完善）
 > 官方搭建[指南](https://www.home-assistant.io/installation/alternative)
+>
+> 后来又安装了[冬瓜OS](https://www.wghaos.com)，还在慢慢摸索
 ```
 services:
   homeassistant:
@@ -1736,4 +1718,73 @@ max_age = 3600
 database_prefix = userdb_
 delete_dbs = false
 enable = true
+```
+
+## ghcr.io/katelya77/katelyatv:latest
+>  M00nTV二次开发的影视聚合平台
+> 
+>  [使用说明](https://github.com/katelya77/KatelyaTV?tab=readme-ov-file)
+```
+networks:
+  default:
+    name: katelyatv
+
+services:
+  katelyatv:
+    image: ghcr.io/katelya77/katelyatv:latest
+    container_name: katelyatv
+    restart: unless-stopped
+    ports:
+      - "9028:3000"
+    environment:
+      NEXT_PUBLIC_STORAGE_TYPE: redis
+      REDIS_URL: redis://katelyatv-redis:6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+      REDIS_DATABASE: 0
+      USERNAME: admin
+      AUTH_PASSWORD: password
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+    depends_on:
+      - katelyatv-redis
+    networks:
+      - default
+
+  katelyatv-redis:
+    image: redis:7-alpine
+    container_name: katelyatv-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - ./katelyatv-redis-data:/data
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+```
+>  .env 文件内容如下
+```
+NEXT_PUBLIC_STORAGE_TYPE=redis
+REDIS_URL=redis://katelyatv-redis:6379
+REDIS_DATABASE=0
+NEXTAUTH_SECRET=your_nextauth_secret_here
+NEXTAUTH_URL=http://localhost:3000
+NEXT_PUBLIC_SITE_NAME=KatelyaTV
+NEXT_PUBLIC_SITE_DESCRIPTION=高性能影视播放平台
+NODE_ENV=production
+PORT=3000
+DOCKER_IMAGE_TAG=latest
+IMAGE_PROXY_ENABLED=true
+CACHE_TTL=3600
+CORS_ORIGIN=*
+RATE_LIMIT_MAX=100
+RATE_LIMIT_WINDOW=60000
+HEALTH_CHECK_ENABLED=true
+HEALTH_CHECK_INTERVAL=30
+LOG_LEVEL=info
+LOG_FORMAT=json
 ```
