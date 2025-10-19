@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.10.18
+## 更新时间 2025.10.20
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -1102,30 +1102,27 @@ services:
 ```
 
 ## linuxserver/chromium:latest
->  尝试安装docker版的chromium浏览器，失败了，因为它强制了需要https访问，本地NAS没去搞证书，隔壁的firefox也是这个要求
+>  docker版的chrome浏览器，还有chromium版本，edge版本，以及firefox版本
 > 
->  [使用说明](https://github.com/linuxserver/docker-chromium)
+>  [使用说明](https://github.com/linuxserver/docker-chrome)
 ```
 services:
-  chromium:
-    image: linuxserver/chromium:latest
-    container_name: chromium
+  lscr-chrome:
+    image: linuxserver/chrome:latest
+    container_name: lscr-chrome
     network_mode: bridge
-    user: root
     restart: unless-stopped
-    shm_size: "1gb"
-    security_opt:
-      - seccomp:unconfined
+    user: root
     environment:
       - PUID=0
       - PGID=0
       - TZ=Asia/Shanghai
       - LC_ALL=zh_CN.UTF-8
     volumes:
-      - /volume1/docker/chromium/config:/config
+      - /volume1/docker/lscr-chrome/config:/config
     ports:
-      - 9011:3000
-      - 9012:3001
+      - 9076:3001
+    shm_size: "1gb"
     devices:
       - /dev/dri:/dev/dri
 ```
@@ -2005,4 +2002,65 @@ services:
     volumes:
       - /volume1/docker/siyuan/workspace:/siyuan/workspace
     command: --workspace=/siyuan/workspace --accessAuthCode=password --lang=zh_CN
+```
+
+## linuxserver/emulatorjs:1.9.2
+>  一个浏览器中运行的采用js技术的游戏模拟器
+> 
+>  [使用说明](https://hub.docker.com/r/linuxserver/emulatorjs)
+```
+services:
+  emulatorjs:
+    image: linuxserver/emulatorjs:1.9.2
+    container_name: emulatorjs
+    network_mode: bridge
+    restart: unless-stopped
+    user: root
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Shanghai
+    ports:
+      - 9068:3000
+      - 9069:80
+    volumes:
+      - /volume1/docker/emulatorjs/config:/config
+      - /volume1/docker/emulatorjs/data:/data
+```
+
+## inglebard/retroarch-web:latest
+>  docker版网页Retroarch模拟器
+> 
+>  [使用说明](https://hub.docker.com/r/inglebard/retroarch-web)
+```
+services:
+  retroarchweb:
+    image: inglebard/retroarch-web:latest
+    container_name: retroarchweb
+    network_mode: bridge
+    restart: unless-stopped
+    ports:
+      - 9079:80
+```
+
+## diluka/nas-too1s:2.9.1
+>  下载视频的工具，2.9.1是最后一个支持BT的版本
+```
+services:
+  nastoo1:
+    image: diluka/nas-too1s:2.9.1
+    container_name: nastoo1
+    network_mode: bridge
+    restart: unless-stopped
+    user: root
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Shanghai
+      - NASTOOL_AUTO_UPDATE=false
+    volumes:
+      - /volume1/docker/nastoo1s/config:/config
+      - /volume1/nastoo1/downloads:/downloads
+    ports:
+      - 9085:3000
 ```
