@@ -2091,3 +2091,28 @@ services:
     ports:
       - 9085:3000
 ```
+
+## 0nlylty/dockercopilot:latest
+>  一键更新容器，群晖默认的管理器只能更新dockerhub上的镜像
+>  
+>  可以用来更新别的平台的镜像，比如github上的镜像
+> 
+>  [使用说明](https://github.com/onlyLTY/dockerCopilot)
+```
+services:
+  dockercopilot:
+    image: 0nlylty/dockercopilot:latest
+    container_name: dockercopilot
+    restart: always
+    network_mode: bridge
+    privileged: true
+    ports:
+      - 9095:12712
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /volume1/docker/dockercopilot/data:/data
+    environment:
+      - TZ=Asia/Shanghai
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - secretKey=不少于八位且非纯数字的密码
+```
