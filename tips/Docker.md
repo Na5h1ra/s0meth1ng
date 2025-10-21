@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.10.20
+## 更新时间 2025.10.21
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -1400,6 +1400,18 @@ services:
 >  解决一个奇怪的笔记软件[Saber](https://saber.adil.hanney.org)的同步问题，它只支持Nextcloud同步
 > 
 >  [安装参考](https://www.bilibili.com/opus/828057484080971780)
+> 
+>  有时遇到nextcloud更新，提示`使用命令行更新程序`
+> 
+>  解决方法是在docker的终端里，进入nextcloud的容器，cd到有`occ`文件的那个文件夹，输入`./occ upgrade`即可
+> 
+>  nextcloud不设置，会直接下载文件，而不会在线预览，需要onlyoffice的JWT密钥
+> 
+>  解决方法是在docker的终端里，进入onlyoffice的容器，直接输入`documentserver-jwt-status.sh`即可
+> 
+>  nextcloud的onlyoffice需要设置`关闭证书校验`
+> 
+>  [Saber](https://saber.adil.hanney.org)需要在最底下的`高级`，设置`允许不安全的连接`
 ```
 networks:
   default:
@@ -1416,14 +1428,14 @@ services:
       - MYSQL_PASSWORD=adminadmin
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
-      - MYSQL_HOST=db
+      - MYSQL_HOST=nextcloud-mariadb
       - TZ=Asia/Shanghai
     ports:
       - 9016:80
     networks:
       - default
 
-  cache:
+  nextcloud-redis:
     image: redis:latest
     container_name: nextcloud-redis
     restart: unless-stopped
@@ -1437,7 +1449,7 @@ services:
     networks:
       - default
 
-  db:
+  nextcloud-mariadb:
     image: mariadb:latest
     container_name: nextcloud-mariadb
     restart: unless-stopped
@@ -1450,6 +1462,21 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - TZ=Asia/Shanghai
+    networks:
+      - default
+      
+  nextcloud-onlyoffice:
+    image: onlyoffice/documentserver:latest
+    container_name: nextcloud-onlyoffice
+    restart: unless-stopped
+    ports:
+      - 9086:80
+    environment:
+      - REDIS_SERVER_HOST=nextcloud-redis
+      - REDIS_SERVER_PORT=6379
+    volumes:
+      - /volume1/docker/nextcloud/onlyoffice/log:/var/log/onlyoffice
+      - /volume1/docker/nextcloud/onlyoffice/data:/var/www/onlyoffice/Data
     networks:
       - default
 ```
