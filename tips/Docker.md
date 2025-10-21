@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.10.21
+## 更新时间 2025.10.22
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -28,6 +28,9 @@
 >>
 >> 注册表镜像，可以填写[1panel](https://docker.1panel.live)和[耗子面板](https://hub.rat.dev)两个国内加速源，[来源](https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6)
 >>
+>> Docker部署多了会产生一些未被使用的镜像，可以先输入`docker images -f dangling=true`列出悬空镜像，然后输入`docker image prune`进行清理
+>>
+>> 如果清理不了可以输入`docker rmi -f 镜像ID`,强制删除
 
 ## youshandefeiyang/allinone:latest
 > 作者新加了鉴权,[使用说明](https://github.com/youshandefeiyang/LiveRedirect/blob/main/Golang/README.md)
