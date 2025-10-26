@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.10.22
+## 更新时间 2025.10.27
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -2118,4 +2118,499 @@ services:
       - TZ=Asia/Shanghai
       - DOCKER_HOST=unix:///var/run/docker.sock
       - secretKey=不少于八位且非纯数字的密码
+```
+
+## linuxserver/code-server:latest
+>  网页版的VS code
+>  
+>  [使用说明](https://github.com/coder/code-server)
+```
+services:
+  codeserver:
+    image: linuxserver/code-server:latest
+    container_name: codeserver
+    restart: unless-stopped
+    network_mode: bridge
+    user: root
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Shanghai
+      - PWA_APPNAME=CodeServer
+    volumes:
+      - ./config:/config
+    ports:
+      - 9110:8443
+```
+
+##  linuxserver/grocy:latest
+>  一个家庭ERP杂货管理系统
+>  
+>  [使用说明](https://grocy.info)
+```
+services:
+  grocy:
+    image: linuxserver/grocy:latest
+    container_name: grocy
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1026
+      - PGID=100
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./config:/config
+    ports:
+      - 9109:80
+```
+
+##  talebook/talebook:latest
+>  一个用于管理图书的书库工具，类似于calibre
+>  
+>  [使用说明](https://github.com/talebook/talebook)
+```
+services:
+  talebook:
+    image: talebook/talebook:latest
+    container_name: talebook
+    restart: unless-stopped
+    network_mode: bridge
+    volumes:
+      - ./data:/data
+    ports:
+      - "9106:80"
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Shanghai
+```
+
+##  teableio/teable:latest
+>  一个多维表格工具
+>  
+>  [使用说明](https://teable.cn)
+```
+networks:
+  default:
+    name: teable
+
+services:
+  teable:
+    image: teableio/teable:latest
+    restart: unless-stopped
+    container_name: teable
+    networks:
+      - default
+    ports:
+      - '9111:3000'
+    volumes:
+      - ./app:/app/.assets:rw
+    env_file:
+      - .env
+    environment:
+      - NEXT_ENV_IMAGES_ALL_REMOTE=true
+    depends_on:
+      teable-db:
+        condition: service_healthy
+      teable-cache:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/health']
+      start_period: 5s
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+  teable-db:
+    image: postgres:15.4
+    container_name: teable-db
+    restart: unless-stopped
+    networks:
+      - default
+    ports:
+      - '42345:5432'
+    volumes:
+      - ./dbdata:/var/lib/postgresql/data:rw
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    healthcheck:
+      test: ['CMD-SHELL', "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  teable-cache:
+    image: redis:7.2.4
+    container_name: teable-cache
+    restart: unless-stopped
+    networks:
+      - default
+    expose:
+      - '6379'
+    volumes:
+      - ./cachedata:/data:rw
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    healthcheck:
+      test: ['CMD', 'redis-cli', '--raw', 'incr', 'ping']
+      interval: 10s
+      timeout: 3s
+      retries: 3
+```
+>  .env 内容如下
+```
+POSTGRES_PASSWORD=postgrespassword
+REDIS_PASSWORD=redispassword
+SECRET_KEY=secretkeypassword
+PUBLIC_ORIGIN=http://127.0.0.1:3000
+POSTGRES_HOST=teable-db
+POSTGRES_PORT=5432
+POSTGRES_DB=teable
+POSTGRES_USER=teable
+REDIS_HOST=teable-cache
+REDIS_PORT=6379
+REDIS_DB=0
+PRISMA_DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+BACKEND_CACHE_PROVIDER=redis
+BACKEND_CACHE_REDIS_URI=redis://default:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}/${REDIS_DB}
+```
+
+##  danielszabo99/microbin:latest
+>  一个类似于pastebin的代码分享工具
+>  
+>  [使用说明](https://microbin.eu)
+```
+services:
+  microbin:
+    image: danielszabo99/microbin:latest
+    container_name: microbin
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+     - "9115:8080"
+    volumes:
+     - ./data:/app/microbin_data
+    environment:
+      - TZ=Asia/Shanghai
+      - MICROBIN_HIGHLIGHTSYNTAX=true
+      - MICROBIN_HASH_IDS=true
+      - MICROBIN_EDITABLE=true
+      - MICROBIN_PRIVATE=false
+      - MICROBIN_HIDE_FOOTER=true
+      - MICROBIN_FOOTER_TEXT=microbin
+      - MICROBIN_HIDE_HEADER=true
+      - MICROBIN_HIDE_LOGO=false
+      - MICROBIN_NO_ETERNAL_PASTA=true
+      - MICROBIN_NO_FILE_UPLOAD=true
+      - MICROBIN_NO_LISTING=false
+      - MICROBIN_THREADS=2
+      - MICROBIN_TITLE=microbin
+      - MICROBIN_QR=true
+      - MICROBIN_SHOW_READ_STATS=true
+      - MICROBIN_DISABLE_TELEMETRY=true
+      - MICROBIN_LIST_SERVER=false
+      - MICROBIN_WIDE=true
+      - MICROBIN_PUBLIC_PATH=http://192.168.10.100:9115/
+```
+
+##  ghcr.io/meeb/tubesync:latest
+>  一个用于同步下载油管视频的工具
+>  
+>  [使用说明](https://github.com/meeb/tubesync)
+```
+services:
+  tubesync:
+    image: ghcr.io/meeb/tubesync:latest
+    container_name: tubesync
+    restart: unless-stopped
+    network_mode: bridge
+    user: root
+    stop_grace_period: 30m
+    ports:
+      - 9108:4848
+    volumes:
+      - ./config:/config
+      - /volume1/Download/videoDLs:/downloads
+    environment:
+      - TZ=Asia/Shanghai
+      - PUID=0
+      - PGID=0
+```
+
+##  miniflux/miniflux:latest
+>  一个简约的RSS阅读器
+>  
+>  [使用说明](https://miniflux.app)
+```
+networks:
+  default:
+    name: miniflux
+
+services:
+  miniflux:
+    image: miniflux/miniflux:latest
+    container_name: miniflux
+    network_mode: bridge
+    user : root
+    ports:
+      - "9092:8080"
+    depends_on:
+      miniflux-db:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgres://miniflux:password@miniflux-db/miniflux?sslmode=disable
+      - RUN_MIGRATIONS=1
+      - CREATE_ADMIN=1
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=adminadmin
+    networks:
+      - default
+
+  miniflux-db:
+    image: postgres:17-alpine
+    container_name: miniflux-db
+    network_mode: bridge
+    environment:
+      - POSTGRES_USER=miniflux
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=miniflux
+    volumes:
+      - /volume1/docker/miniflux/data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "miniflux"]
+      interval: 10s
+      start_period: 30s
+    networks:
+      - default
+```
+
+##  gravityle/hyperms:0.0.3
+>  一个用于nullbr115的搜索转存工具，与nullbr115站长无关，是第三方开发者
+>  
+>  [使用说明](https://hub.docker.com/r/gravityle/hyperms)
+```
+services:
+  hyperms:
+    image: gravityle/hyperms:0.0.3
+    container_name: hyperms
+    network_mode: bridge
+    restart: unless-stopped
+    ports:
+      - 9112:8115
+    environment:
+      - HMS_TOKEN=需要去微信小程序获取
+    volumes:
+      - ./config:/config
+      - /volume1/Download/nullbrDLs:/media
+```
+
+##  logvar/danmu-api:latest
+>  一个基于 js 的弹幕 API 服务器
+>  
+>  [使用说明](https://github.com/huangxd-/danmu_api)
+```
+services:
+  danmuapi:
+    image: logvar/danmu-api:latest
+    container_name: danmuapi
+    network_mode: bridge
+    restart: unless-stopped
+    ports:
+      - "9119:9321"
+    volumes:
+      - ./.env:/app/.env
+```
+>  .env 内容如下
+```
+TOKEN=自行设定一个token
+```
+
+##  lkw199711/smanga-nodejs:latest
+>  一个漫画阅读整理与阅读浏览器
+>  
+>  [使用说明](https://github.com/lkw199711/smanga)
+```
+services:
+  smanga:
+    image: lkw199711/smanga-nodejs:latest
+    container_name: smanga
+    network_mode: bridge
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    ports:
+      - 9120:9797
+    volumes:
+      - ./data:/data
+      - /volume1/Download/mangaDLs:/mnt
+```
+
+
+##  difegue/lanraragi:latest
+>  一个漫画阅读整理与阅读工具，有些第三方app会支持
+>  
+>  [使用说明](https://github.com/Difegue/LANraragi)
+```
+services:
+  lanraragi:
+    image: difegue/lanraragi:latest
+    container_name: lanraragi
+    network_mode: bridge
+    restart: unless-stopped
+    user: root
+    ports:
+      - "9125:3000"
+    environment:
+      - LRR_UID=0
+      - LRR_GID=0
+    volumes:
+      - /volume1/Download/mangaDLs:/home/koyomi/lanraragi/content
+      - ./thumb:/home/koyomi/lanraragi/thumb
+      - ./db:/home/koyomi/lanraragi/database
+```
+
+##  docmost/docmost:latest
+>  一款开源的Wiki和文档协作软件
+>  
+>  [使用说明](https://github.com/Docmost/docmost)
+```
+networks:
+  default:
+    name: docmost
+
+services:
+  docmost:
+    image: docmost/docmost:latest
+    container_name: docmost
+    networks:
+      - default
+    depends_on:
+      - db
+      - redis
+    environment:
+      APP_URL: 'http://192.168.0.197:9121'
+      APP_SECRET: '32位以上的密码'
+      DATABASE_URL: 'postgresql://docmost:STRONG_POSTGRES_PASSWORD@db:5432/docmost?schema=public'
+      REDIS_URL: 'redis://redis:6379'
+    ports:
+      - "9121:3000"
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data/storage
+
+  db:
+    image: postgres:16-alpine
+    container_name: docmost-db
+    restart: unless-stopped
+    networks:
+      - default
+    environment:
+      POSTGRES_DB: docmost
+      POSTGRES_USER: docmost
+      POSTGRES_PASSWORD: STRONG_POSTGRES_PASSWORD
+    volumes:
+      - ./db:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: docmost-redis
+    restart: unless-stopped
+    networks:
+      - default
+    volumes:
+      - ./redis:/data
+```
+
+##  suziwen/dragon:latest
+>  一个Docker版的Markdown写作软件，有各个平台的客户端可供使用
+>  
+>  [使用说明](https://soft.xiaoshujiang.com/docs)
+```
+services:
+  xsjdragon:
+    image: suziwen/dragon:latest
+    container_name: xsjdragon
+    network_mode: bridge
+    restart: unless-stopped
+    ports:
+      - "9122:80"
+    volumes:
+      - ./data:/opt/couchdb/data
+      - ./index:/opt/couchdb-lucene/indexes
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password
+```
+
+##  tomsquest/docker-radicale:latest
+>  是一款轻量级的CalDAV/CardDAV服务器，支持网页端管理、多设备同步、TLS加密传输等功能
+>  
+>  [使用说明](https://github.com/tomsquest/docker-radicale)
+```
+services:
+  radicale:
+    image: tomsquest/docker-radicale:latest
+    container_name: radicale
+    restart: unless-stopped
+    network_mode: bridge
+    volumes:
+      - ./data:/data
+    ports:
+      - 9129:5232
+    init: true
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETUID
+      - SETGID
+      - CHOWN
+      - KILL
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          pids: 50
+    healthcheck:
+      test: curl -f http://127.0.0.1:5232 || exit 1
+      interval: 30s
+      retries: 3
+```
+
+##  lampon/omnibox:latest
+>  一个影视聚合壳子，需要自行导入源
+>  
+>  [使用说明](https://linux.do/t/topic/1089102)
+```
+services:
+  omnibox:
+    image: lampon/omnibox:latest
+    container_name: omnibox
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - "9128:7023"
+    volumes:
+      - ./data:/app/data
+```
+
+##  kuingsmile/piclist:latest
+>  一个图片上传管理工具，平台客户端，此docker为server版接口，无GUI界面
+>  
+>  [使用说明](https://github.com/Kuingsmile/PicList)
+```
+services:
+  piclist:
+    image: kuingsmile/piclist:latest
+    container_name: piclist
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - 9127:36677
+    volumes:
+      - ./data:/root/.piclist
+    command: node /usr/local/bin/picgo-server -k 自行设定一个token
 ```
