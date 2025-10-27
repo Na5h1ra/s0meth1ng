@@ -2614,3 +2614,30 @@ services:
       - ./data:/root/.piclist
     command: node /usr/local/bin/picgo-server -k 自行设定一个token
 ```
+
+##  nickrunning/wechat-selkies:latest
+>  基于 Docker 的微信/QQ Linux 客户端，使用 Selkies WebRTC 技术提供浏览器访问支持
+>  
+>  [使用说明](https://github.com/nickrunning/wechat-selkies)
+```
+services:
+  wechatqq:
+    image: nickrunning/wechat-selkies:latest
+    container_name: wechatqq
+    restart: unless-stopped
+    user : root
+    network_mode: bridge
+    volumes:
+      - ./config:/config
+    devices:
+      - /dev/dri:/dev/dri
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Shanghai
+      - LC_ALL=zh_CN.UTF-8
+      - AUTO_START_WECHAT=true
+      - AUTO_START_QQ=false
+    ports:
+      - "9135:3001"
+```
