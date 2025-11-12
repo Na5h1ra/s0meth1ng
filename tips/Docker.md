@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.10.27
+## 更新时间 2025.11.13
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -2640,4 +2640,38 @@ services:
       - AUTO_START_QQ=false
     ports:
       - "9135:3001"
+```
+
+##  hraulein/mind-map:latest
+>  一个简单的思维导图库和思维导图设计页面
+>  
+>  [使用说明](https://github.com/hraulein/mind-map)
+```
+services:
+  mindmap:
+    image: hraulein/mind-map:latest
+    container_name: mindmap
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - "9139:8080"  
+    volumes:                   
+      - ./config:/conf.d
+```
+
+##  nocodb/nocodb:latest
+>  一个部署较为简单的多维表格应用
+>  
+>  [使用说明](https://github.com/nocodb/nocodb)
+```
+services:
+  nocodb:
+    image: nocodb/nocodb:latest
+    container_name: nocodb
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - "9150:8080"
+    volumes:
+      - ./data:/usr/app/data
 ```
