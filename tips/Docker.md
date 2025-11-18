@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.11.13
+## 更新时间 2025.11.18
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -2674,4 +2674,78 @@ services:
       - "9150:8080"
     volumes:
       - ./data:/usr/app/data
+```
+
+
+##  keking/kkfileview:latest
+>  一个文件预览程序，适用于Alist或者Openlist，比Onlyoffice容易部署多了，有原版和修改版
+>  
+>  [使用说明](https://github.com/kekingcn/kkFileView)
+>  
+>  原版部署如下
+```
+services:
+  kkfileview:
+    image: keking/kkfileview:latest
+    container_name: kkfileview
+    restart: always
+    network_mode: bridge
+    ports:
+      - 9160:8012
+```
+>  修改版是[这个](https://github.com/kekingcn/kkFileView/issues/682)老哥的
+> 
+>  修改版部署如下
+```
+services:
+  kkfileview2:
+    image: wangbowen/kkfileview:4.4.2
+    container_name: kkfileview2
+    restart: always
+    ports:
+      - 9161:40011
+    environment:
+      - TZ=Asia/Shanghai
+      - KK_SERVER_PORT=40011
+      - KK_OFFICE_PREVIEW_TYPE=pdf
+      - KK_OFFICE_PREVIEW_SWITCH_DISABLED=true
+      - KK_OFFICE_HOME=/opt/libreoffice25.8
+      - KK_TRUST_HOST=*
+    volumes:
+      - ./configs:/opt/kkFileView-4.4.2/config/application.properties:ro
+```
+>  搭建好后，Openlist中的`设置`-`预览`-`iframe 预览`中改写如下的代码，
+```
+{
+  "doc,docx,xls,xlsx,ppt,pptx": {
+    "kkFileView": "域名或IP:端口/onlinePreview?url=$eb_durl"
+  },
+  "pdf": {
+    "kkFileView": "域名或IP:端口号/onlinePreview?url=$eb_durl"
+  },
+  "csv,tsv,dotm,xlt,xltm,dot,dotx,xlam,xla,pages,wps,dps,et,ett,wpt,odt,ods,ots,odp,otp,six,ott,fodt,fods": {
+    "kkFileView": "域名或IP:端口号/onlinePreview?url=$eb_durl"
+  },
+  "vsd,vsdx,wmf,emf,eps,ofd,rtf,xmind,bpmn,eml,drawio,dcm": {
+    "kkFileView": "域名或IP:端口号/onlinePreview?url=$eb_durl"
+  },
+  "epub": {
+    "kkFileView": "域名或IP:端口号/onlinePreview?url=$eb_durl"
+  },
+  "obj,3ds,stl,ply,gltf,glb,off,3dm,fbx,dae,wrl,3mf,ifc,brep,step,iges,fcstd,bim": {
+    "kkFileView": "域名或IP:端口号/onlinePreview?url=$eb_durl"
+  },
+  "dwg,dxf,dwf,iges,igs,dwt,dng,ifc,dwfx,stl,cf2,plt": {
+    "kkFileView": "域名或IP:端口号/onlinePreview?url=$eb_durl"
+  },
+  "zip,rar,jar,tar,gzip,gz,7z": {
+    "kkFileView": "域名或IP:端口号/onlinePreview?url=$eb_durl"
+  },
+  "psd,tif,tiff,tga,svg": {
+    "kkFileView": "域名或IP:端口号/onlinePreview?url=$eb_durl"
+  },
+  "drawio": {
+    "kkFileView": "域名或IP:端口号/onlinePreview?url=$eb_durl"
+  }
+}
 ```
