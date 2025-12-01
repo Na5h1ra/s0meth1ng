@@ -3,7 +3,7 @@
 ## 更新时间 2025.03.11
 
 ## 1.iPod相关
-  见[这篇文章](https://github.com/Na5h1ra/s0meth1ng/blob/main/tips/iPodClassic.md)
+  见[这篇文章](https://github.com/nash11ra/s0meth1ng/blob/main/tips/iPodClassic.md)
 ## 2.音视频提取与转换
 ### 2.1 批量切割片头片尾
 网上找到的bat代码，设置好片头片尾长度即可
