@@ -1,5 +1,5 @@
 # Docker
-## 更新时间 2025.11.18
+## 更新时间 2025.12.02
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
@@ -2748,4 +2748,103 @@ services:
     "kkFileView": "域名或IP:端口号/onlinePreview?url=$eb_durl"
   }
 }
+```
+
+##  registry.cn-shanghai.aliyuncs.com/rustc/easynvr_amd64:latest
+>  一款用于摄像头的录像管理系统，支持ONVIF,GB28181等协议
+>  
+>  [使用说明](https://www.easynvr.com/doc.html)
+```
+services:
+  easynvr:
+    image: registry.cn-shanghai.aliyuncs.com/rustc/easynvr_amd64:latest
+    container_name: easynvr
+    restart: always
+    network_mode: host
+    logging:
+      options:
+        max-size: "50M"
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+    volumes:
+      - ./data/configs:/app/configs
+      - ./data/logs:/app/logs
+      - ./data/temporary:/app/temporary
+      - ./data/record:/app/r
+      - ./data/stream:/app/stream
+```
+
+##  l429609201/misaka_danmu_server:latest
+>  一个自托管弹幕聚合与管理服务，兼容 dandanplay API
+>  
+>  [使用说明](https://github.com/l429609201/misaka_danmu_server)
+>  
+>  第一次的密码是随机的，可以在容器的日志中找到
+```
+networks:
+  default:
+    name: misaka
+
+services:
+  mysql:
+    image: mysql:8.1.0-oracle
+    container_name: danmu-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "your_strong_root_password"
+      MYSQL_DATABASE: "danmuapi"
+      MYSQL_USER: "danmuapi"
+      MYSQL_PASSWORD: "your_strong_user_password"
+      TZ: "Asia/Shanghai"
+    volumes:
+      - ./db-data:/var/lib/mysql
+    command:
+      - '--character-set-server=utf8mb4'
+      - '--collation-server=utf8mb4_unicode_ci'
+      - '--binlog_expire_logs_seconds=259200'
+      - '--default-authentication-plugin=mysql_native_password'
+      - '--innodb_buffer_pool_size=128M'
+      - '--innodb_log_file_size=32M'
+      - '--innodb_log_buffer_size=8M'
+      - '--max_connections=50'
+      - '--table_open_cache=64'
+      - '--performance_schema=OFF'
+      - '--innodb_flush_log_at_trx_commit=2'
+      - '--innodb_flush_method=O_DIRECT'
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -u$${MYSQL_USER} -p$${MYSQL_PASSWORD}"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 30s
+    networks:
+      - default
+
+  danmu-app:
+    image: l429609201/misaka_danmu_server:latest
+    container_name: misakadanmu
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - PUID=0
+      - PGID=0
+      - UMASK=0022
+      - TZ=Asia/Shanghai
+      - DANMUAPI_DATABASE__TYPE=mysql
+      - DANMUAPI_DATABASE__HOST=mysql
+      - DANMUAPI_DATABASE__PORT=3306
+      - DANMUAPI_DATABASE__NAME=danmuapi
+      - DANMUAPI_DATABASE__USER=danmuapi
+      - DANMUAPI_DATABASE__PASSWORD=your_strong_user_password
+      - DANMUAPI_ADMIN__INITIAL_USER=admin
+    volumes:
+      - ./config:/app/config
+    ports:
+      - "7768:7768"
+    networks:
+      - default
 ```
