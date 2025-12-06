@@ -1,13 +1,15 @@
 # Docker
-## 更新时间 2025.12.02
+## 更新时间 2025.12.07
 > 自用Docker安装命令
 >> 
 >> 用于群晖和N1盒子。
 >> 
 >> N1盒子使用root权限登录，命令行安装，默认网络模式是bridge
 >>
->> 所有 **`:`** 的左边都是外部实际的端口或者映射位置，可以按照情况更改，所有 **`:`** 的右边一定要和镜像作者写的一样，
+>> compose.yml的个人编写习惯是按照image，container_name，network，restart，volume的顺序，根据情况稍加改造，以便看起来比较整洁有条理
 >>
+>> 所有 **`:`** 的左边都是外部实际的端口或者映射位置，可以按照情况更改，所有 **`:`** 的右边一定要和镜像作者写的一样
+>> 
 >> 注意-v映射的文件或文件夹，确保它是正确的
 >>
 >> 如果compose.yml相同路径下有文件夹，可简略成`./`,如`/volume1/docker/data:/data`  →→→  `./data:/data`
@@ -22,11 +24,13 @@
 >>
 >> 或者创建一个指定名称的桥接网络，这样不用对外暴露内部端口，这在多个容器依赖时比较安全
 >>
+>> 比如先声明`networks:  default:    name: 网络名`，然后相关的多个容器的networks部分写成`networks:  - default`
+>>
 >> 可使用[这个网站](https://www.composerize.com/) 使得Docker CLI  →→→  Docker-Compose.yml
 >>
 >> [这个网站](https://www.decomposerize.com/)，则是逆转换 Docker-Compose.yml  →→→  Docker CLI
 >>
->> 注册表镜像，可以填写[1panel](https://docker.1panel.live)和[耗子面板](https://hub.rat.dev)两个国内加速源，[来源](https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6)
+>> 注册表镜像，可以参考这个[讨论](https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6)
 >>
 >> Docker部署多了会产生一些未被使用的镜像，可以先输入`docker images -f dangling=true`列出悬空镜像，然后输入`docker image prune`进行清理
 >>
@@ -2845,6 +2849,105 @@ services:
       - ./config:/app/config
     ports:
       - "7768:7768"
+    networks:
+      - default
+```
+
+##  registry.kspeeder.com/linkease/kspeeder:latest
+>  iStoreOS的研发团队做的一个Docker镜像代理服务，不过没搞明白怎么在群晖上生效
+>  
+>  [使用说明](https://kspeeder.com)
+```
+networks:
+  default:
+    name: kspeeder
+
+services:
+  kspeeder:
+    image: registry.kspeeder.com/linkease/kspeeder:latest
+    container_name: kspeeder
+    ports:
+      - "9165:5003"
+    volumes:
+      - ./data:/kspeeder-data
+      - ./config:/kspeeder-config
+    restart: unless-stopped
+    environment:
+      - KSPEEDER_PORT=443
+    networks:
+      - default
+```
+
+
+##  fintechstudios/davical:latest
+>  DAViCal 是一个开源的服务器，用于日历共享，基于CalDAV 协议实现，旨在存储日历资源（采用 iCalendar 格式）在远程共享服务器上。支持多种客户端的访问
+>
+>  这里直接借用了这位[博主](https://laosu.tech)的部署命令
+> 
+>  [使用说明](https://laosu.tech/2025/11/27/CalDAV%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E5%99%A8DAViCal)
+```
+networks:
+  default:
+    name: davical
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: davical-db
+    restart: unless-stopped
+    volumes:  
+      - ./data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    networks:
+      - default
+
+  davical:
+    image: fintechstudios/davical:latest
+    container_name: davical-server
+    restart: unless-stopped
+    ports:
+      - 4082:80
+    depends_on:
+      - postgres
+    environment:
+      PGHOST: postgres
+      PGPASSWORD: davical
+      RUN_MIGRATIONS_AT_STARTUP: "true"
+      ROOT_PGUSER: postgres
+      ROOT_PGPASSWORD: postgres
+      DAVICAL_ADMIN_PASS: adminadmin
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -X
+        - OPTIONS
+        - -u
+        - admin:adminadmin
+        - -f
+        - http://localhost/caldav.php
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - default
+
+  agendav:
+    image: ghcr.io/nagimov/agendav-docker:latest
+    container_name: davical-web
+    restart: unless-stopped
+    ports:
+      - 4089:8080
+    environment:
+      - AGENDAV_SERVER_NAME=davical
+      - AGENDAV_TITLE=laosu Calendar
+      - AGENDAV_CALDAV_SERVER=http://davical/caldav.php/admin
+      - AGENDAV_TIMEZONE=Asia/Shanghai
+      - AGENDAV_LANG=en
+      - AGENDAV_LOG_DIR=/tmp/
     networks:
       - default
 ```
